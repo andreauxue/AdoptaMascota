@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Aquí aplicamos los estilos base para el body */
+body {
+  @apply bg-yellow-50 text-purple-900;
+}
