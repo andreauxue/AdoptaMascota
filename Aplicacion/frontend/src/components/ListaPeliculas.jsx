@@ -7,9 +7,9 @@ import wall_e from "../assets/wall-e_poster.png";
 export default function ListaPeliculas() {
     const pelis = [
     { id: 1, titulo: "Knives Out", director: "Rian Johnson", año: "2019", poster: knives_out, clasificacion: "B", duracion: "2h 10min", genero:"Drama"},
-    { id: 2, titulo: "Little Women", director: "Greta Gerwig", año: "2019", poster: little_women, clasificacion: "A", duracion: "2h 15min", genero:"Acción"},
-    { id: 3, titulo: "The Batman", director: "Matt Reeves", año: "2022", poster: the_batman, clasificacion: "B", duracion: "2h 56min", genero:"Drama"},
-    { id: 4, titulo: "Wall-E", director: "Andrew Stanton", año: "2008", poster: wall_e, clasificacion: "AA", duracion: "1h 38min", genero:"Animación"},
+    { id: 2, titulo: "Little Women", director: "Greta Gerwig", año: "2019", poster: little_women, clasificacion: "A", duracion: "2h 15min", genero:"Drama"},
+    { id: 3, titulo: "The Batman", director: "Matt Reeves", año: "2022", poster: the_batman, clasificacion: "B", duracion: "2h 56min", genero:"Acción"},
+    { id: 4, titulo: "WALL·E", director: "Andrew Stanton", año: "2008", poster: wall_e, clasificacion: "AA", duracion: "1h 38min", genero:"Animación"},
     ];
 
     return (
