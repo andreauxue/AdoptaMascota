@@ -1,5 +1,5 @@
-import Home from "./pages/Home";
+import Mangas from "./pages/Mangas";
 
 export default function App() {
-  return <Home />
+  return <Mangas />
 }
