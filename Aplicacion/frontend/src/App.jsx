@@ -1,5 +1,5 @@
-import Home from "./pages/Home";
+import BooksPage from "./pages/librosFeroPage";
 
 export default function App() {
-  return <Home />
+  return <BooksPage />;
 }
