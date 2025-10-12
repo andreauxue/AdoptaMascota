@@ -1,4 +1,4 @@
-export default function TarjetaJuego({ titulo, plataforma, descripcion, imagen }) {
+export default function TarjetaJuego({ titulo, plataforma, descripcion, imagen, lanzamiento }) {
     return (
       <div className="group relative max-w-xs overflow-hidden rounded-2xl border border-indigo-200 bg-gray-900 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-indigo-500/50">
         <img
@@ -10,7 +10,10 @@ export default function TarjetaJuego({ titulo, plataforma, descripcion, imagen }
           <h2 className="text-xl font-bold tracking-tight text-indigo-400">
             {titulo}
           </h2>
-          <p className="text-sm font-medium text-gray-300">plataforma: {plataforma}</p>
+          {/* Mostramos la plataforma y el año en la misma línea */}
+          <p className="text-sm font-medium text-gray-300">
+            {plataforma} - <span className="font-semibold text-gray-200">{lanzamiento}</span>
+          </p>
           <p className="mt-1 text-sm leading-relaxed text-gray-400">
             {descripcion}
           </p>

@@ -4,7 +4,7 @@ function MiGaleriaPage() {
   return (
     <div className="min-h-screen bg-gray-950 pt-10">
       <h1 className="text-5xl font-bold text-center text-white mb-8">
-        Mi Galería Retro
+        Mi Galería de Videojuegos
       </h1>
       <GaleriaJuegos />
     </div>
