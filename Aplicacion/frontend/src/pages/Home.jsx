@@ -1,12 +1,15 @@
-import ListaMascotas from "../components/ListaMascotas";
+import ListaCoffee from "../components/ListaCoffee";
+
+
+
 
 export default function Home() {
     return (
-        <div className="min-h-screen bg-pink-100 p-6">
-            <h1 className="text-3xl font-bold text-center text-pink-600 mb-6">
-                Adopta un animalito
-            </h1>
-            <ListaMascotas/>
+        <div className="mt-auto bg-yellow-950/90 min-h-screen p-6 w-full  inset-shadow-sm inset-shadow-indigo-500">
+                <h1 className="text-center font-serif text-5xl md:text-6xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-amber-200 via-yellow-100 to-white drop-shadow-lg tracking-wide leading-tight">Nuestro café</h1>
+            <ListaCoffee />
+           
+
         </div>
     )
 }
