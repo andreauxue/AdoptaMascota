@@ -1,5 +1,14 @@
-import Home from "./pages/Home";
+// src/App.jsx
+import React from "react";
+import Canciones from "./pages/Canciones";
 
-export default function App() {
-  return <Home />
+function App() {
+  return (
+    <div>
+      <Canciones />
+    </div>
+  );
 }
+
+export default App;
+
