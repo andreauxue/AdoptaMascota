@@ -1,5 +1,7 @@
-import Home from "./pages/Home";
+import Canciones from "./pages/Canciones";
+
 
 export default function App() {
-  return <Home />
+  return <Canciones />;
 }
+
