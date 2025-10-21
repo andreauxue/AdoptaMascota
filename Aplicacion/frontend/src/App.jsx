@@ -1,5 +1,5 @@
-import Home from "./pages/Home";
+import VHome from "./pages/vHome";
 
 export default function App() {
-  return <Home />
+  return <VHome />;
 }
