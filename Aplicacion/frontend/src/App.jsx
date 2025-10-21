@@ -1,5 +1,6 @@
-import Home from "./pages/Home";
+import SongsPage from "./pages/SongsPage";
+
 
 export default function App() {
-  return <Home />
+  return <SongsPage />
 }
