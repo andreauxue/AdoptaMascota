@@ -1,5 +1,5 @@
-import Home from "./pages/Home";
+import Platillos from "./pages/Platillos";
 
 export default function App() {
-  return <Home />
+  return <Platillos />
 }
