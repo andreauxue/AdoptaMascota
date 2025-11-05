@@ -1,6 +1,13 @@
 import TarjetaMascota from "./TarjetaMascota";
 import tomillo from "../assets/tomillo.jpg";
 import erizo from "../assets/erizo.jpg";
+import pelusa from "../assets/pelusa.jpg";
+import vikingo from "../assets/vikingo.jpg";
+import stella from "../assets/stella.jpg";
+import cheddar from "../assets/cheddar.jpg";
+import yoshi from "../assets/yoshi.jpg";
+import garfield from "../assets/garfield.jpg";
+import srgato from "../assets/srgato.jpg";
 import { Link } from "react-router-dom";
 
 export default function ListaMascotas() {
@@ -23,17 +30,71 @@ export default function ListaMascotas() {
       descripcion: "Cuidado porque pica, pero es solo al principio. Es tímido.", 
       imagen: erizo,
       genero: "hembra",
-      ubicacion: "Casa de Cuidado (Norte)"
+      ubicacion: "Refugio Norte"
     },
     { 
       id: 3, 
       nombre: "Pelusa", 
       edad: "1 año", 
       descripcion: "Un conejo tranquilo que ama las zanahorias.", 
-      imagen: tomillo,
+      imagen: pelusa,
       genero: "macho",
       ubicacion: "Refugio Central"
     },
+    { 
+      id: 4, 
+      nombre: "Vikingo", 
+      edad: "2 años", 
+      descripcion: "Un perro pitbull leal, protector y siempre alerta. Le encanta jugar al aire libre.", 
+      imagen: vikingo,
+      genero: "macho",
+      ubicacion: "Refugio Norte"
+    },
+    { 
+      id: 5, 
+      nombre: "Stella", 
+      edad: "3 años", 
+      descripcion: "Buldog francesa muy cariñosa. Le gusta estar cerca de las personas.", 
+      imagen: stella,
+      genero: "hembra",
+      ubicacion: "Refugio Sur"
+    },
+    { 
+      id: 6, 
+      nombre: "Cheddar", 
+      edad: "4 años", 
+      descripcion: "Corgi macho energético y juguetón. Le gusta correr y saltar.", 
+      imagen: cheddar,
+      genero: "macho",
+      ubicacion: "Refugio Sur"
+    },
+    { 
+      id: 7, 
+      nombre: "Yoshi", 
+      edad: "3 años", 
+      descripcion: "Oso polar de gran tamaño, tranquilo y cariñoso.", 
+      imagen: yoshi,
+      genero: "macho",
+      ubicacion: "Refugio Norte"
+    },
+    { 
+      id: 8, 
+      nombre: "Garfield", 
+      edad: "5 años", 
+      descripcion: "Gato perezoso que adora dormir y comer lasaña. Es muy independiente.", 
+      imagen: garfield,
+      genero: "macho",
+      ubicacion: "Refugio Central"
+    },
+    { 
+      id: 9, 
+      nombre: "Sr. Gato", 
+      edad: "2 años", 
+      descripcion: "Gato juguetón que disfruta de las alturas y explorar. Siempre curioso.", 
+      imagen: srgato,
+      genero: "macho",
+      ubicacion: "Refugio Este"
+    }
   ];
 
   return (
