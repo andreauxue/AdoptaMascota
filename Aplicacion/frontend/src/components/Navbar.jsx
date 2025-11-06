@@ -14,14 +14,14 @@ import placeholderLogo from '../assets/image.png';
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
 
-    const linkStyle = "flex items-center gap-2 px-4 py-2 rounded-md bg-gray-600 hover:bg-gray-500 transition-all duration-300 text-white font-medium";
+    const linkStyle = "flex items-center gap-2 px-4 py-2 rounded-md bg-[#5f0f2a] hover:opacity-90 transition-all duration-300 text-white font-medium";
 
     return (
-        <nav className="bg-gray-800 text-white px-4 lg:px-8 py-4 flex flex-wrap justify-between items-center shadow-lg">
+        <nav className="bg-[#911a42] text-white px-4 lg:px-8 py-4 flex flex-wrap justify-between items-center shadow-lg">
             
             {/* Logo y título */}
             <Link to="/" className="flex items-center gap-3">
-                <img src={placeholderLogo} alt="Logo" className="w-10 h-10 rounded-md bg-gray-300" />
+                <img src={placeholderLogo} alt="Logo" className="w-10 h-10 rounded-md bg-[#FFFFFF]" />
                 <h1 className="text-xl lg:text-2xl font-bold text-white">
                     Huellitas en Casa
                 </h1>
@@ -30,7 +30,7 @@ export default function Navbar() {
             {/* Botón de Hamburguesa (menu desplegable) para la pantalla móvil */}
             <button 
                 onClick={() => setIsOpen(!isOpen)} 
-                className="lg:hidden p-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white"
+                className={`lg:hidden p-2 rounded-md text-white hover:opacity-80 ${isOpen ? 'bg-[#6b1512]' : ''}`}
                 aria-label="Abrir menú"
             >
                 {isOpen ? <FaTimes className="w-6 h-6" /> : <FaBars className="w-6 h-6" />}
@@ -48,7 +48,7 @@ export default function Navbar() {
                         </Link>
                     </li>
 
-                    {/* 2. Botón de Galería */}
+                    {/* Botón de Galería */}
                     <li>
                         <Link to="/mascotas" className={linkStyle} onClick={() => setIsOpen(false)}>
                             <FaPaw className="text-lg" /> 

@@ -35,18 +35,18 @@ export default function FormularioAuth({ tipo, onSubmit }) {
     const subTitulo = tipo === "login" ? "Ingresas tus datos" : "Crea tu cuenta";
 
     return (
-        <div className="min-h-[70vh] bg-white flex items-center justify-center p-4">
+        <div className="min-h-[70vh] bg-[#f5e9ce] flex items-center justify-center p-4">
             <div className="container mx-auto flex flex-col lg:flex-row items-center justify-center gap-16">
 
                 {/* Columna de Formulario a la izquierda */}
                 <div className="w-full max-w-md">
-                    <h2 className="text-4xl font-bold text-gray-900 mb-6 text-center lg:text-left">
+                    <h2 className="text-4xl font-bold text-[#243B55] mb-6 text-center lg:text-left">
                         {titulo}
                     </h2>
                     
                     {/* Tarjeta del formulario */}
-                    <form onSubmit={handleSubmit} className="bg-gray-200 rounded-lg shadow-xl p-8 w-full">
-                        <h3 className="text-2xl font-semibold text-gray-800 text-center mb-6">
+                    <form onSubmit={handleSubmit} className="bg-[#FFFFFF] rounded-lg shadow-xl p-8 w-full">
+                        <h3 className="text-2xl font-semibold text-[#243B55] text-center mb-6">
                             {subTitulo}
                         </h3>
 
@@ -60,7 +60,7 @@ export default function FormularioAuth({ tipo, onSubmit }) {
                                     value={formData.username}
                                     onChange={handleChange}
                                     required
-                                    className="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500"
+                                    className="w-full px-4 py-3 bg-white border border-gray-300 rounded-md focus:ring-2 focus:ring-[#801917] focus:border-[#5f0f2a] focus:outline-none"
                                 />
                             </div>
 
@@ -74,7 +74,7 @@ export default function FormularioAuth({ tipo, onSubmit }) {
                                         value={formData.email}
                                         onChange={handleChange}
                                         required
-                                        className="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500"
+                                        className="w-full px-4 py-3 bg-white border border-gray-300 rounded-md focus:ring-2 focus:ring-[#801917] focus:border-[#5f0f2a] focus:outline-none"
                                     />
                                 </div>
                             )}
@@ -88,12 +88,12 @@ export default function FormularioAuth({ tipo, onSubmit }) {
                                     value={formData.password}
                                     onChange={handleChange}
                                     required
-                                    className="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-500 focus:border-gray-500"
+                                    className="w-full px-4 py-3 bg-white border border-gray-300 rounded-md focus:ring-2 focus:ring-[#801917] focus:border-[#5f0f2a] focus:outline-none"
                                 />
                                 <button 
                                     type="button"
                                     onClick={togglePasswordVisibility}
-                                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-700"
+                                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-[#801917] hover:opacity-70"
                                 >
                                     {showPassword ? <FaEyeSlash /> : <FaEye />}
                                 </button>
@@ -104,10 +104,10 @@ export default function FormularioAuth({ tipo, onSubmit }) {
                         <button
                             type="submit"
                             disabled={isLoading}
-                            className={`w-full mt-6 py-3 px-4 rounded-md font-semibold text-white transition-all duration-200 shadow-md ${
+                            className={`w-full mt-6 py-3 px-4 rounded-md font-semibold text-white transition-all duration-200 shadow-md hover:opacity-90 ${
                                 isLoading 
                                     ? 'bg-gray-400 cursor-not-allowed' 
-                                    : 'bg-gray-600 hover:bg-gray-700'
+                                    : 'bg-[#5f0f2a]'
                             }`}
                         >
                             {isLoading ? "Procesando..." : (tipo === "login" ? "Iniciar Sesión" : "Crear Cuenta")}
@@ -120,7 +120,7 @@ export default function FormularioAuth({ tipo, onSubmit }) {
                     <img 
                         src={placeholderImage} 
                         alt="Decoración" 
-                        className="rounded-lg shadow-2xl w-full h-auto max-w-lg mx-auto bg-gray-300 aspect-square object-cover"
+                        className="rounded-lg shadow-2xl w-full h-auto max-w-lg mx-auto bg-[#FFFFFF] aspect-square object-cover"
                     />
                 </div>
             </div>

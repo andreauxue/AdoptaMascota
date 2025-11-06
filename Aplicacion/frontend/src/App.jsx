@@ -13,7 +13,7 @@ export default function App() {
     <BrowserRouter>
       <div className="flex flex-col min-h-screen">
         <Navbar/>
-        <main className="flex-grow bg-pink-50 p-6">
+        <main className="flex-grow bg-[#f5e9ce] p-6">
           <Routes>
             <Route path="/" element={<Home/>}/>
             <Route path="/mascotas" element={<ListaMascotas/>}/>
