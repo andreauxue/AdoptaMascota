@@ -49,51 +49,61 @@ export default function RegistrarMascota() {
             
             {/* Tarjeta del formulario */}
             <form onSubmit={handleSubmit} className="bg-[#FFFFFF] rounded-lg shadow-xl p-8 w-full max-w-lg">
-                
-                <h2 className="text-4xl font-bold text-[#243B55] mb-4 text-center">
+
+                <h2 className="text-4xl font-bold text-[#243B55] mb-4 text-center drop-shadow-md">
                     Registrar mascota
                 </h2>
-                <h3 className="text-xl text-[#243B55] text-center mb-6">
+                <h3 className="text-xl text-[#243B55] text-center mb-6 drop-shadow-sm">
                     Rellena el formulario
                 </h3>
 
                 <div className="space-y-4">
-                    
+
                     {/* Usamos el inputStyle definido arriba */}
-                    <input name="nombre" placeholder="Nombre" value={formData.nombre} onChange={handleChange} required className={inputStyle} />
-                    <input name="edad" placeholder="Edad (ej. 5 meses)" value={formData.edad} onChange={handleChange} required className={inputStyle} />
-                    <input name="ubicacion" placeholder="Ubicación (ej. Refugio Central)" value={formData.ubicacion} onChange={handleChange} required className={inputStyle} />
-                    
+                    <input name="nombre" placeholder="Nombre" value={formData.nombre} onChange={handleChange} required
+                           className={inputStyle}/>
+                    <input name="edad" placeholder="Edad (ej. 5 meses)" value={formData.edad} onChange={handleChange}
+                           required className={inputStyle}/>
+                    <input name="ubicacion" placeholder="Ubicación (ej. Refugio Central)" value={formData.ubicacion}
+                           onChange={handleChange} required className={inputStyle}/>
+
                     {/* Género */}
                     <div className="p-4 bg-white border border-gray-300 rounded-md">
                         <label className="text-[#243B55] font-medium">Sexo:</label>
                         <div className="flex gap-4 mt-2">
                             <label className="flex items-center cursor-pointer">
-                                <input type="radio" name="genero" value="macho" checked={formData.genero === "macho"} onChange={handleChange} className="h-4 w-4 text-[#801917] accent-[#801917] border-gray-400 focus:ring-[#801917]" />
+                                <input type="radio" name="genero" value="macho" checked={formData.genero === "macho"}
+                                       onChange={handleChange}
+                                       className="h-4 w-4 text-[#801917] accent-[#801917] border-gray-400 focus:ring-[#801917]"/>
                                 <span className="ml-2 text-[#243B55]">Macho</span>
                             </label>
                             <label className="flex items-center cursor-pointer">
-                                <input type="radio" name="genero" value="hembra" checked={formData.genero === "hembra"} onChange={handleChange} className="h-4 w-4 text-[#801917] accent-[#801917] border-gray-400 focus:ring-[#801917]" />
+                                <input type="radio" name="genero" value="hembra" checked={formData.genero === "hembra"}
+                                       onChange={handleChange}
+                                       className="h-4 w-4 text-[#801917] accent-[#801917] border-gray-400 focus:ring-[#801917]"/>
                                 <span className="ml-2 text-[#243B55]">Hembra</span>
                             </label>
                         </div>
                     </div>
-                    
+
                     {/* Descripción */}
-                    <textarea name="descripcion" placeholder="Descripción" value={formData.descripcion} onChange={handleChange} rows="3" className={inputStyle} />
-                    
+                    <textarea name="descripcion" placeholder="Descripción" value={formData.descripcion}
+                              onChange={handleChange} rows="3" className={inputStyle}/>
+
                     {/* Input de Imagen */}
                     <label className={`${inputStyle} flex items-center gap-3 cursor-pointer hover:bg-gray-50`}>
-                        <FaFileImage className="text-[#801917]" />
+                        <FaFileImage className="text-[#801917]"/>
                         <span className="text-[#243B55]">
                             {imagePreview ? "Cambiar imagen" : "Subir imagen"}
                         </span>
-                        <input type="file" name="imagen" onChange={handleImageChange} className="hidden" accept="image/png, image/jpeg" />
+                        <input type="file" name="imagen" onChange={handleImageChange} className="hidden"
+                               accept="image/png, image/jpeg"/>
                     </label>
 
                     {/* Previsualización */}
                     {imagePreview && (
-                        <img src={imagePreview} alt="Previsualización" className="w-full h-48 object-cover rounded-md border border-gray-300 shadow-sm" />
+                        <img src={imagePreview} alt="Previsualización"
+                             className="w-full h-48 object-cover rounded-md border border-gray-300 shadow-sm"/>
                     )}
                 </div>
 
@@ -101,8 +111,10 @@ export default function RegistrarMascota() {
                 <button
                     type="submit"
                     disabled={isLoading}
-                    className={`w-full mt-6 py-3 px-4 rounded-md font-semibold text-white transition-all duration-200 shadow-md hover:opacity-90 ${
-                        isLoading ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#5f0f2a]'
+                    className={`w-full mt-6 py-3 px-4 rounded-md font-semibold text-white transition-all duration-300 ${
+                        isLoading
+                            ? 'bg-gray-400 cursor-not-allowed shadow-md'
+                            : 'bg-[#5f0f2a] hover:bg-[#243B55] hover:-translate-y-1 hover:shadow-2xl hover:shadow-[#243B55]/40 hover:ring-2 hover:ring-white active:translate-y-0 active:shadow-md cursor-pointer shadow-md'
                     }`}
                 >
                     {isLoading ? "Procesando..." : "Subir"}

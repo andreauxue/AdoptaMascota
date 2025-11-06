@@ -54,7 +54,7 @@ export default function FormularioAuth({ tipo, onSubmit }) {
                         <div className="space-y-4">
                             {/* Campo Usuario */}
                             <div className="relative">
-                                <input 
+                                <input
                                     name="username"
                                     placeholder="Nombre de usuario"
                                     value={formData.username}
@@ -67,7 +67,7 @@ export default function FormularioAuth({ tipo, onSubmit }) {
                             {/* Campo Email */}
                             {tipo === "register" && (
                                 <div className="relative">
-                                    <input 
+                                    <input
                                         name="email"
                                         type="email"
                                         placeholder="Correo electrónico"
@@ -81,7 +81,7 @@ export default function FormularioAuth({ tipo, onSubmit }) {
 
                             {/* Campo Contraseña */}
                             <div className="relative">
-                                <input 
+                                <input
                                     type={showPassword ? "text" : "password"}
                                     name="password"
                                     placeholder="Contraseña"
@@ -90,12 +90,12 @@ export default function FormularioAuth({ tipo, onSubmit }) {
                                     required
                                     className="w-full px-4 py-3 bg-white border border-gray-300 rounded-md focus:ring-2 focus:ring-[#801917] focus:border-[#5f0f2a] focus:outline-none"
                                 />
-                                <button 
+                                <button
                                     type="button"
                                     onClick={togglePasswordVisibility}
                                     className="absolute inset-y-0 right-0 pr-3 flex items-center text-[#801917] hover:opacity-70"
                                 >
-                                    {showPassword ? <FaEyeSlash /> : <FaEye />}
+                                    {showPassword ? <FaEyeSlash/> : <FaEye/>}
                                 </button>
                             </div>
                         </div>
@@ -104,10 +104,10 @@ export default function FormularioAuth({ tipo, onSubmit }) {
                         <button
                             type="submit"
                             disabled={isLoading}
-                            className={`w-full mt-6 py-3 px-4 rounded-md font-semibold text-white transition-all duration-200 shadow-md hover:opacity-90 ${
-                                isLoading 
-                                    ? 'bg-gray-400 cursor-not-allowed' 
-                                    : 'bg-[#5f0f2a]'
+                            className={`w-full mt-6 py-3 px-4 rounded-md font-semibold text-white transition-all duration-300 ${
+                                isLoading
+                                    ? 'bg-gray-400 cursor-not-allowed shadow-md'
+                                    : 'bg-[#5f0f2a] hover:bg-[#243B55] hover:-translate-y-1 hover:shadow-2xl hover:shadow-[#243B55]/40 hover:ring-2 hover:ring-white active:translate-y-0 active:shadow-md cursor-pointer shadow-md'
                             }`}
                         >
                             {isLoading ? "Procesando..." : (tipo === "login" ? "Iniciar Sesión" : "Crear Cuenta")}
@@ -117,9 +117,9 @@ export default function FormularioAuth({ tipo, onSubmit }) {
 
                 {/* Columna de Imagen a la derecha */}
                 <div className="hidden lg:block lg:w-1/2">
-                    <img 
-                        src={placeholderImage} 
-                        alt="Decoración" 
+                    <img
+                        src={placeholderImage}
+                        alt="Decoración"
                         className="rounded-lg shadow-2xl w-full h-auto max-w-lg mx-auto bg-[#FFFFFF] aspect-square object-cover"
                     />
                 </div>

@@ -14,7 +14,7 @@ export default function Home() {
                     <h1 className="text-5xl lg:text-6xl font-bold text-[#243B55]">
                         Huellitas en Casa
                     </h1>
-                    
+
                     <p className="text-lg text-[#243B55] my-8 leading-relaxed max-w-lg">
                         Texto describiendo la aplicación de manera llamativa pero concisa.
                         Descubre a tu nuevo mejor amigo peludo.
@@ -22,15 +22,15 @@ export default function Home() {
 
                     {/* Botones del Prototipo */}
                     <div className="flex flex-col gap-4 w-full items-center lg:items-start">
-                        <Link 
+                        <Link
                             to="/register"
-                            className={buttonStyle}
+                            className={`hover:bg-[#243B55] hover:scale-105 hover:shadow-lg active:scale-95 active:shadow-md transition-all duration-300 cursor-pointer ${buttonStyle}`}
                         >
                             Registrarse
                         </Link>
-                        <Link 
+                        <Link
                             to="/mascotas"
-                            className={buttonStyle}
+                            className={`hover:bg-[#243B55] hover:scale-105 hover:shadow-lg active:scale-95 active:shadow-md transition-all duration-300 cursor-pointer ${buttonStyle}`}
                         >
                             Muro de mascotas
                         </Link>
@@ -39,7 +39,7 @@ export default function Home() {
 
                 {/* 'hidden' para estar oculto en móvil y 'lg:block' para ser visible en 'lg' y superior */}
                 <div className="hidden lg:block lg:w-1/2">
-                    <img 
+                    <img
                         src={placeholderImage}
                         alt="Perro y gato juntos"
                         className="rounded-lg shadow-2xl w-full h-auto max-w-lg mx-auto bg-[#FFFFFF] aspect-square object-cover"

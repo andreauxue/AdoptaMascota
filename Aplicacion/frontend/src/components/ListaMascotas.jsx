@@ -98,32 +98,39 @@ export default function ListaMascotas() {
   ];
 
   return (
-    <div className="relative py-6 px-4">
-        
+      <div className="relative py-6 px-4">
+
         {/* Cuadrícula de 3 columnas para las tarjetas como en el prototipo */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 place-items-center">
-        {mascotas.map((m) => (
-            <TarjetaMascota
-            key={m.id}
-            nombre={m.nombre}
-            edad={m.edad}
-            descripcion={m.descripcion}
-            imagen={m.imagen}
-            genero={m.genero}
-            ubicacion={m.ubicacion}
-            />
-        ))}
+          {mascotas.map((m) => (
+              <div
+                  key={m.id}
+                  className="w-full h-full"
+              >
+                <div
+                    className="transform transition-all duration-300 hover:-translate-y-2 hover:scale-105 hover:shadow-2xl hover:shadow-[#243B55]/50">
+                  <TarjetaMascota
+                      nombre={m.nombre}
+                      edad={m.edad}
+                      descripcion={m.descripcion}
+                      imagen={m.imagen}
+                      genero={m.genero}
+                      ubicacion={m.ubicacion}
+                  />
+                </div>
+              </div>
+          ))}
         </div>
 
         {/* Botón "Registrar Mascota" */}
         <div className="flex justify-center md:justify-end mt-12">
-             <Link 
-                to="/registrar-mascota"
-                className="px-6 py-3 rounded-lg bg-[#5f0f2a] text-white font-semibold text-center hover:opacity-90 transition duration-300 shadow-md"
-            >
-                Registrar Mascota
-            </Link>
+          <Link
+              to="/registrar-mascota"
+              className="px-6 py-3 rounded-lg bg-[#5f0f2a] text-white font-semibold text-center hover:bg-[#243B55] hover:scale-105 hover:shadow-lg active:scale-95 active:shadow-md transition-all duration-300 cursor-pointer"
+          >
+            Registrar Mascota
+          </Link>
         </div>
-    </div>
+      </div>
   );
 }
