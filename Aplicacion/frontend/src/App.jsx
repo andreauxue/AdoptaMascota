@@ -1,4 +1,4 @@
-// import { BrowserRouter, Router, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
 import Navbar from "./components/Navbar";
@@ -8,19 +8,20 @@ import Galeria from "./pages/Galeria";
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-[#F7F7F7] flex flex-col">
-      <Navbar colorBg={"bg-blue-400"} />
+    <BrowserRouter>
+      <div>
+        <Navbar/>
 
-      {/* Contenedor que se expande */}
-      <main className="flex-1">
-        <Galeria />
-      </main>
+        <main>
+          <Routes>
+            <Route path="/" element={<Home/>}/>
+            <Route path="/galeria" element={<Galeria/>}/>
+          </Routes>
+        </main>
 
-      <Footer
-        color={"bg-blue-400"}
-        texto={"En MatchPaw encontramos tu mascota perfecta"}
-      />
-    </div>
+        <Footer/>
+      </div>
+    </BrowserRouter>
   );
 }
 
