@@ -1,8 +1,9 @@
+// src/components/Footer.jsx
 import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 
 export default function Footer() {
   return (
-  <footer className="w-full bg-[#38657E] text-white px-8 py-8 text-center mt-10">
+    <footer className="w-full bg-[#38657E] text-white px-8 py-8 text-center mt-10">
 
       {/* Derechos reservados */}
       <p className="font-semibold text-base mb-4">  {/* <- antes era text-lg */}

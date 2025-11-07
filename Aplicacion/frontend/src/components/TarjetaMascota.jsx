@@ -1,24 +1,50 @@
-export default function TarjetaMascota({ nombre, edad, descripcion, imagen }) {
-    return (
-      <div className="group relative max-w-xs overflow-hidden rounded-2xl border border-pink-100 bg-white shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-        <img
-          src={imagen}
-          alt={nombre}
-          className="h-48 w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
-        />
-        <div className="space-y-1.5 p-4">
-          <h2 className="text-xl font-semibold tracking-tight text-pink-600">
-            {nombre}
-          </h2>
-          <p className="text-sm font-medium text-pink-900/70">Edad: {edad}</p>
-          <p className="mt-1 text-sm leading-relaxed text-gray-600">
-            {descripcion}
-          </p>
-          <button className="mt-4 inline-flex w-full items-center justify-center rounded-full bg-pink-500 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-pink-600 hover:shadow-md active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-pink-300">
-            Quiero adoptarla
+export default function TarjetaMascota({ nombre, tipo, info, imagen }) {
+  return (
+    <div className="group relative max-w-xs overflow-hidden rounded-2xl border border-black bg-white shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+
+      <img
+        src={imagen}
+        alt={nombre}
+        className="h-48 w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+      />
+
+      <div className="space-y-1.5 p-4">
+
+        {/* Nombre */}
+        <h2 className="text-xl font-semibold tracking-tight" style={{ color: "#916431ff" }}>
+          {nombre}
+        </h2>
+
+        {/* Tipo (Perro, Gato...) */}
+        <p className="text-xs text-gray-500">
+          {tipo}
+        </p>
+
+        {/* Edad o info */}
+        <p className="text-base text-black">
+          {info}
+        </p>
+
+        <div className="flex justify-center">
+          <button
+            className="
+              inline-flex items-center justify-center
+              rounded-full px-3 py-1.5 text-xs font-semibold 
+              text-black shadow-sm transition-all duration-200 
+              border border-black
+              active:scale-95 focus:outline-none focus-visible:ring-2
+            "
+            style={{
+              backgroundColor: "#F0E68C",
+            }}
+            onMouseEnter={(e) => (e.target.style.backgroundColor = "#dfd15bff")}
+            onMouseLeave={(e) => (e.target.style.backgroundColor = "#F0E68C")}
+          >
+            Más Detalles
           </button>
         </div>
+
       </div>
-    );
-  }
-  
+    </div>
+  );
+}

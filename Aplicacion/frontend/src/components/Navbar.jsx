@@ -1,8 +1,10 @@
-import logo from '../assets/logo.png';
+// src/components/Navbar.jsx
+
+import logo from "../assets/logo.png";
 
 export default function Navbar() {
   return (
-     <nav
+    <nav
       className="w-full bg-[#38657E] text-white px-8 py-5 
                  flex justify-between items-center shadow-md"
     >
