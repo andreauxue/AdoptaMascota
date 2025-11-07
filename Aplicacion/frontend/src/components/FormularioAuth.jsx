@@ -35,7 +35,7 @@ export default function FormularioAuth({ tipo, onSubmit }) {
     const subTitulo = tipo === "login" ? "Ingresas tus datos" : "Crea tu cuenta";
 
     return (
-        <div className="min-h-[70vh] bg-[#f5e9ce] flex items-center justify-center p-4">
+        <div className="min-h-[70vh] bg-[#C1D9C1] flex items-center justify-center p-4">
             <div className="container mx-auto flex flex-col lg:flex-row items-center justify-center gap-16">
 
                 {/* Columna de Formulario a la izquierda */}
@@ -59,8 +59,8 @@ export default function FormularioAuth({ tipo, onSubmit }) {
                                     placeholder="Nombre de usuario"
                                     value={formData.username}
                                     onChange={handleChange}
-                                    required
-                                    className="w-full px-4 py-3 bg-white border border-gray-300 rounded-md focus:ring-2 focus:ring-[#801917] focus:border-[#5f0f2a] focus:outline-none"
+                                    required   
+                                    className="w-full px-4 py-3 bg-white border border-gray-300 rounded-md focus:ring-2 focus:ring-[#127369] focus:border-[#127369] focus:outline-none"
                                 />
                             </div>
 
@@ -74,7 +74,7 @@ export default function FormularioAuth({ tipo, onSubmit }) {
                                         value={formData.email}
                                         onChange={handleChange}
                                         required
-                                        className="w-full px-4 py-3 bg-white border border-gray-300 rounded-md focus:ring-2 focus:ring-[#801917] focus:border-[#5f0f2a] focus:outline-none"
+                                        className="w-full px-4 py-3 bg-white border border-gray-300 rounded-md focus:ring-2 focus:ring-[#127369] focus:border-[#127369] focus:outline-none"
                                     />
                                 </div>
                             )}
@@ -88,12 +88,12 @@ export default function FormularioAuth({ tipo, onSubmit }) {
                                     value={formData.password}
                                     onChange={handleChange}
                                     required
-                                    className="w-full px-4 py-3 bg-white border border-gray-300 rounded-md focus:ring-2 focus:ring-[#801917] focus:border-[#5f0f2a] focus:outline-none"
+                                    className="w-full px-4 py-3 bg-white border border-gray-300 rounded-md focus:ring-2 focus:ring-[#127369] focus:border-[#127369] focus:outline-none"
                                 />
                                 <button
                                     type="button"
                                     onClick={togglePasswordVisibility}
-                                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-[#801917] hover:opacity-70"
+                                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-[#127369] hover:opacity-70"
                                 >
                                     {showPassword ? <FaEyeSlash/> : <FaEye/>}
                                 </button>
@@ -107,7 +107,7 @@ export default function FormularioAuth({ tipo, onSubmit }) {
                             className={`w-full mt-6 py-3 px-4 rounded-md font-semibold text-white transition-all duration-300 ${
                                 isLoading
                                     ? 'bg-gray-400 cursor-not-allowed shadow-md'
-                                    : 'bg-[#5f0f2a] hover:bg-[#243B55] hover:-translate-y-1 hover:shadow-2xl hover:shadow-[#243B55]/40 hover:ring-2 hover:ring-white active:translate-y-0 active:shadow-md cursor-pointer shadow-md'
+                                    : 'bg-[#127369] hover:bg-[#243B55] hover:-translate-y-1 hover:shadow-2xl hover:shadow-[#243B55]/40 hover:ring-2 hover:ring-white active:translate-y-0 active:shadow-md cursor-pointer shadow-md'
                             }`}
                         >
                             {isLoading ? "Procesando..." : (tipo === "login" ? "Iniciar Sesión" : "Crear Cuenta")}

@@ -126,7 +126,7 @@ export default function ListaMascotas() {
         <div className="flex justify-center md:justify-end mt-12">
           <Link
               to="/registrar-mascota"
-              className="px-6 py-3 rounded-lg bg-[#5f0f2a] text-white font-semibold text-center hover:bg-[#243B55] hover:scale-105 hover:shadow-lg active:scale-95 active:shadow-md transition-all duration-300 cursor-pointer"
+              className="px-6 py-3 rounded-lg bg-[#10403B] text-white font-semibold text-center hover:bg-[#243B55] hover:scale-105 hover:shadow-lg active:scale-95 active:shadow-md transition-all duration-300 cursor-pointer"
           >
             Registrar Mascota
           </Link>

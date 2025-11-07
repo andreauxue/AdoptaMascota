@@ -3,10 +3,10 @@ import placeholderImage from '../assets/image.png'; // Placeholder
 
 export default function Home() {
 
-    const buttonStyle = "w-full max-w-xs px-6 py-3 rounded-lg text-white font-semibold text-center hover:opacity-90 transition duration-300 shadow-md bg-[#5f0f2a]";
+    const buttonStyle = "w-full max-w-xs px-6 py-3 rounded-lg text-white font-semibold text-center hover:opacity-90 transition duration-300 shadow-md bg-[#10403B]";
 
     return (
-        <div className="min-h-[70vh] bg-[#f5e9ce] flex items-center justify-center">
+        <div className="min-h-[70vh] bg-[#C1D9C1] flex items-center justify-center">
             <div className="container mx-auto px-6 py-16 flex flex-col lg:flex-row items-center justify-center gap-16">
 
                 {/* Columna de Texto y Botones a la izquierda en desktop) */}

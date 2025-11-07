@@ -41,11 +41,11 @@ export default function RegistrarMascota() {
     };
 
     // Estilo de Input del prototipo
-    const inputStyle = "w-full px-4 py-3 bg-white border border-gray-300 rounded-md focus:ring-2 focus:ring-[#801917] focus:border-[#801917] focus:outline-none";
+    const inputStyle = "w-full px-4 py-3 bg-white border border-gray-300 rounded-md focus:ring-2 focus:ring-[#127369] focus:border-[#127369] focus:outline-none";
 
     return (
-        // Fondo beige claro y formulario centrado
-        <div className="min-h-[70vh] bg-[#f5e9ce] flex items-center justify-center p-4">
+        // Fondo verde claro y formulario centrado
+        <div className="min-h-[70vh] bg-[#C1D9C1] flex items-center justify-center p-4">
             
             {/* Tarjeta del formulario */}
             <form onSubmit={handleSubmit} className="bg-[#FFFFFF] rounded-lg shadow-xl p-8 w-full max-w-lg">
@@ -74,13 +74,13 @@ export default function RegistrarMascota() {
                             <label className="flex items-center cursor-pointer">
                                 <input type="radio" name="genero" value="macho" checked={formData.genero === "macho"}
                                        onChange={handleChange}
-                                       className="h-4 w-4 text-[#801917] accent-[#801917] border-gray-400 focus:ring-[#801917]"/>
+                                       className="h-4 w-4 text-[#127369] accent-[#127369] border-gray-400 focus:ring-[#127369]"/>
                                 <span className="ml-2 text-[#243B55]">Macho</span>
                             </label>
                             <label className="flex items-center cursor-pointer">
                                 <input type="radio" name="genero" value="hembra" checked={formData.genero === "hembra"}
                                        onChange={handleChange}
-                                       className="h-4 w-4 text-[#801917] accent-[#801917] border-gray-400 focus:ring-[#801917]"/>
+                                       className="h-4 w-4 text-[#127369] accent-[#127369] border-gray-400 focus:ring-[#127369]"/>
                                 <span className="ml-2 text-[#243B55]">Hembra</span>
                             </label>
                         </div>
@@ -92,7 +92,7 @@ export default function RegistrarMascota() {
 
                     {/* Input de Imagen */}
                     <label className={`${inputStyle} flex items-center gap-3 cursor-pointer hover:bg-gray-50`}>
-                        <FaFileImage className="text-[#801917]"/>
+                        <FaFileImage className="text-[#127369]"/>
                         <span className="text-[#243B55]">
                             {imagePreview ? "Cambiar imagen" : "Subir imagen"}
                         </span>
@@ -114,7 +114,7 @@ export default function RegistrarMascota() {
                     className={`w-full mt-6 py-3 px-4 rounded-md font-semibold text-white transition-all duration-300 ${
                         isLoading
                             ? 'bg-gray-400 cursor-not-allowed shadow-md'
-                            : 'bg-[#5f0f2a] hover:bg-[#243B55] hover:-translate-y-1 hover:shadow-2xl hover:shadow-[#243B55]/40 hover:ring-2 hover:ring-white active:translate-y-0 active:shadow-md cursor-pointer shadow-md'
+                            : 'bg-[#127369] hover:bg-[#243B55] hover:-translate-y-1 hover:shadow-2xl hover:shadow-[#243B55]/40 hover:ring-2 hover:ring-white active:translate-y-0 active:shadow-md cursor-pointer shadow-md'
                     }`}
                 >
                     {isLoading ? "Procesando..." : "Subir"}

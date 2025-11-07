@@ -3,8 +3,8 @@ import placeholderLogo from '../assets/image.png'; // Imagen placeholder
 
 export default function Footer() {
     return (
-        // Fondo de color rojo y texto blanco
-        <footer className="bg-[#911a42] text-white text-center py-8 mt-0 border-t border-[#911a42]">
+        // Fondo de color verde y texto blanco
+        <footer className="bg-[#127369] text-white text-center py-8 mt-0 border-t border-[#127369]">
             <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
                 
                 {/* Logo y título a la izquierda */}
@@ -36,7 +36,7 @@ export default function Footer() {
             </div>
             
             {/* Derechos de autor */}
-            <div className="border-t border-[#D6C399] pt-4 mt-8">
+            <div className="border-t border-[#C1D9C1] pt-4 mt-8">
                 <p className="text-xs text-white flex items-center justify-center gap-1">
                     <FaRegCopyright /> {new Date().getFullYear()} Huellitas en Casa. Todos los derechos reservados.
                 </p>
