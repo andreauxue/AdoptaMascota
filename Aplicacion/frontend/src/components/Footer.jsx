@@ -4,7 +4,7 @@ export default function Footer({
   texto,
 }) {
   return (
-    <footer className={`${colorBg} ${colorText} text-center p-4 mt-6`}>
+    <footer className={`${colorBg} ${colorText} text-center p-4`}>
       {texto}
     </footer>
   );
