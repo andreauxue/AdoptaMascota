@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useRef } from 'react';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
+import { useState, useEffect } from "react";
 import adopcionMascotas from '../assets/adopcion.jpg'; 
 
 // Imports de imágenes de mascotas
@@ -31,6 +32,19 @@ export default function Home() {
         }
     };
 
+    // logica carrusel
+    const heroImages = [adopcionMascotas, tomillo, vikingo, stella];
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const nextSlide = () => setCurrentIndex((prev) => (prev + 1) % heroImages.length);
+    const prevSlide = () => setCurrentIndex((prev) => (prev - 1 + heroImages.length) % heroImages.length);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            nextSlide();
+        }, 4000);
+        return () => clearInterval(interval);
+    }, []);
+
     return (
         <>
             <div className="min-h-[70vh] bg-[#C1D9C1] flex items-center justify-center">
@@ -51,12 +65,33 @@ export default function Home() {
                             </Link>
                         </div>
                     </div>
-                    <div className="hidden lg:block lg:w-1/2">
+                    <div className="relative hidden lg:block lg:w-1/2">
                         <img
-                            src={adopcionMascotas}
-                            alt="Perro y gato juntos"
-                            className="rounded-lg shadow-2xl w-full h-auto max-w-lg mx-auto bg-[#FFFFFF] aspect-square object-cover hover:scale-105 transition-transform duration-300"
+                            src={heroImages[currentIndex]}
+                            alt={`Imagen ${currentIndex + 1}`}
+                            className="rounded-lg shadow-2xl w-full h-auto max-w-lg mx-auto bg-white aspect-square object-cover transition-all duration-700 ease-in-out"
                         />
+                        <button
+                            onClick={prevSlide}
+                            className="absolute left-3 top-1/2 -translate-y-1/2 bg-white/70 text-[#10403B] rounded-full p-2 shadow-md hover:bg-white active:scale-95"
+                        >
+                        <FaArrowLeft />
+                        </button>
+
+                        <button
+                            onClick={nextSlide}
+                            className="absolute right-3 top-1/2 -translate-y-1/2 bg-white/70 text-[#10403B] rounded-full p-2 shadow-md hover:bg-white active:scale-95"
+                        >
+                        <FaArrowRight />
+                        </button>
+                        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
+                            {heroImages.map((_, index) => (
+                                <span
+                                    key={index}
+                                    className={`w-3 h-3 rounded-full ${index === currentIndex ? 'bg-[#10403B]' : 'bg-white/70'}`}
+                                ></span>
+                        ))}
+                        </div>
                     </div>
                 </div>
             </div>
