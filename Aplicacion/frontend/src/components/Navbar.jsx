@@ -27,6 +27,12 @@ export default function Navbar() {
         </li>
 
         <li>
+          <a href="/" className="hover:underline">
+            Ver Galería
+          </a>
+        </li>
+
+        <li>
           <a href="/galeria" className="hover:underline">
             Búsqueda Filtrada
           </a>
