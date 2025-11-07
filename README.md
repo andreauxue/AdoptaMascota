@@ -1,8 +1,30 @@
-# AdoptaMascota
-Desarrollo de aplicación web para Diseño de Interfaces de Usuario 2026-1
+# 🐾 Huellitas en Casa
 
+**Huellitas en Casa** es una plataforma web diseñada para conectar mascotas que buscan un hogar con personas interesadas en adoptar.  
+El objetivo principal es fomentar la adopción responsable y brindar una experiencia amigable y accesible para los usuarios.
 
-## Tipos principales de commits
+---
+
+## Tecnologías Utilizadas
+
+- **React + Vite**
+- **TailwindCSS**
+- **React Router DOM**
+- **JavaScript (ES6+)**
+
+---
+
+## Integrantes del equipo — Gryffindor
+
+- Anaya Pérez Ulises Josué
+- Díaz Reyes Lilith Jaquelin
+- García López Francisco Daniel
+- Osorio Morales Fernanda Ameyalli
+- Sautto Ramírez Seldon
+- Tapia Sánchez Oscar
+- Vázquez Reyes Jesús Elías
+
+### Tipos principales de commits
 
 | Tipo         | Significado                                                                                  | Ejemplo                                               |
 | ------------ | -------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
