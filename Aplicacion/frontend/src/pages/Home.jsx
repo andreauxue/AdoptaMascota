@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import placeholderImage from '../assets/image.png'; // Placeholder
-
+import adopcionMascotas from '../assets/adopcion.jpg'; // Imagen de adopción de mascotas
 export default function Home() {
 
     const buttonStyle = "w-full max-w-xs px-6 py-3 rounded-lg text-white font-semibold text-center hover:opacity-90 transition duration-300 shadow-md bg-[#10403B]";
@@ -40,7 +40,7 @@ export default function Home() {
                 {/* 'hidden' para estar oculto en móvil y 'lg:block' para ser visible en 'lg' y superior */}
                 <div className="hidden lg:block lg:w-1/2">
                     <img
-                        src={placeholderImage}
+                        src={adopcionMascotas}
                         alt="Perro y gato juntos"
                         className="rounded-lg shadow-2xl w-full h-auto max-w-lg mx-auto bg-[#FFFFFF] aspect-square object-cover"
                     />

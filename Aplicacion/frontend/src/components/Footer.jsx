@@ -1,6 +1,9 @@
 import { FaRegCopyright, FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
 import placeholderLogo from '../assets/image.png'; // Imagen placeholder
-
+import facebookImg from '../assets/facebook.avif'; // Imagen facebook
+import instaImg from '../assets/insta.webp'; // Imagen instagram
+import linkedinImg from '../assets/linkedin.webp'; // Imagen linkedin
+import huellitasEnCasa from '../assets/huellitasEnCasa.jpg';
 export default function Footer() {
     return (
         // Fondo de color verde y texto blanco
@@ -9,7 +12,7 @@ export default function Footer() {
                 
                 {/* Logo y título a la izquierda */}
                 <div className="flex items-center justify-center md:justify-start gap-3">
-                    <img src={placeholderLogo} alt="Logo" className="w-12 h-12 rounded-md bg-[#FFFFFF]" />
+                    <img src={huellitasEnCasa} alt="Logo" className="w-12 h-12 rounded-md bg-[#FFFFFF]" />
                     <h3 className="text-2xl font-bold text-white">
                         Huellitas en Casa
                     </h3>
@@ -27,9 +30,9 @@ export default function Footer() {
                 <div className="flex flex-col items-center md:items-end">
                      <h4 className="font-semibold text-white mb-2">Redes sociales</h4>
                      <div className="flex gap-4">
-                        <img src={placeholderLogo} alt="Icono" className="w-8 h-8 rounded-md bg-[#FFFFFF]" />
-                        <img src={placeholderLogo} alt="Icono" className="w-8 h-8 rounded-md bg-[#FFFFFF]" />
-                        <img src={placeholderLogo} alt="Icono" className="w-8 h-8 rounded-md bg-[#FFFFFF]" />
+                        <img src={facebookImg} alt="Icono" className="w-8 h-8 rounded-md bg-[#FFFFFF]" />
+                        <img src={instaImg} alt="Icono" className="w-8 h-8 rounded-md bg-[#FFFFFF]" />
+                        <img src={linkedinImg} alt="Icono" className="w-8 h-8 rounded-md bg-[#FFFFFF]" />
                      </div>
                 </div>
 

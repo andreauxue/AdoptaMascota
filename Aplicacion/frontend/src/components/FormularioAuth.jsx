@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
 import placeholderImage from '../assets/image.png'; // Imagen placeholder
-
+import adopcionMascotitas from '../assets/adopcion3.jpg'; // Imagen de adopción de mascotas
 export default function FormularioAuth({ tipo, onSubmit }) {
     const [formData, setFormData] = useState({ 
         username: "", 
@@ -118,7 +118,7 @@ export default function FormularioAuth({ tipo, onSubmit }) {
                 {/* Columna de Imagen a la derecha */}
                 <div className="hidden lg:block lg:w-1/2">
                     <img
-                        src={placeholderImage}
+                        src={adopcionMascotitas}
                         alt="Decoración"
                         className="rounded-lg shadow-2xl w-full h-auto max-w-lg mx-auto bg-[#FFFFFF] aspect-square object-cover"
                     />

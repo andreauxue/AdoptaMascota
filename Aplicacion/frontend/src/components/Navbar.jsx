@@ -10,7 +10,7 @@ import {
     FaTimes
 } from 'react-icons/fa';
 import placeholderLogo from '../assets/image.png';
-
+import huellitasEnCasa from '../assets/huellitasEnCasa.jpg';
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -21,7 +21,7 @@ export default function Navbar() {
 
             {/* Logo y título */}
             <Link to="/" className="flex items-center gap-3 cursor-pointer hover:scale-105 transition-transform duration-300">
-                <img src={placeholderLogo} alt="Logo" className="w-10 h-10 rounded-md bg-[#FFFFFF] hover:rotate-12 transition-transform duration-300" />
+                <img src={huellitasEnCasa} alt="Logo" className="w-10 h-10 rounded-md bg-[#FFFFFF] hover:rotate-12 transition-transform duration-300" />
                 <h1 className="text-xl lg:text-2xl font-bold text-white">
                     Huellitas en Casa
                 </h1>
