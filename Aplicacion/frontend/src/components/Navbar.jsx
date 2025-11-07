@@ -1,9 +1,11 @@
-export default function Navbar() {
+export default function Navbar({ colorBg, colorText = "text-white" }) {
   return (
-    <nav className="flex justify-between items-center">
+    <nav
+      className={`${colorBg} ${colorText} flex justify-between items-center`}
+    >
       <h1> MatchPaw </h1>
 
-      <ul className="flex gap-6">
+      <ul className={`${colorText} flex gap-6`}>
         <li>
           <a href="/" className="hover: underline">
             Inicio
