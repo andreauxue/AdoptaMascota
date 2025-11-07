@@ -34,15 +34,15 @@ export default function Navbar() {
         </li>
 
         <li>
-          <a href="/galeria" className="hover:underline">
+          <Link to="/galeria" className="hover:underline">
             Búsqueda Filtrada
-          </a>
+          </Link>
         </li>
 
         <li>
-          <a href="/registrar-mascota" className="hover:underline">
+          <Link to="/registrar-mascota" className="hover:underline">
             Registrar Mascota
-          </a>
+          </Link>
         </li>
 
         <li>
