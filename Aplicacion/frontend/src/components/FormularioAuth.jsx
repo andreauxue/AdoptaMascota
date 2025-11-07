@@ -2,6 +2,7 @@ import { useState } from "react";
 import { FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
 import placeholderImage from '../assets/image.png'; // Imagen placeholder
 import adopcionMascotitas from '../assets/adopcion3.jpg'; // Imagen de adopción de mascotas
+
 export default function FormularioAuth({ tipo, onSubmit }) {
     const [formData, setFormData] = useState({ 
         username: "", 
@@ -40,17 +41,19 @@ export default function FormularioAuth({ tipo, onSubmit }) {
 
                 {/* Columna de Formulario a la izquierda */}
                 <div className="w-full max-w-md">
-                    <h2 className="text-4xl font-bold text-[#243B55] mb-6 text-center lg:text-left">
+                    {/* --- FUENTE TÍTULO --- */}
+                    <h2 className="text-4xl font-bold text-[#243B55] mb-6 text-center lg:text-left font-aclonica">
                         {titulo}
                     </h2>
                     
                     {/* Tarjeta del formulario */}
                     <form onSubmit={handleSubmit} className="bg-[#FFFFFF] rounded-lg shadow-xl p-8 w-full">
-                        <h3 className="text-2xl font-semibold text-[#243B55] text-center mb-6">
+                        {/* --- FUENTE SUBTÍTULO --- */}
+                        <h3 className="text-2xl font-semibold text-[#243B55] text-center mb-6 font-aclonica">
                             {subTitulo}
                         </h3>
 
-                        {/* Campos del formulario */}
+                        {/* Campos del formulario (heredan font-belleza del body) */}
                         <div className="space-y-4">
                             {/* Campo Usuario */}
                             <div className="relative">
@@ -104,7 +107,8 @@ export default function FormularioAuth({ tipo, onSubmit }) {
                         <button
                             type="submit"
                             disabled={isLoading}
-                            className={`w-full mt-6 py-3 px-4 rounded-md font-semibold text-white transition-all duration-300 ${
+                            // --- FUENTE BOTÓN ---
+                            className={`w-full mt-6 py-3 px-4 rounded-md font-semibold text-white transition-all duration-300 font-belleza ${
                                 isLoading
                                     ? 'bg-gray-400 cursor-not-allowed shadow-md'
                                     : 'bg-[#127369] hover:bg-[#243B55] hover:-translate-y-1 hover:shadow-2xl hover:shadow-[#243B55]/40 hover:ring-2 hover:ring-white active:translate-y-0 active:shadow-md cursor-pointer shadow-md'
@@ -120,7 +124,7 @@ export default function FormularioAuth({ tipo, onSubmit }) {
                     <img
                         src={adopcionMascotitas}
                         alt="Decoración"
-                        className="rounded-lg shadow-2xl w-full h-auto max-w-lg mx-auto bg-[#FFFFFF] aspect-square object-cover"
+                        className="rounded-lg shadow-2xl w-full h-auto max-w-lg mx-auto bg-[#FFFFFF] aspect-square object-cover border-4 border-white hover:scale-105 transition-transform duration-300"
                     />
                 </div>
             </div>

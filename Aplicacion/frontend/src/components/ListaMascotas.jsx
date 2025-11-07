@@ -8,6 +8,7 @@ import cheddar from "../assets/cheddar.jpg";
 import yoshi from "../assets/yoshi.jpg";
 import garfield from "../assets/garfield.jpg";
 import srgato from "../assets/srgato.jpg";
+import Langosta from "../assets/Langosta.webp";
 import { Link } from "react-router-dom";
 
 export default function ListaMascotas() {
@@ -94,13 +95,22 @@ export default function ListaMascotas() {
       imagen: srgato,
       genero: "macho",
       ubicacion: "Refugio Este"
+    },
+    { 
+      id: 10, 
+      nombre: "Langostina", 
+      edad: "5 años", 
+      descripcion: "Langosta azul famosa en redes sociales.", 
+      imagen: Langosta,
+      genero: "hembra",
+      ubicacion: "Refugio del Pacífico"
     }
   ];
 
   return (
       <div className="relative py-6 px-4">
 
-        {/* Cuadrícula de 3 columnas para las tarjetas como en el prototipo */}
+        {/* Cuadrícula de 3 columnas */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 place-items-center">
           {mascotas.map((m) => (
               <div
@@ -126,7 +136,8 @@ export default function ListaMascotas() {
         <div className="flex justify-center md:justify-end mt-12">
           <Link
               to="/registrar-mascota"
-              className="px-6 py-3 rounded-lg bg-[#10403B] text-white font-semibold text-center hover:bg-[#243B55] hover:scale-105 hover:shadow-lg active:scale-95 active:shadow-md transition-all duration-300 cursor-pointer"
+              /* Fuente del boton */
+              className="px-6 py-3 rounded-lg bg-[#10403B] text-white font-semibold text-center hover:bg-[#243B55] hover:scale-105 hover:shadow-lg active:scale-95 active:shadow-md transition-all duration-300 cursor-pointer font-belleza"
           >
             Registrar Mascota
           </Link>

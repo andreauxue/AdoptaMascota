@@ -1,3 +1,23 @@
+/* index.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Aclonica&family=Belleza&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  body {
+    /* Establece Belleza como la fuente por defecto */
+    @apply font-belleza;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
