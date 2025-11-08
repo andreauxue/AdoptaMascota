@@ -1,6 +1,6 @@
 # Huellitas en Casa 🐾 
 
-**Huellitas en Casa** es na plataforma web diseñada para conectar mascotas que buscan un hogar con personas interesadas en adoptar. 
+**Huellitas en Casa** es una plataforma web diseñada para conectar mascotas que buscan un hogar con personas interesadas en adoptar. 
 El objetivo principal es fomentar la adopción responsable y brindar una experiencia amigable y accesible para los usuarios.
 
 ---
