@@ -23,27 +23,28 @@ export default function Home() {
       </div>
 
       {/* Objetivos */}
-      <div className="max-w-4xl grid md:grid-cols-3 gap-6 mb-12">
-        <div className="bg-[#F0E68C] rounded-xl shadow-md p-6 text-center transition-all duration-300 hover:brightness-95 hover:shadow-xl">
-          <h3 className="font-bold text-lg mb-2">Facilitar la Adopción</h3>
-          <p className="text-gray-800 text-sm">
-            Simplificar el proceso de búsqueda, solicitud y aprobación de adopciones.
-          </p>
-        </div>
-        <div className="bg-[#F0E68C] rounded-xl shadow-md p-6 text-center transition-all duration-300 hover:brightness-95 hover:shadow-xl">
-          <h3 className="font-bold text-lg mb-2">Visibilidad de las Mascotas</h3>
-          <p className="text-gray-800 text-sm">
-            Proporcionar perfiles de calidad para aumentar significativamente la exposición de las mascotas disponibles.
-          </p>
-        </div>
-        <div className="bg-[#F0E68C] rounded-xl shadow-md p-6 text-center transition-all duration-300 hover:brightness-95 hover:shadow-xl">
-          <h3 className="font-bold text-lg mb-2">Compatibilidad</h3>
-          <p className="text-gray-800 text-sm">
-            Sistema de búsqueda filtrada que ayuda a encontrar mascotas compatibles con tu estilo de vida.
-          </p>
-        </div>
-      </div>
+        <div className="max-w-4xl grid md:grid-cols-3 gap-6 mb-12">
+            <div className="group bg-[#F0E68C] rounded-xl shadow-md p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                <h3 className="font-bold text-lg mb-2">Facilitar la Adopción</h3>
+                <p className="text-gray-800 text-sm">
+                Simplificar el proceso de búsqueda, solicitud y aprobación de adopciones.
+                </p>
+            </div>
 
+            <div className="group bg-[#F0E68C] rounded-xl shadow-md p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                <h3 className="font-bold text-lg mb-2">Visibilidad de las Mascotas</h3>
+                <p className="text-gray-800 text-sm">
+                Proporcionar perfiles de calidad para aumentar significativamente la exposición de las mascotas disponibles.
+                </p>
+            </div>
+
+            <div className="group bg-[#F0E68C] rounded-xl shadow-md p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                <h3 className="font-bold text-lg mb-2">Compatibilidad</h3>
+                <p className="text-gray-800 text-sm">
+                Sistema de búsqueda filtrada que ayuda a encontrar mascotas compatibles con tu estilo de vida.
+                </p>
+            </div>
+        </div>
     </div>
   );
 }
