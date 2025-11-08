@@ -1,7 +1,7 @@
 /**
  * @fileoverview App.jsx: Componente principal que define la estructura del router
  * y el layout condicional de la aplicación (Navbar/Footer).
- * @version 1.0.1 (Modificación de visibilidad de Navbar/Footer)
+ * @version 1.0.0
  * @author Equipo Slytherin
  */
 
@@ -10,7 +10,7 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
 import Register from "./pages/Register";
 import Adoptar from "./pages/Adoptar";
-import PublicarMascota from "./pages/PublicarMascota"; 
+import PublicarMascota from "./pages/PublicarMascota"; // <-- Importación corregida y esencial
 import Perfil from "./pages/Perfil"; 
 import DetalleMascota from "./pages/DetalleMascota"; 
 // Importación de Componentes de Layout y Seguridad
@@ -28,11 +28,10 @@ import ProtectedRoute from "./components/ProtectedRoute";
  * @returns {JSX.Element} El esqueleto de la aplicación con rutas dinámicas.
  */
 function Layout() { 
-  const location = useLocation(); 
+  const location = useLocation(); // Hook para obtener la ruta actual
 
-  // Rutas donde NO se mostrará la Navbar ni el Footer (SOLO HOME)
-  // De esta manera, /register SÍ muestra la Navbar para permitir navegación.
-  const noNavbarRoutes = ["/"]; 
+  // Rutas donde NO se mostrará la Navbar ni el Footer (Home y Register/Login)
+  const noNavbarRoutes = ["/", "/register"];
   const showNavbar = !noNavbarRoutes.includes(location.pathname);
   
   return (
@@ -46,14 +45,17 @@ function Layout() {
           {/* -------------------- RUTAS PÚBLICAS -------------------- */}
           
           <Route path="/" element={<Home />} /> 
-          
-          {/* Al entrar a /register, la Navbar es visible */}
           <Route path="/register" element={<Register />} />
           
+          {/* El muro de adopción es accesible para todos */}
           <Route path="/adopta" element={<Adoptar />} />
+          
+          {/* Ruta dinámica para el detalle de la mascota */}
           <Route path="/mascota/:id" element={<DetalleMascota />} /> 
 
           {/* -------------------- RUTAS PROTEGIDAS -------------------- */}
+          
+          {/* Para Publicar y Perfil, se requiere que el usuario esté autenticado. */}
           
           <Route 
             path="/publicar" 
@@ -64,6 +66,8 @@ function Layout() {
             path="/perfil" 
             element={<ProtectedRoute><Perfil /></ProtectedRoute>} 
           />
+          
+          {/* ---------------------------------------------------------- */}
           
         </Routes>
       </main>
@@ -81,6 +85,8 @@ function Layout() {
  * @returns {JSX.Element} El componente App.
  */
 export default function App() {
+  // NOTA: Asegúrate de que AuthProvider (del AuthContext) envuelva a este componente
+  // en tu archivo index.js o main.jsx para que las ProtectedRoutes funcionen.
   return (
     <BrowserRouter>
       <Layout />
