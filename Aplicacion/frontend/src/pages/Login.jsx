@@ -33,7 +33,7 @@ export default function Login() {
         <section>
           <AuthForm mode="login" onSubmit={handleLogin} loading={loading} error={err} />
           <div className="text-center mt-4">
-            <Link to="/registro" className="inline-block border rounded-lg px-4 py-2 hover:bg-gray-100">
+            <Link to="/register" className="inline-block border rounded-lg px-4 py-2 hover:bg-gray-100">
               Crear Cuenta
             </Link>
           </div>
