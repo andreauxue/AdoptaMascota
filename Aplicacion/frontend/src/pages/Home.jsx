@@ -1,7 +1,7 @@
 import Boton from "../components/Boton";
 import { useNavigate } from "react-router-dom";
-import { FaHeart, FaPaw, FaSearch } from 'react-icons/fa';
 import imgHome from "../assets/img/img1.png";
+import logo from "../assets/img/LOGO.png";
 
 export default function Home() {
     const navigate = useNavigate();
