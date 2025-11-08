@@ -48,3 +48,9 @@ npm run dev
 
 ### ✅ 4. Abrir el proyecto
 http://localhost:5173/
+
+## Instalaciones Extra
+
+Tuvimos que instalar lo siguiente:
+npm install react-icons
+npm install react-router-dom
