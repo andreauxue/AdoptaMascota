@@ -11,12 +11,34 @@ function writeUsers(users) {
 
 export function register({ name, email, password, birthDay, birthMonth, birthYear, phone }) {
   const users = readUsers();
+
+  // Verifica si el correo ya está registrado
   const exists = users.some(u => u.email.toLowerCase() === email.toLowerCase());
   if (exists) throw new Error("Ese correo ya está registrado.");
-  const user = { id: crypto.randomUUID(), name, email, password, birthDay, birthMonth, birthYear, phone, createdAt: Date.now() };
+
+  // Crea el nuevo usuario
+  const user = { 
+    id: crypto.randomUUID(), 
+    name, 
+    email, 
+    password, 
+    birthDay, 
+    birthMonth, 
+    birthYear, 
+    phone, 
+    createdAt: Date.now() 
+  };
+
+  // Guarda el usuario
   users.push(user);
   writeUsers(users);
-  localStorage.setItem(SESSION_KEY, JSON.stringify({ id: user.id, name: user.name, email: user.email }));
+
+  // Inicia sesión automáticamente
+  localStorage.setItem(
+    SESSION_KEY,
+    JSON.stringify({ id: user.id, name: user.name, email: user.email })
+  );
+
   return user;
 }
 

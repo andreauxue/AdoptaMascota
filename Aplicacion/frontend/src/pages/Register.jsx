@@ -15,6 +15,7 @@ export default function Register() {
       if (!data.name.trim()) throw new Error("El nombre es obligatorio.");
       if (!/^\S+@\S+\.\S+$/.test(data.email)) throw new Error("Correo inválido.");
       if (data.password.length < 6) throw new Error("La contraseña debe tener al menos 6 caracteres.");
+      if (data.password !== data.confirmPassword) throw new Error("Las contraseñas no coinciden.");
 
       await new Promise(r => setTimeout(r, 350));
       register(data);
