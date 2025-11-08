@@ -57,7 +57,7 @@ export default function FormularioAuth({ tipo, onSubmit }) {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-pink-50 to-pink-100 flex items-center justify-center p-4">
+        <div className="min-h-screen bg-gradient-to-br bg-azul-fondo/30 rounded-sm flex items-center justify-center p-4">
             <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-md border border-pink-200">
                 {/* Header */}
                 <div className="text-center mb-8">
