@@ -46,16 +46,11 @@ export default function Navbar() {
         </li>
 
         <li>
-          <a href="/logout" className="hover:underline">
+          <a href="/login" className="hover:underline">
             Cerrar Sesión
           </a>
         </li>
 
-        <li>
-          <a href="/register" className="hover:underline">
-            Regístrate
-          </a>
-        </li>
       </ul>
     </nav>
   );

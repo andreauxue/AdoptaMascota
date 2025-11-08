@@ -31,7 +31,6 @@ export default function Register() {
     <div className="min-h-[80vh] grid place-items-center bg-gray-100">
       <div className="w-full max-w-3xl p-6">
         <div className="text-center mb-4">
-          <h2 className="text-4xl font-extrabold">MatchPaw</h2>
         </div>
         <AuthForm mode="register" onSubmit={handleRegister} loading={loading} error={err} />
         <p className="text-center mt-4 text-sm">

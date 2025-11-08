@@ -7,8 +7,8 @@ export default function Home() {
       {/* Logo y título */}
       <div className="flex flex-col items-center mb-12">
         <img src={logo} alt="MatchPaw Logo" className="w-50 h-24 mb-4" />
-        <h1 className="text-4xl font-bold text-[#38657E] text-center">
-          ¡Bienvenido a <span className="text-[#C59A6A]">MatchPaw</span>!
+        <h1 className="text-4xl font-bold text-[#000000] text-center">
+          ¡Bienvenido a <span className="text-[#38657E]">MatchPaw</span>!
         </h1>
         <p className="mt-4 max-w-2xl text-center text-gray-700 text-lg">
           MatchPaw es una plataforma para conectar personas, familias e instituciones interesadas en adoptar mascotas con refugios y particulares que dan en adopción.
