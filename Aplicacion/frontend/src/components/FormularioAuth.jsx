@@ -1,176 +1,186 @@
+// frontend/src/components/FormularioAuth.jsx (MODIFICADO)
+/**
+ * @fileoverview Componente FormularioAuth - Ahora un formulario puro, sin layout de página.
+ * @version 1.0.2
+ * @author Equipo Slytherin
+ */
+
 import { useState } from "react";
 import { FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
+import { useNavigate } from "react-router-dom"; 
 
-export default function FormularioAuth({ tipo, onSubmit }) {
+/**
+ * Componente funcional FormularioAuth.
+ *
+ * Muestra el formulario de autenticación (Login o Registro).
+ *
+ */
+export default function FormularioAuth({ tipo, onToggleType }) { 
+    
+    const navigate = useNavigate(); 
+    
     const [formData, setFormData] = useState({ 
         username: "", 
         password: "", 
         email: "" 
     });
+    
     const [showPassword, setShowPassword] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [message, setMessage] = useState(null); 
 
     const handleChange = (e) => 
         setFormData({ ...formData, [e.target.name]: e.target.value });
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setIsLoading(true);
-        
-        // Simulación de envío de datos
-        setTimeout(() => {
-            console.log("Datos del formulario enviados:", {
-                tipo: tipo,
-                datos: formData,
-                timestamp: new Date().toISOString()
-            });
-            
-            // Simular respuesta exitosa
-            const respuestaSimulada = {
-                success: true,
-                message: tipo === "login" 
-                    ? "Inicio de sesión exitoso" 
-                    : "Registro completado correctamente",
-                user: {
-                    id: Math.random().toString(36).substr(2, 9),
-                    username: formData.username,
-                    email: formData.email
-                }
-            };
-            
-            console.log("Respuesta simulada:", respuestaSimulada);
-            setIsLoading(false);
-            
-            // Llamar al callback onSubmit con los datos simulados
-            if (onSubmit) {
-                onSubmit(respuestaSimulada);
-            }
-            
-            // Mostrar alerta de éxito
-            alert(respuestaSimulada.message);
-            
-        }, 1500);
-    };
-
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
+    
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setMessage(null);
+        setIsLoading(true);
+
+        if (tipo === "login") {
+            // --- LÓGICA DE INICIO DE SESIÓN ---
+            navigate("/adopta"); 
+            setIsLoading(false);
+
+        } else { // tipo === "register"
+            // --- LÓGICA DE REGISTRO (1.5s de espera) ---
+            setTimeout(() => {
+                setMessage("¡Cuenta creada con éxito! Por favor, inicia sesión.");
+                setFormData({ username: "", password: "", email: "" }); 
+                onToggleType(); // Llama a la función del padre para cambiar a 'login'
+                setIsLoading(false);
+                setTimeout(() => setMessage(null), 4000);
+            }, 1500);
+        }
+    };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-pink-50 to-pink-100 flex items-center justify-center p-4">
-            <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-md border border-pink-200">
-                {/* Header */}
-                <div className="text-center mb-8">
-                    <div className="w-16 h-16 bg-gradient-to-r from-pink-400 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <FaUser className="text-2xl text-white" />
+        <form 
+            onSubmit={handleSubmit} 
+            className="bg-blanco rounded-2xl shadow-xl p-8 w-full max-w-md border border-verde-menta"
+        >
+            {/* Header dinámico */}
+            <div className="text-center mb-8">
+                <div className="w-16 h-16 bg-durazno rounded-full flex items-center justify-center mx-auto mb-4">
+                    <FaUser className="text-2xl text-azul-fondo" />
+                </div>
+                <h2 className="text-3xl font-bold text-azul-fondo">
+                    {tipo === "login" ? "Bienvenido" : "Crear Cuenta"}
+                </h2>
+                <p className="text-azul-fondo mt-2">
+                    {tipo === "login" 
+                        ? "Ingresa a tu cuenta" 
+                        : "Únete a nuestra comunidad"
+                    }
+                </p>
+            </div>
+            
+            {/* Mensaje de notificación */}
+            {message && (
+                <div className="bg-verde-menta text-azul-fondo p-3 rounded-lg text-sm mb-4 border border-verde-grisaseo">
+                    {message}
+                </div>
+            )}
+
+            {/* Campos del formulario */}
+            <div className="space-y-4">
+                {/* Campo Usuario */}
+                <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <FaUser className="text-verde-grisaseo" />
                     </div>
-                    <h2 className="text-3xl font-bold bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent">
-                        {tipo === "login" ? "Bienvenido" : "Crear Cuenta"}
-                    </h2>
-                    <p className="text-gray-600 mt-2">
-                        {tipo === "login" 
-                            ? "Ingresa a tu cuenta" 
-                            : "Únete a nuestra comunidad"
-                        }
-                    </p>
+                    <input 
+                        name="username"
+                        placeholder="Nombre de usuario"
+                        value={formData.username}
+                        onChange={handleChange}
+                        required
+                        className="w-full pl-10 pr-4 py-3 border border-verde-grisaseo rounded-xl focus:ring-2 focus:ring-durazno focus:border-durazno transition-all duration-200 text-azul-fondo bg-blanco"
+                    />
                 </div>
 
-                {/* Campos del formulario */}
-                <div className="space-y-4">
-                    {/* Campo Usuario */}
+                {/* Campo Email (solo registro) */}
+                {tipo === "register" && ( 
                     <div className="relative">
                         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <FaUser className="text-gray-400" />
+                            <FaEnvelope className="text-verde-grisaseo" />
                         </div>
                         <input 
-                            name="username"
-                            placeholder="Nombre de usuario"
-                            value={formData.username}
+                            name="email"
+                            type="email"
+                            placeholder="Correo electrónico"
+                            value={formData.email}
                             onChange={handleChange}
                             required
-                            className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-all duration-200"
+                            className="w-full pl-10 pr-4 py-3 border border-verde-grisaseo rounded-xl focus:ring-2 focus:ring-durazno focus:border-durazno transition-all duration-200 text-azul-fondo bg-blanco"
                         />
                     </div>
+                )}
 
-                    {/* Campo Email (solo registro) */}
-                    {tipo === "register" && (
-                        <div className="relative">
-                            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <FaEnvelope className="text-gray-400" />
-                            </div>
-                            <input 
-                                name="email"
-                                type="email"
-                                placeholder="Correo electrónico"
-                                value={formData.email}
-                                onChange={handleChange}
-                                required
-                                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-all duration-200"
-                            />
-                        </div>
-                    )}
-
-                    {/* Campo Contraseña */}
-                    <div className="relative">
-                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <FaLock className="text-gray-400" />
-                        </div>
-                        <input 
-                            type={showPassword ? "text" : "password"}
-                            name="password"
-                            placeholder="Contraseña"
-                            value={formData.password}
-                            onChange={handleChange}
-                            required
-                            className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-all duration-200"
-                        />
-                        <button 
-                            type="button"
-                            onClick={togglePasswordVisibility}
-                            className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-pink-500 transition-colors"
-                        >
-                            {showPassword ? <FaEyeSlash /> : <FaEye />}
-                        </button>
+                {/* Campo Contraseña */}
+                <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <FaLock className="text-verde-grisaseo" />
                     </div>
+                    <input 
+                        type={showPassword ? "text" : "password"}
+                        name="password"
+                        placeholder="Contraseña"
+                        value={formData.password}
+                        onChange={handleChange}
+                        required
+                        className="w-full pl-10 pr-12 py-3 border border-verde-grisaseo rounded-xl focus:ring-2 focus:ring-durazno focus:border-durazno transition-all duration-200 text-azul-fondo bg-blanco"
+                    />
+                    <button 
+                        type="button"
+                        onClick={togglePasswordVisibility}
+                        className="absolute inset-y-0 right-0 pr-3 flex items-center text-verde-grisaseo hover:text-azul-fondo transition-colors"
+                    >
+                        {showPassword ? <FaEyeSlash /> : <FaEye />}
+                    </button>
                 </div>
+            </div>
 
-                {/* Botón de envío */}
-                <button
-                    type="submit"
-                    disabled={isLoading}
-                    className={`w-full mt-6 py-3 px-4 rounded-xl font-semibold text-white transition-all duration-200 ${
-                        isLoading 
-                            ? 'bg-gray-400 cursor-not-allowed' 
-                            : 'bg-gradient-to-r from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 shadow-lg hover:shadow-pink-200'
-                    }`}
-                >
-                    {isLoading ? (
-                        <span className="flex items-center justify-center">
-                            <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
-                            Procesando...
-                        </span>
-                    ) : (
-                        tipo === "login" ? "Iniciar Sesión" : "Crear Cuenta"
-                    )}
-                </button>
+            {/* Botón de envío */}
+            <button
+                type="submit"
+                disabled={isLoading}
+                className={`w-full mt-6 py-3 px-4 rounded-xl font-semibold text-azul-fondo transition-all duration-200 shadow-lg ${
+                    isLoading 
+                        ? 'bg-verde-grisaseo cursor-not-allowed' 
+                        : 'bg-durazno hover:bg-verde-menta hover:shadow-verde-menta/50'
+                }`}
+            >
+                {isLoading ? (
+                    <span className="flex items-center justify-center text-azul-fondo">
+                        <div className="w-5 h-5 border-2 border-azul-fondo border-t-transparent rounded-full animate-spin mr-2"></div>
+                        Procesando...
+                    </span>
+                ) : (
+                    tipo === "login" ? "Iniciar Sesión" : "Crear Cuenta"
+                )}
+            </button>
 
-                {/* Enlace adicional */}
-                <div className="text-center mt-6 pt-6 border-t border-gray-200">
-                    <p className="text-gray-600">
-                        {tipo === "login" 
-                            ? "¿No tienes cuenta? " 
-                            : "¿Ya tienes cuenta? "
-                        }
-                        <button 
-                            type="button"
-                            className="text-pink-500 hover:text-pink-600 font-semibold transition-colors"
-                            onClick={() => console.log("Cambiar a:", tipo === "login" ? "register" : "login")}
-                        >
-                            {tipo === "login" ? "Regístrate" : "Inicia Sesión"}
-                        </button>
-                    </p>
-                </div>
-            </form>
-        </div>
+            {/* Enlace para alternar entre Login/Registro */}
+            <div className="text-center mt-6 pt-6 border-t border-verde-grisaseo">
+                <p className="text-azul-fondo">
+                    {tipo === "login" 
+                        ? "¿No tienes cuenta? " 
+                        : "¿Ya tienes cuenta? "
+                    }
+                    <button 
+                        type="button"
+                        className="text-verde-grisaseo hover:text-azul-fondo font-semibold transition-colors"
+                        onClick={onToggleType} // Llama a la función del padre para alternar
+                    >
+                        {tipo === "login" ? "Regístrate" : "Inicia Sesión"}
+                    </button>
+                </p>
+            </div>
+        </form>
     );
 }

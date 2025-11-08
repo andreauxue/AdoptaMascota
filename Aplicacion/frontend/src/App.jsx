@@ -9,9 +9,10 @@ export default function App() {
   return (
     <BrowserRouter>
       <div className="flex flex-col min-h-screen">
-        <Navbar/>
-        <main className="flex-grow bg-pink-50 p-6">
+        <main className="flex-grow bg-blanco">
           <Routes>
+            <Route path="/login" element={<Register initialType="login" />} />
+            <Route path="/register" element={<Register initialType="register" />} />
             <Route path="/" element={<Home/>}/>
             <Route path="/mascotas" element={<ListaMascotas/>}/>
             <Route path="/register" element={<Register/>}/>
