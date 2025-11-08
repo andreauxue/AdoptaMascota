@@ -24,13 +24,13 @@ export default function Navbar() {
             {/* Logo y título */}
             <Link to="/" className="flex items-center gap-3 cursor-pointer hover:scale-105 transition-transform duration-300">
                 <img src={huellitasEnCasa} alt="Logo" className="w-10 h-10 rounded-md bg-[#FFFFFF] hover:rotate-12 transition-transform duration-300" />
-                {/* --- FUENTE TÍTULO --- */}
+                {/* Fuente de título */}
                 <h1 className="text-xl lg:text-2xl font-bold text-white font-aclonica">
                     Huellitas en Casa
                 </h1>
             </Link>
 
-            {/* Botón de Hamburguesa */}
+            {/* Botón de Hamburguesa (cuando la pantalla es chica) */}
             <button
                 onClick={() => setIsOpen(!isOpen)}
                 className={`lg:hidden p-2 rounded-md text-white hover:bg-[#243B55] hover:rotate-90 active:scale-95 transition-all duration-300 cursor-pointer ${isOpen ? 'bg-[#243B55] rotate-90' : ''}`}

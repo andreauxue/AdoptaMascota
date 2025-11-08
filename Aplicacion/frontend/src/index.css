@@ -8,7 +8,7 @@
 
 @layer base {
   body {
-    /* Establece Belleza como la fuente por defecto */
+    /* Establecemos Belleza como la fuente por defecto */
     @apply font-belleza;
   }
 }

@@ -6,7 +6,7 @@ export default function Register() {
 
     const handleRegister = (data) => {
         console.log("Registro completado con datos:", data);
-           navigate("/login");
+            navigate("/login");
     };
 
     return (

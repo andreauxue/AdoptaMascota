@@ -11,9 +11,7 @@ export default function Login() {
 
     return (
         <div>
-            {/* Aquí reutilizamos el componente FormularioAuth 
-              y le indicamos que se comporte como un formulario de "login".
-            */}
+            {/* Reutilizamos el componente FormularioAuth y le indicamos que se comporte como un formulario de login */}
             <FormularioAuth tipo="login" onSubmit={handleLogin} />
         </div>
     );

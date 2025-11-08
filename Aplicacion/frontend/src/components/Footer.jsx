@@ -25,22 +25,22 @@ export default function Footer() {
                 {/* Info de contacto */}
                 <div className="flex flex-col items-center gap-2 text-sm">
                     <h4 className="font-semibold text-white mb-2">Medios de Contacto</h4>
-                    <span className="flex items-center gap-2"><FaEnvelope /> hola@huellitas.org</span>
-                    <span className="flex items-center gap-2"><FaPhone /> +1 (555) 123-4567</span>
-                    <span className="flex items-center gap-2"><FaMapMarkerAlt /> Ciudad Animal, CA 90210</span>
+                    <span className="flex items-center gap-2"><FaEnvelope /> contacto@huellitas.org</span>
+                    <span className="flex items-center gap-2"><FaPhone /> +1 (555) 134-4857</span>
+                    <span className="flex items-center gap-2"><FaMapMarkerAlt /> Fraccionamiento Vida Sana, CP 57210</span>
                 </div>
 
                 {/* Redes sociales */}
                 <div className="flex flex-col items-center md:items-end">
-                     <h4 className="font-semibold text-white mb-2">Redes sociales</h4>
-                     <div className="flex gap-4">
-                        {/* --- CAMBIO AQUÍ: 'bg-[#FFFFFF]' ELIMINADO --- */}
+                    <h4 className="font-semibold text-white mb-2">Redes sociales</h4>
+                    <div className="flex gap-4">
+                        {/* Imágen de Facebook */}
                         <img src={facebookImg} alt="Icono" className="w-8 h-8 rounded-md hover:scale-105 transition-transform duration-300 cursor-pointer" />
-                        {/* --- CAMBIO AQUÍ: 'bg-[#FFFFFF]' ELIMINADO --- */}
+                        {/* Imágen de Instagram */}
                         <img src={instaImg} alt="Icono" className="w-8 h-8 rounded-md hover:scale-105 transition-transform duration-300 cursor-pointer" />
-                        {/* --- CAMBIO AQUÍ: 'bg-[#FFFFFF]' ELIMINADO --- */}
+                        {/* Imágen de twitter (o X pues) */}
                         <img src={xImg} alt="Icono" className="w-8 h-8 rounded-md hover:scale-105 transition-transform duration-300 cursor-pointer" />
-                     </div>
+                    </div>
                 </div>
 
             </div>

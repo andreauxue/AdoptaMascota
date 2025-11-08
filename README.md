@@ -1,6 +1,6 @@
-# 🐾 Huellitas en Casa
+# Huellitas en Casa 🐾 
 
-**Huellitas en Casa** es una plataforma web diseñada para conectar mascotas que buscan un hogar con personas interesadas en adoptar.  
+**Huellitas en Casa** es na plataforma web diseñada para conectar mascotas que buscan un hogar con personas interesadas en adoptar. 
 El objetivo principal es fomentar la adopción responsable y brindar una experiencia amigable y accesible para los usuarios.
 
 ---
@@ -16,13 +16,33 @@ El objetivo principal es fomentar la adopción responsable y brindar una experie
 
 ## Integrantes del equipo — Gryffindor
 
-- Anaya Pérez Ulises Josué
-- Díaz Reyes Lilith Jaquelin
-- García López Francisco Daniel
-- Osorio Morales Fernanda Ameyalli
-- Sautto Ramírez Seldon
-- Tapia Sánchez Oscar
-- Vázquez Reyes Jesús Elías
+- Anaya Pérez Ulises Josué (ulisessap)
+- Díaz Reyes Lilith Jaquelin (jackDiazz)
+- García López Francisco Daniel (D-GaLo)
+- Osorio Morales Fernanda Ameyalli (FernandaOsorioMorales)
+- Sautto Ramírez Seldon (seldon1128)
+- Tapia Sánchez Oscar (OscarTapiaS)
+- Vázquez Reyes Jesús Elías (JesusEVR)
+
+## Cómo ejecutar el proyecto
+
+Por ahora, solo es funcional la interfaz de la aplicación, por lo que necesitamos posicionarnos en la carpeta ```frontend``` del proyecto. Para ello, se ejecutan los siguientes comandos:
+
+```
+cd AdoptaMascota
+cd Aplicacion
+cd frontend
+```
+
+Posteriomente, se ejecutan los siguientes comandos dentro dicha carpeta:
+
+```
+npm install
+npm run dev
+```
+
+Finalmente, se accede a ```http://localhost:5173/``` desde el navegador web para visualizar la interfaz.
+  
 
 ### Tipos principales de commits
 

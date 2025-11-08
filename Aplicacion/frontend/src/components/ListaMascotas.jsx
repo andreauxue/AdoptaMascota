@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 
 export default function ListaMascotas() {
   
-  // Datos de mascotas de ejemplo
+  // Datos de mascotas
   const mascotas = [
     { 
       id: 1, 

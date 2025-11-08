@@ -59,11 +59,11 @@ export default function RegistrarMascota() {
                 <div className="space-y-4">
                     
                     <input name="nombre" placeholder="Nombre" value={formData.nombre} onChange={handleChange} required
-                           className={inputStyle}/>
+                            className={inputStyle}/>
                     <input name="edad" placeholder="Edad (ej. 5 meses)" value={formData.edad} onChange={handleChange}
-                           required className={inputStyle}/>
+                            required className={inputStyle}/>
                     <input name="ubicacion" placeholder="Ubicación (ej. Refugio Central)" value={formData.ubicacion}
-                           onChange={handleChange} required className={inputStyle}/>
+                            onChange={handleChange} required className={inputStyle}/>
 
                     {/* Género */}
                     <div className="p-4 bg-white border border-gray-300 rounded-md">
@@ -71,14 +71,14 @@ export default function RegistrarMascota() {
                         <div className="flex gap-4 mt-2">
                             <label className="flex items-center cursor-pointer">
                                 <input type="radio" name="genero" value="macho" checked={formData.genero === "macho"}
-                                       onChange={handleChange}
-                                       className="h-4 w-4 text-[#127369] accent-[#127369] border-gray-400 focus:ring-[#127369]"/>
+                                        onChange={handleChange}
+                                        className="h-4 w-4 text-[#127369] accent-[#127369] border-gray-400 focus:ring-[#127369]"/>
                                 <span className="ml-2 text-[#243B55]">Macho</span>
                             </label>
                             <label className="flex items-center cursor-pointer">
                                 <input type="radio" name="genero" value="hembra" checked={formData.genero === "hembra"}
-                                       onChange={handleChange}
-                                       className="h-4 w-4 text-[#127369] accent-[#127369] border-gray-400 focus:ring-[#127369]"/>
+                                        onChange={handleChange}
+                                        className="h-4 w-4 text-[#127369] accent-[#127369] border-gray-400 focus:ring-[#127369]"/>
                                 <span className="ml-2 text-[#243B55]">Hembra</span>
                             </label>
                         </div>
@@ -86,7 +86,7 @@ export default function RegistrarMascota() {
 
                     {/* Descripción */}
                     <textarea name="descripcion" placeholder="Descripción" value={formData.descripcion}
-                              onChange={handleChange} rows="3" className={inputStyle}/>
+                            onChange={handleChange} rows="3" className={inputStyle}/>
 
                     {/* Input de Imagen */}
                     <label className={`${inputStyle} flex items-center gap-3 cursor-pointer hover:bg-gray-50`}>
@@ -95,13 +95,13 @@ export default function RegistrarMascota() {
                             {imagePreview ? "Cambiar imagen" : "Subir imagen"}
                         </span>
                         <input type="file" name="imagen" onChange={handleImageChange} className="hidden"
-                               accept="image/png, image/jpeg"/>
+                                accept="image/png, image/jpeg"/>
                     </label>
 
                     {/* Previsualización */}
                     {imagePreview && (
                         <img src={imagePreview} alt="Previsualización"
-                             className="w-full h-48 object-cover rounded-md border border-gray-300 shadow-sm hover:scale-105 transition-transform duration-300"/>
+                            className="w-full h-48 object-cover rounded-md border border-gray-300 shadow-sm hover:scale-105 transition-transform duration-300"/>
                     )}
                 </div>
 
@@ -109,7 +109,7 @@ export default function RegistrarMascota() {
                 <button
                     type="submit"
                     disabled={isLoading}
-                    // --- FUENTE BOTÓN ---
+                    // Fuente del botón
                     className={`w-full mt-6 py-3 px-4 rounded-md font-semibold text-white transition-all duration-300 font-belleza ${
                         isLoading
                             ? 'bg-gray-400 cursor-not-allowed shadow-md'

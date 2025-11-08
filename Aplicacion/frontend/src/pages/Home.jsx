@@ -102,7 +102,7 @@ export default function Home() {
                 </svg>
             </div>
 
-            {/* CONTENIDO DE LA MISIÓN */}
+            {/* Contenido de la olita de "Misión" */}
             <div className="bg-[#10403B] shadow-inner -mt-1">
                 <div className="container mx-auto px-6 py-12 text-center">
                     <h2 className="text-3xl font-bold text-white mb-4 font-aclonica">
@@ -117,19 +117,19 @@ export default function Home() {
             </div>
             
             <div className="bg-[#10403B]">
-                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" className="w-full h-auto block -mt-1">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" className="w-full h-auto block -mt-1">
                     <path fill="#C1D9C1" d="M0,32L48,37.3C96,43,192,53,288,58.7C384,64,480,64,576,58.7C672,53,768,43,864,37.3C960,32,1056,32,1152,37.3C1248,43,1344,53,1392,58.7L1440,64L1440,100L1392,100C1344,100,1248,100,1152,100C1056,100,960,100,864,100C768,100,672,100,576,100C480,100,384,100,288,100C192,100,96,100,48,100L0,100Z"></path>
-                 </svg>
+                </svg>
             </div>
 
-            {/* --- SECCIÓN CARRUSEL DE IMÁGENES --- */}
+            {/* Sección de carrusel de imágenes */}
             <div className="bg-[#C1D9C1] py-16 -mt-2">
                 <div className="container mx-auto px-4 relative">
                     <h2 className="text-3xl font-bold text-[#243B55] text-center mb-10 font-aclonica">
                         Conoce a algunos amigos
                     </h2>
 
-                    {/* Botón Izquierda */}
+                    {/* Botón izquierda */}
                     <button
                         onClick={() => scroll('left')}
                         className="absolute left-0 top-1/2 z-10 p-3 bg-white/70 rounded-full shadow-md text-[#10403B] hover:bg-white transition -translate-y-1/2 active:scale-95"
@@ -138,7 +138,7 @@ export default function Home() {
                         <FaArrowLeft />
                     </button>
 
-                    {/* Contenedor del Carrusel*/}
+                    {/* Contenedor del Carrusel */}
                     <div
                         ref={scrollContainerRef}
                         className="flex overflow-x-auto space-x-6 py-4 px-2 snap-x snap-mandatory scroll-smooth no-scrollbar"
@@ -158,7 +158,7 @@ export default function Home() {
                         ))}
                     </div>
 
-                    {/* Botón Derecha */}
+                    {/* Botón derecha */}
                     <button
                         onClick={() => scroll('right')}
                         className="absolute right-0 top-1/2 z-10 p-3 bg-white/70 rounded-full shadow-md text-[#10403B] hover:bg-white transition -translate-y-1/2 active:scale-95"

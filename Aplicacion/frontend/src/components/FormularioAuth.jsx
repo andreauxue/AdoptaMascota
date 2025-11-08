@@ -41,21 +41,21 @@ export default function FormularioAuth({ tipo, onSubmit }) {
 
                 {/* Columna de Formulario a la izquierda */}
                 <div className="w-full max-w-md">
-                    {/* --- FUENTE TÍTULO --- */}
+                    {/* Fuente del títullo */}
                     <h2 className="text-4xl font-bold text-[#243B55] mb-6 text-center lg:text-left font-aclonica">
                         {titulo}
                     </h2>
                     
                     {/* Tarjeta del formulario */}
                     <form onSubmit={handleSubmit} className="bg-[#FFFFFF] rounded-lg shadow-xl p-8 w-full">
-                        {/* --- FUENTE SUBTÍTULO --- */}
+                        {/* Fuente de subtítulo */}
                         <h3 className="text-2xl font-semibold text-[#243B55] text-center mb-6 font-aclonica">
                             {subTitulo}
                         </h3>
 
-                        {/* Campos del formulario (heredan font-belleza del body) */}
+                        {/* Campos del formulario */}
                         <div className="space-y-4">
-                            {/* Campo Usuario */}
+                            {/* Campo de usuario */}
                             <div className="relative">
                                 <input
                                     name="username"
@@ -67,7 +67,7 @@ export default function FormularioAuth({ tipo, onSubmit }) {
                                 />
                             </div>
 
-                            {/* Campo Email */}
+                            {/* Campo de correo */}
                             {tipo === "register" && (
                                 <div className="relative">
                                     <input
@@ -82,7 +82,7 @@ export default function FormularioAuth({ tipo, onSubmit }) {
                                 </div>
                             )}
 
-                            {/* Campo Contraseña */}
+                            {/* Campo de contraseña */}
                             <div className="relative">
                                 <input
                                     type={showPassword ? "text" : "password"}
@@ -107,7 +107,7 @@ export default function FormularioAuth({ tipo, onSubmit }) {
                         <button
                             type="submit"
                             disabled={isLoading}
-                            // --- FUENTE BOTÓN ---
+                            // Fuente de botón
                             className={`w-full mt-6 py-3 px-4 rounded-md font-semibold text-white transition-all duration-300 font-belleza ${
                                 isLoading
                                     ? 'bg-gray-400 cursor-not-allowed shadow-md'
