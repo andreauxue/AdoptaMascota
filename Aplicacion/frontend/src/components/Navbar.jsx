@@ -21,6 +21,13 @@ export default function Navbar() {
 
       {/* Opciones del menú */}
       <ul className="flex gap-8 text-lg font-medium">
+
+        <li>
+          <a href="/login" className="hover:underline">
+            Login
+          </a>
+        </li>
+
         <li>
           <Link to="/" className="hover:underline">
             Inicio
@@ -37,12 +44,6 @@ export default function Navbar() {
           <Link to="/registrar-mascota" className="hover:underline">
             Registrar Mascota
           </Link>
-        </li>
-
-        <li>
-          <a href="/login" className="hover:underline">
-            Login
-          </a>
         </li>
 
         <li>
