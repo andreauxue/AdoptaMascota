@@ -1,4 +1,3 @@
-// frontend/src/pages/Register.jsx
 /**
  * @fileoverview Componente de Página Register (Login/Registro).
  * @version 1.2.0

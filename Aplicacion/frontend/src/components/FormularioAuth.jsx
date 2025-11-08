@@ -1,6 +1,5 @@
-// frontend/src/components/FormularioAuth.jsx (MODIFICADO)
 /**
- * @fileoverview Componente FormularioAuth - Ahora un formulario puro, sin layout de página.
+ * @fileoverview Componente FormularioAuth
  * @version 1.0.2
  * @author Equipo Slytherin
  */
