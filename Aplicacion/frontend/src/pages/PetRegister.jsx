@@ -61,6 +61,7 @@ export default function PetRegister() {
 
         <div className="flex flex-col mb-12 mt-10 items-start">
           <form onSubmit={handleSubmit}>
+            {/* Nombre */}
             <div>
               <label className="block font-semibold text-gray-700">
                 Nombre
@@ -76,6 +77,7 @@ export default function PetRegister() {
               />
             </div>
 
+            {/* Edad */}
             <div className="mt-5">
               <label className="block font-semibold text-gray-700">Edad</label>
               <input
@@ -89,6 +91,7 @@ export default function PetRegister() {
               />
             </div>
 
+            {/* Especie */}
             <div className="mt-5">
               <label className="block font-semibold text-gray-700">
                 Especie
@@ -104,9 +107,10 @@ export default function PetRegister() {
               />
             </div>
 
+            {/* Género */}
             <div className="mt-5">
               <label className="block font-semibold text-gray-700">
-                Genero
+                Género
               </label>
               <select
                 name="genero"
@@ -118,6 +122,106 @@ export default function PetRegister() {
                 <option value="">Selecciona una opción</option>
                 <option value="Macho">Macho</option>
                 <option value="Hembra">Hembra</option>
+              </select>
+            </div>
+
+            {/* Tamaño */}
+            <div className="mt-5">
+              <label className="block font-semibold text-gray-700">
+                Tamaño
+              </label>
+              <select
+                name="tamano"
+                value={formData.tamano}
+                onChange={handleChange}
+                className="w-full mt-1 border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-500"
+                required
+              >
+                <option value="">Selecciona una opción</option>
+                <option value="Chico">Chico</option>
+                <option value="Mediano">Mediano</option>
+                <option value="Grande">Grande</option>
+              </select>
+            </div>
+
+            {/* Vacunado */}
+            <div className="mt-5">
+              <label className="block font-semibold text-gray-700 mb-2">
+                Vacunado
+              </label>
+              <div className="flex gap-6">
+                <label className="flex items-center gap-2">
+                  <input
+                    type="radio"
+                    name="vacunado"
+                    value="Sí"
+                    checked={formData.vacunado === "Sí"}
+                    onChange={handleChange}
+                    className="h-4 w-4 text-blue-500 focus:ring-blue-500 border-gray-300"
+                  />
+                  Sí
+                </label>
+                <label className="flex items-center gap-2">
+                  <input
+                    type="radio"
+                    name="vacunado"
+                    value="No"
+                    checked={formData.vacunado === "No"}
+                    onChange={handleChange}
+                    className="h-4 w-4 text-blue-500 focus:ring-blue-500 border-gray-300"
+                  />
+                  No
+                </label>
+              </div>
+            </div>
+
+            {/* Esterilizado */}
+            <div className="mt-5">
+              <label className="block font-semibold text-gray-700 mb-2">
+                Esterilizado
+              </label>
+              <div className="flex gap-6">
+                <label className="flex items-center gap-2">
+                  <input
+                    type="radio"
+                    name="esterilizado"
+                    value="Sí"
+                    checked={formData.esterilizado === "Sí"}
+                    onChange={handleChange}
+                    className="h-4 w-4 text-blue-500 focus:ring-blue-500 border-gray-300"
+                  />
+                  Sí
+                </label>
+                <label className="flex items-center gap-2">
+                  <input
+                    type="radio"
+                    name="esterilizado"
+                    value="No"
+                    checked={formData.esterilizado === "No"}
+                    onChange={handleChange}
+                    className="h-4 w-4 text-blue-500 focus:ring-blue-500 border-gray-300"
+                  />
+                  No
+                </label>
+              </div>
+            </div>
+
+            {/* Nivel de Energía */}
+            <div className="mt-5">
+              <label className="block font-semibold text-gray-700">
+                Nivel de Energía
+              </label>
+              <select
+                name="energia"
+                value={formData.energia}
+                onChange={handleChange}
+                className="w-full mt-1 border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-500"
+                required
+              >
+                <option value="">Selecciona una opción</option>
+                <option value="Tranquilo">Tranquilo</option>
+                <option value="Moderado">Moderado</option>
+                <option value="Muy Activo">Muy Activo</option>
               </select>
             </div>
 
@@ -133,12 +237,23 @@ export default function PetRegister() {
               />
             </div>
 
-            <button
-              type="submit"
-              className="mt-8 bg-[#F0E68C] text-[#38657E] font-bold py-2 px-6 rounded-lg hover:bg-blue-700 transition-colors hover:text-white"
-            >
-              Registrar Mascota
-            </button>
+           <button
+            type="submit"
+            className="
+              mt-8 
+              bg-[#F0E68C] 
+              text-black 
+              font-normal 
+              py-2 px-6 
+              rounded-lg 
+              border border-black 
+              hover:bg-[#e6d85c] 
+              transition-colors
+            "
+          >
+            Registrar Mascota
+          </button>
+
           </form>
         </div>
       </div>
