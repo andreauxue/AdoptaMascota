@@ -69,7 +69,7 @@ export default function Navbar() {
                 
                 {/* Enlace 2: Adoptar */}
                 <li className="group">
-                    <Link to="/mascotas" className="relative inline-block px-4 py-2 font-serif text-white">
+                    <Link to="/publicar" className="relative inline-block px-4 py-2 font-serif text-white">
                         Adoptar
                         <UnderlineEffect />
                     </Link>

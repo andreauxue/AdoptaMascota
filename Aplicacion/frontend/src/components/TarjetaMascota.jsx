@@ -15,7 +15,7 @@ import { useNavigate } from 'react-router-dom';
  * Muestra los detalles de una mascota en un formato de tarjeta.
  *
  */
-export default function TarjetaMascota({ id, nombre, edad, ubicacion, imagen, genero }) {
+export default function TarjetaMascota({ id, nombre,vacunado, especie, edad, ubicacion, imagen, genero }) {
     
     const navigate = useNavigate();
 
@@ -42,8 +42,19 @@ export default function TarjetaMascota({ id, nombre, edad, ubicacion, imagen, ge
                 className="w-full h-48 object-cover" 
             />
             <div className="p-5">
+                
+                {/* Bloque de Nombre y Especie */}
                 <div className="flex justify-between items-center mb-2">
-                    <h3 className="text-xl font-bold text-azul-fondo">{nombre}</h3>
+                    {/* Contenedor del nombre y la especie, alineados a la izquierda */}
+                    <div className="flex items-center gap-3"> 
+                        <h3 className="text-xl font-bold text-azul-fondo">{nombre}</h3>
+                        
+                        {/* Recuadro de la Especie*/}
+                        <span className="bg-verde-menta text-azul-fondo text-xs font-semibold px-2 py-1 rounded-lg">
+                            {especie}
+                        </span>
+                    </div>
+
                     {generoIcono}
                 </div>
                 

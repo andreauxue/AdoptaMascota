@@ -1,6 +1,6 @@
 /**
  * @fileoverview Componente de Página MuroMascotas (Muro Principal) - Estética mejorada y sintaxis corregida.
- * @version 1.3.2
+ * @version 1.0.0
  * @author Equipo Slytherin
  */
 

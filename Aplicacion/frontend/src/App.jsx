@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import ListaMascotas from "./components/ListaMascotas";
 import Register from "./pages/Register";
 import MuroMascotas from "./pages/MuroMascotas";
+import Anuncio from "./pages/Anuncio";
 
 function AppContent() {
     const location = useLocation();
@@ -29,6 +30,7 @@ function AppContent() {
                 <Route path="/muro" element={<MuroMascotas/>}/>
                 <Route path="/" element={<Home/>}/>
                 <Route path="/mascotas" element={<ListaMascotas/>}/>
+                <Route path="/publicar" element={<Anuncio />} />
               </Routes>
             </main>
             <Footer/>

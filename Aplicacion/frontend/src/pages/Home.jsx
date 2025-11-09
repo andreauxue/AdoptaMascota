@@ -56,7 +56,7 @@ export default function Home() {
                     <div className="mt-6 text-center lg:text-left">
                         <button 
                             className="font-medium font-serif text-azul-fondo text-xl underline hover:text-verde-grisaseo transition-colors py-2"
-                            onClick={() => navigate("/mascotas")} 
+                            onClick={() => navigate("/muro")} 
                         >
                            Muro de las Mascotas
                         </button>
