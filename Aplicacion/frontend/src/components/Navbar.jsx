@@ -1,22 +1,31 @@
 /**
  * @fileoverview Componente Navbar.
- * @version 1.0.1
+ * @version 1.0.2
  * @author Equipo Slytherin
  */
-import React from 'react';
+import React, { useState } from 'react';
 import logo from "../assets/img/LOGO.png";
 import { Link, useNavigate } from 'react-router-dom';
 
 /**
  * Componente funcional Navbar.
- *
- * Muestra una barra de navegación, por el momento tanto para usuario no identificados como identificados.
+ * 
  */
 export default function Navbar() {
     const navigate = useNavigate();
     
+    // Estado para controlar la visibilidad del modal
+    const [showLogoutModal, setShowLogoutModal] = useState(false);
+    
     const handleLoginClick = () => navigate('/login');
     const handleLogoClick = () => navigate('/'); 
+
+    // Función para manejar el cierre de sesión confirmado
+    const handleConfirmLogout = () => {
+        console.log('Sesión cerrada exitosamente.'); 
+        setShowLogoutModal(false); 
+        navigate('/'); // Redirige al Home
+    }
 
     // Estilo de la barra de búsqueda
     const searchBarClass = "w-full py-2 pl-6 pr-12 text-blanco bg-azul-fondo rounded-full focus:outline-none focus:ring-2 focus:ring-durazno hover:bg-blanco hover:text-azul-fondo transition-all duration-200 border border-azul-fondo";
@@ -58,7 +67,6 @@ export default function Navbar() {
             {/* 3. Menú de navegación */}
             <ul className="flex gap-8 items-center">
                 
-                
                 {/* Enlace 1: Añadir Anuncio */}
                 <li className="group">
                     <Link to="/publicar" className="relative inline-block px-4 py-2 font-serif text-white">
@@ -69,7 +77,7 @@ export default function Navbar() {
                 
                 {/* Enlace 2: Adoptar */}
                 <li className="group">
-                    <Link to="/publicar" className="relative inline-block px-4 py-2 font-serif text-white">
+                    <Link to="/muro" className="relative inline-block px-4 py-2 font-serif text-white">
                         Adoptar
                         <UnderlineEffect />
                     </Link>
@@ -86,13 +94,42 @@ export default function Navbar() {
                 {/* Botón de Cerrar Sesión*/}
                 <li className="group">
                      <button 
-                        onClick={() => console.log('Cerrar sesión simulado')}
+                        onClick={() => setShowLogoutModal(true)} 
                         className="relative inline-block px-4 py-2 font-serif text-white border border-durazno rounded-lg hover:bg-durazno hover:text-azul-fondo transition"
                     >
                         Cerrar Sesión
                     </button>
                 </li>
             </ul>
+
+            {/* Modal de confirmacion */}
+            {showLogoutModal && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                    <div className="bg-blanco p-6 rounded-lg shadow-xl w-full max-w-sm">
+                        <h3 className="text-xl font-bold text-azul-fondo mb-4">Confirmar Cierre de Sesión</h3>
+                        <p className="text-azul-fondo/80 mb-6">
+                            ¿Estás seguro que deseas cerrar la sesión? Serás redirigido a la página de inicio.
+                        </p>
+                        
+                        <div className="flex justify-end gap-4">
+                            {/* Botón Cancelar */}
+                            <button 
+                                onClick={() => setShowLogoutModal(false)}
+                                className="px-4 py-2 border border-verde-grisaseo text-azul-fondo rounded-lg hover:bg-verde-grisaseo/50 transition"
+                            >
+                                Cancelar
+                            </button>
+                            {/* Botón Confirmar (Cerrar Sesión) */}
+                            <button 
+                                onClick={handleConfirmLogout} 
+                                className="px-4 py-2 bg-durazno text-azul-fondo rounded-lg font-semibold hover:bg-durazno/80 transition"
+                            >
+                                Sí, Cerrar Sesión
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </nav>
     )
 }
