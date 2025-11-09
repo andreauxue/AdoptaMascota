@@ -59,7 +59,6 @@ export default function Register({ initialType = 'login' }) {
                 className="hidden md:w-1/2 md:flex items-center justify-center bg-cover bg-center rounded-l-3xl rounded-r-none overflow-hidden" 
                 style={{ backgroundImage: `url(${backgroundImage})` }}
             >
-                {/* La imagen ilustrativa se muestra como fondo */}
             </div>
         </div>
     );
