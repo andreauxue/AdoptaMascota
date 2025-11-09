@@ -6,6 +6,7 @@ import ListaMascotas from "./components/ListaMascotas";
 import Register from "./pages/Register";
 import MuroMascotas from "./pages/MuroMascotas";
 import Anuncio from "./pages/Anuncio";
+import DetalleMascota from "./pages/DetalleMascota";
 
 function AppContent() {
     const location = useLocation();
@@ -31,6 +32,7 @@ function AppContent() {
                 <Route path="/" element={<Home/>}/>
                 <Route path="/mascotas" element={<ListaMascotas/>}/>
                 <Route path="/publicar" element={<Anuncio />} />
+                <Route path="/mascota/:id" element={<DetalleMascota />} />
               </Routes>
             </main>
             <Footer/>
