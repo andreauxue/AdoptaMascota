@@ -42,7 +42,7 @@ export default function FormularioAuth({ tipo, onToggleType }) {
 
         if (tipo === "login") {
             // --- LÓGICA DE INICIO DE SESIÓN ---
-            navigate("/mascotas"); 
+            navigate("/muro"); 
             setIsLoading(false);
 
         } else { // tipo === "register"

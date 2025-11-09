@@ -4,6 +4,7 @@ import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import ListaMascotas from "./components/ListaMascotas";
 import Register from "./pages/Register";
+import MuroMascotas from "./pages/MuroMascotas";
 
 function AppContent() {
     const location = useLocation();
@@ -25,6 +26,7 @@ function AppContent() {
                 <Route path="/register" element={<Register initialType="register" />} />
                 
                 {/* Rutas de Contenido */}
+                <Route path="/muro" element={<MuroMascotas/>}/>
                 <Route path="/" element={<Home/>}/>
                 <Route path="/mascotas" element={<ListaMascotas/>}/>
               </Routes>
