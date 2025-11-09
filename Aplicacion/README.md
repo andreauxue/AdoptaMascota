@@ -1,3 +1,12 @@
+# Equipo Slytherin: 
+
+- Leslie Geronimo Soto: 320032848 - lesliegeronimo
+- Ximena Andrade Luviano: 320249150 - xim28-25
+- Israel Rivera: 320490747 - Orbitalx1
+- Patrick A. C. Martínez Rodríguez: 726000986 - Mexidis 
+- Ariadna Beatríz Pérez Aparicio: 320215122 - AriadnaPA 
+- Angel Moisés Gónzalez Corrales: 32034619 - MoisesAGC
+
 # Pasos para correr el proyecto
 
 Recuerda que para poder correr esto es necesario crear un entorno virtual:
