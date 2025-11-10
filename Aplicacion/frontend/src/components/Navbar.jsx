@@ -1,46 +1,58 @@
-import { FaPaw, FaHome, FaUser, FaUserPlus } from 'react-icons/fa';
+// src/components/Navbar.jsx
+
+import { Link } from "react-router-dom";
+import logo from "../assets/logo.png";
 
 export default function Navbar() {
-    return (
-        <nav className="bg-gradient-to-r from-pink-400 to-pink-300 text-white px-8 py-4 flex justify-between items-center shadow-lg rounded-b-2xl border-b-4 border-pink-200">
-            {/* Logo y título */}
-            <div className="flex items-center gap-3">
-                <FaPaw className="text-2xl text-pink-100 animate-bounce" />
-                <h1 className="text-2xl font-bold bg-gradient-to-r from-white to-pink-100 bg-clip-text text-transparent">
-                    Adopta una Mascota
-                </h1>
-            </div>
+  return (
+    <nav
+      className="w-full bg-[#38657E] text-white px-8 py-5 
+                 flex justify-between items-center shadow-md"
+    >
+      {/* Logo + Nombre */}
+      <div className="flex items-center gap-3">
+        <img 
+          src={logo} 
+          alt="MatchPaw logo"
+          className="w-10 h-10 object-contain"
+        />
+        <h1 className="text-2xl font-bold tracking-wide">MatchPaw</h1>
+      </div>
 
-            {/* Menú de navegación */}
-            <ul className="flex gap-8">
-                <li>
-                    <a 
-                        href="/" 
-                        className="flex items-center gap-2 px-4 py-2 rounded-full bg-pink-500/30 hover:bg-pink-500/50 transition-all duration-300 hover:scale-105 shadow-md hover:shadow-pink-200/50"
-                    >
-                        <FaHome className="text-lg" />
-                        <span className="font-medium">Inicio</span>
-                    </a>
-                </li>
-                <li>
-                    <a 
-                        href="/login" 
-                        className="flex items-center gap-2 px-4 py-2 rounded-full bg-pink-500/30 hover:bg-pink-500/50 transition-all duration-300 hover:scale-105 shadow-md hover:shadow-pink-200/50"
-                    >
-                        <FaUser className="text-lg" />
-                        <span className="font-medium">Login</span>
-                    </a>
-                </li>
-                <li>
-                    <a 
-                        href="/register" 
-                        className="flex items-center gap-2 px-4 py-2 rounded-full bg-pink-600/40 hover:bg-pink-600/60 transition-all duration-300 hover:scale-105 shadow-md hover:shadow-pink-200/50"
-                    >
-                        <FaUserPlus className="text-lg" />
-                        <span className="font-medium">Registro</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    )
+      {/* Opciones del menú */}
+      <ul className="flex gap-8 text-lg font-medium">
+
+        <li>
+          <a href="/login" className="hover:underline">
+            Login
+          </a>
+        </li>
+
+        <li>
+          <Link to="/" className="hover:underline">
+            Inicio
+          </Link>
+        </li>
+
+        <li>
+          <Link to="/galeria" className="hover:underline">
+            Ver Galería
+          </Link>
+        </li>
+
+        <li>
+          <Link to="/registrar-mascota" className="hover:underline">
+            Registrar Mascota
+          </Link>
+        </li>
+
+        <li>
+          <a href="/login" className="hover:underline">
+            Cerrar Sesión
+          </a>
+        </li>
+
+      </ul>
+    </nav>
+  );
 }

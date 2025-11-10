@@ -1,24 +1,33 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import Home from "./pages/Home";
-import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
-import ListaMascotas from "./components/ListaMascotas";
+import Footer from "./components/Footer";
+import Galeria from "./pages/Galeria";
+import PetRegister from "./pages/PetRegister";
+import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Protected from "./components/Protected";
 
 export default function App() {
   return (
     <BrowserRouter>
-      <div className="flex flex-col min-h-screen">
+      <div>
         <Navbar/>
-        <main className="flex-grow bg-pink-50 p-6">
+
+        <main>
           <Routes>
             <Route path="/" element={<Home/>}/>
-            <Route path="/mascotas" element={<ListaMascotas/>}/>
+            <Route path="/galeria" element={<Galeria/>}/>
+            <Route path="/registrar-mascota" element={<PetRegister/>}/>
+            <Route path="/login" element={<Login/>}/>
             <Route path="/register" element={<Register/>}/>
           </Routes>
         </main>
+
         <Footer/>
       </div>
     </BrowserRouter>
-  )
+  );
 }
+
