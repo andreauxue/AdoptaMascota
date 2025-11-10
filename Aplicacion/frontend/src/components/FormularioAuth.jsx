@@ -1,74 +1,125 @@
+/**
+ * @fileoverview Componente FormularioAuth.
+ * @version 1.0.0
+ * @author Equipo Slytherin
+ */
+
 import { useState } from "react";
 import { FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
+import { useNavigate } from "react-router-dom"; 
+import { useAuth } from '../context/AuthContext'; // <-- Importar el Contexto
 
+/**
+ * Componente funcional FormularioAuth.
+ *
+ * Muestra un formulario dinámico que alterna entre las vistas de "Iniciar Sesión" (Login)
+ * y "Crear Cuenta" (Registro). Maneja la lógica de estado, validación simulada
+ * y la integración con el contexto de autenticación.
+ *
+ * @param {object} props Las propiedades del componente.
+ * @param {string} props.tipo El tipo inicial del formulario ("login" o "register"). Nota: el componente ahora usa un estado interno para alternar.
+ * @param {function} props.onSubmit Función (opcional) a ejecutar al enviar el formulario (actualmente usa su propia lógica de manejo).
+ * @returns {JSX.Element} El formulario de autenticación renderizado.
+ */
 export default function FormularioAuth({ tipo, onSubmit }) {
+    // Hooks de React Router y Contexto para navegación y autenticación
+    const { login } = useAuth(); // Obtener la función de login del contexto
+    const navigate = useNavigate(); 
+    
+    // Estado para capturar los datos del formulario
     const [formData, setFormData] = useState({ 
         username: "", 
         password: "", 
         email: "" 
     });
+    // Estados de UI y control
     const [showPassword, setShowPassword] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    // Estado que determina si se muestra la vista de Login (true) o Registro (false)
+    const [isLogin, setIsLogin] = useState(tipo === "login" || false); 
 
+    /**
+     * Manejador de cambio para actualizar el estado del formulario.
+     * @param {Event} e Evento de cambio del input.
+     */
     const handleChange = (e) => 
         setFormData({ ...formData, [e.target.name]: e.target.value });
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setIsLoading(true);
-        
-        // Simulación de envío de datos
-        setTimeout(() => {
-            console.log("Datos del formulario enviados:", {
-                tipo: tipo,
-                datos: formData,
-                timestamp: new Date().toISOString()
-            });
-            
-            // Simular respuesta exitosa
-            const respuestaSimulada = {
-                success: true,
-                message: tipo === "login" 
-                    ? "Inicio de sesión exitoso" 
-                    : "Registro completado correctamente",
-                user: {
-                    id: Math.random().toString(36).substr(2, 9),
-                    username: formData.username,
-                    email: formData.email
-                }
-            };
-            
-            console.log("Respuesta simulada:", respuestaSimulada);
-            setIsLoading(false);
-            
-            // Llamar al callback onSubmit con los datos simulados
-            if (onSubmit) {
-                onSubmit(respuestaSimulada);
-            }
-            
-            // Mostrar alerta de éxito
-            alert(respuestaSimulada.message);
-            
-        }, 1500);
-    };
-
+    /**
+     * Alterna la visibilidad del campo de contraseña.
+     */
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
 
+    /**
+     * Alterna entre la vista de Login y la vista de Registro, limpiando los datos del formulario.
+     */
+    const handleToggle = () => {
+        setIsLogin(!isLogin);
+        setFormData({ username: "", password: "", email: "" }); // Limpiar campos al cambiar
+    };
+
+    /**
+     * Manejador de envío del formulario. Simula una llamada a la API y maneja
+     * el estado de carga, la autenticación y la redirección.
+     * @param {Event} e Evento de envío del formulario.
+     */
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setIsLoading(true);
+        
+        // Simulación de envío de datos (retraso de 1.5s)
+        setTimeout(() => {
+            console.log("Datos del formulario enviados:", {
+                tipo: isLogin ? "login" : "register",
+                datos: formData,
+                timestamp: new Date().toISOString()
+            });
+            
+            // Reemplazar alert() con un modal o mensaje en producción
+            alert(isLogin 
+                ? "Inicio de sesión exitoso. Redirigiendo al Muro..." 
+                : "Registro completado. Redirigiendo al Muro...");
+            
+            // Datos que se usarían para el Contexto de Autenticación
+            const userData = { 
+                username: formData.username,
+                email: formData.email,
+                phone: null, 
+                profilePic: null
+            };
+            
+            // 1. LLAMAR A LA FUNCIÓN DE LOGIN DEL CONTEXTO (simulación de autenticación)
+            login(userData); 
+            
+            // 2. REDIRECCIÓN AL MURO
+            navigate("/adopta"); 
+            
+            setIsLoading(false);
+        }, 1500);
+    };
+    
     return (
-        <div className="min-h-screen bg-gradient-to-br from-pink-50 to-pink-100 flex items-center justify-center p-4">
-            <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-md border border-pink-200">
-                {/* Header */}
+        // El contenedor principal centra el formulario en la pantalla
+        <div className="min-h-screen w-full flex items-center justify-center p-4">
+            <form 
+                onSubmit={handleSubmit} 
+                className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-md border border-pink-200"
+            >
+                {/* Header dinámico */}
                 <div className="text-center mb-8">
-                    <div className="w-16 h-16 bg-gradient-to-r from-pink-400 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                    {/* Ícono de usuario con fondo degradado 'durazno' */}
+                    <div className="w-16 h-16 bg-gradient-to-r bg-durazno rounded-full flex items-center justify-center mx-auto mb-4">
                         <FaUser className="text-2xl text-white" />
                     </div>
-                    <h2 className="text-3xl font-bold bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent">
-                        {tipo === "login" ? "Bienvenido" : "Crear Cuenta"}
+                    {/* Título dinámico */}
+                    <h2 className="text-3xl font-bold bg-gradient-to-r bg-du bg-clip-text text-transparent">
+                        {isLogin ? "Bienvenido" : "Crear Cuenta"}
                     </h2>
+                    {/* Subtítulo dinámico */}
                     <p className="text-gray-600 mt-2">
-                        {tipo === "login" 
+                        {isLogin 
                             ? "Ingresa a tu cuenta" 
                             : "Únete a nuestra comunidad"
                         }
@@ -77,7 +128,7 @@ export default function FormularioAuth({ tipo, onSubmit }) {
 
                 {/* Campos del formulario */}
                 <div className="space-y-4">
-                    {/* Campo Usuario */}
+                    {/* Campo Usuario (siempre visible) */}
                     <div className="relative">
                         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <FaUser className="text-gray-400" />
@@ -92,8 +143,8 @@ export default function FormularioAuth({ tipo, onSubmit }) {
                         />
                     </div>
 
-                    {/* Campo Email (solo registro) */}
-                    {tipo === "register" && (
+                    {/* Campo Email (solo visible en la vista de Registro) */}
+                    {!isLogin && (
                         <div className="relative">
                             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                 <FaEnvelope className="text-gray-400" />
@@ -110,7 +161,7 @@ export default function FormularioAuth({ tipo, onSubmit }) {
                         </div>
                     )}
 
-                    {/* Campo Contraseña */}
+                    {/* Campo Contraseña (con toggler de visibilidad) */}
                     <div className="relative">
                         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <FaLock className="text-gray-400" />
@@ -127,46 +178,48 @@ export default function FormularioAuth({ tipo, onSubmit }) {
                         <button 
                             type="button"
                             onClick={togglePasswordVisibility}
-                            className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-pink-500 transition-colors"
+                            className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-black transition-colors"
                         >
+                            {/* Ícono de ojo que cambia según el estado */}
                             {showPassword ? <FaEyeSlash /> : <FaEye />}
                         </button>
                     </div>
                 </div>
 
-                {/* Botón de envío */}
+                {/* Botón de envío (dinámico y con estado de carga) */}
                 <button
                     type="submit"
                     disabled={isLoading}
-                    className={`w-full mt-6 py-3 px-4 rounded-xl font-semibold text-white transition-all duration-200 ${
+                    className={`w-full mt-6 py-3 px-4 rounded-xl font-semibold text-black transition-all duration-200 ${
                         isLoading 
                             ? 'bg-gray-400 cursor-not-allowed' 
-                            : 'bg-gradient-to-r from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 shadow-lg hover:shadow-pink-200'
+                            : 'bg-gradient-to-r bg-durazno hover:bg-durazno/40 hover:to-pink-700 shadow-lg hover:shadow-pink-200'
                     }`}
                 >
                     {isLoading ? (
                         <span className="flex items-center justify-center">
+                            {/* Spinner de carga */}
                             <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
                             Procesando...
                         </span>
                     ) : (
-                        tipo === "login" ? "Iniciar Sesión" : "Crear Cuenta"
+                        isLogin ? "Iniciar Sesión" : "Crear Cuenta"
                     )}
                 </button>
 
-                {/* Enlace adicional */}
+                {/* Enlace para alternar entre Login/Registro */}
                 <div className="text-center mt-6 pt-6 border-t border-gray-200">
                     <p className="text-gray-600">
-                        {tipo === "login" 
+                        {isLogin 
                             ? "¿No tienes cuenta? " 
                             : "¿Ya tienes cuenta? "
                         }
                         <button 
                             type="button"
-                            className="text-pink-500 hover:text-pink-600 font-semibold transition-colors"
-                            onClick={() => console.log("Cambiar a:", tipo === "login" ? "register" : "login")}
+                            className="text-azul-fondo hover:text-pink-600 font-semibold transition-colors"
+                            onClick={handleToggle}
                         >
-                            {tipo === "login" ? "Regístrate" : "Inicia Sesión"}
+                            {isLogin ? "Regístrate" : "Inicia Sesión"}
                         </button>
                     </p>
                 </div>
