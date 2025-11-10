@@ -1,46 +1,89 @@
-import { FaPaw, FaHome, FaUser, FaUserPlus } from 'react-icons/fa';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import {
+    FaPaw,
+    FaHome,
+    FaUser,
+    FaUserPlus,
+    FaSignOutAlt,
+    FaBars,
+    FaTimes
+} from 'react-icons/fa';
+import placeholderLogo from '../assets/image.png';
+import huellitasEnCasa from '../assets/huellitasEnCasa.jpg';
 
 export default function Navbar() {
-    return (
-        <nav className="bg-gradient-to-r from-pink-400 to-pink-300 text-white px-8 py-4 flex justify-between items-center shadow-lg rounded-b-2xl border-b-4 border-pink-200">
-            {/* Logo y título */}
-            <div className="flex items-center gap-3">
-                <FaPaw className="text-2xl text-pink-100 animate-bounce" />
-                <h1 className="text-2xl font-bold bg-gradient-to-r from-white to-pink-100 bg-clip-text text-transparent">
-                    Adopta una Mascota
-                </h1>
-            </div>
+    const [isOpen, setIsOpen] = useState(false);
 
-            {/* Menú de navegación */}
-            <ul className="flex gap-8">
-                <li>
-                    <a 
-                        href="/" 
-                        className="flex items-center gap-2 px-4 py-2 rounded-full bg-pink-500/30 hover:bg-pink-500/50 transition-all duration-300 hover:scale-105 shadow-md hover:shadow-pink-200/50"
-                    >
-                        <FaHome className="text-lg" />
-                        <span className="font-medium">Inicio</span>
-                    </a>
-                </li>
-                <li>
-                    <a 
-                        href="/login" 
-                        className="flex items-center gap-2 px-4 py-2 rounded-full bg-pink-500/30 hover:bg-pink-500/50 transition-all duration-300 hover:scale-105 shadow-md hover:shadow-pink-200/50"
-                    >
-                        <FaUser className="text-lg" />
-                        <span className="font-medium">Login</span>
-                    </a>
-                </li>
-                <li>
-                    <a 
-                        href="/register" 
-                        className="flex items-center gap-2 px-4 py-2 rounded-full bg-pink-600/40 hover:bg-pink-600/60 transition-all duration-300 hover:scale-105 shadow-md hover:shadow-pink-200/50"
-                    >
-                        <FaUserPlus className="text-lg" />
-                        <span className="font-medium">Registro</span>
-                    </a>
-                </li>
-            </ul>
+    /* Fuente del boton */
+    const linkStyle = "flex items-center gap-2 px-4 py-2 rounded-md bg-[#10403B] hover:bg-[#243B55] transition-all duration-300 text-white font-medium cursor-pointer hover:shadow-[0_0_15px_rgba(255,255,255,0.3)] hover:ring-2 hover:ring-white/50 hover:-translate-y-1 hover:scale-105 active:scale-95 active:translate-y-0 font-belleza";
+
+    return (
+        <nav className="bg-[#127369] text-white px-4 lg:px-8 py-4 flex flex-wrap justify-between items-center shadow-lg">
+
+            {/* Logo y título */}
+            <Link to="/" className="flex items-center gap-3 cursor-pointer hover:scale-105 transition-transform duration-300">
+                <img src={huellitasEnCasa} alt="Logo" className="w-10 h-10 rounded-md bg-[#FFFFFF] hover:rotate-12 transition-transform duration-300" />
+                {/* Fuente de título */}
+                <h1 className="text-xl lg:text-2xl font-bold text-white font-aclonica">
+                    Huellitas en Casa
+                </h1>
+            </Link>
+
+            {/* Botón de Hamburguesa (cuando la pantalla es chica) */}
+            <button
+                onClick={() => setIsOpen(!isOpen)}
+                className={`lg:hidden p-2 rounded-md text-white hover:bg-[#243B55] hover:rotate-90 active:scale-95 transition-all duration-300 cursor-pointer ${isOpen ? 'bg-[#243B55] rotate-90' : ''}`}
+                aria-label="Abrir menú"
+            >
+                {isOpen ? <FaTimes className="w-6 h-6" /> : <FaBars className="w-6 h-6" />}
+            </button>
+
+            {/* Contenedor del Menú */}
+            <div className={`w-full lg:w-auto lg:flex items-center mt-4 lg:mt-0 ${isOpen ? 'block' : 'hidden'}`}>
+                <ul className="flex flex-col lg:flex-row lg:items-center gap-3">
+
+                    {/* Botón de Inicio */}
+                    <li>
+                        <Link to="/" className={linkStyle} onClick={() => setIsOpen(false)}>
+                            <FaHome className="text-lg group-hover:scale-110 transition-transform" />
+                            <span className="font-medium">Inicio</span>
+                        </Link>
+                    </li>
+
+                    {/* Botón de Galería */}
+                    <li>
+                        <Link to="/mascotas" className={linkStyle} onClick={() => setIsOpen(false)}>
+                            <FaPaw className="text-lg group-hover:rotate-12 transition-transform" />
+                            <span className="font-medium">Galería</span>
+                        </Link>
+                    </li>
+
+                    {/* Botón de Registrarse */}
+                    <li>
+                        <Link to="/register" className={linkStyle} onClick={() => setIsOpen(false)}>
+                            <FaUserPlus className="text-lg group-hover:scale-110 transition-transform" />
+                            <span className="font-medium">Registrarse</span>
+                        </Link>
+                    </li>
+
+                    {/* Botón de Iniciar Sesión */}
+                    <li>
+                        <Link to="/login" className={linkStyle} onClick={() => setIsOpen(false)}>
+                            <FaUser className="text-lg group-hover:scale-110 transition-transform" />
+                            <span className="font-medium">Iniciar Sesión</span>
+                        </Link>
+                    </li>
+
+                    {/* Botón de Cerrar Sesión */}
+                    <li>
+                        <Link to="/" className={linkStyle} onClick={() => setIsOpen(false)}>
+                            <FaSignOutAlt className="text-lg group-hover:translate-x-1 transition-transform" />
+                            <span className="font-medium">Cerrar Sesión</span>
+                        </Link>
+                    </li>
+                </ul>
+            </div>
         </nav>
     )
 }

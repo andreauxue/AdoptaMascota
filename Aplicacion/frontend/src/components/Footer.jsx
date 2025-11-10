@@ -1,53 +1,55 @@
-import { FaHeart, FaPaw } from 'react-icons/fa';
+import { FaRegCopyright, FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
+import placeholderLogo from '../assets/image.png'; // Imagen placeholder
+import facebookImg from '../assets/facebook.png'; // Imagen facebook
+import instaImg from '../assets/instagram.png'; // Imagen instagram
+import xImg from '../assets/x.png'; // Imagen X
+import huellitasEnCasa from '../assets/huellitasEnCasa.jpg';
 
-export default function Footer({ color = "bg-pink-50", texto = "Adopta una Mascota" }) {
+export default function Footer() {
     return (
-        <footer className={`${color} text-center py-8 mt-16 border-t border-pink-200`}>
-            <div className="container mx-auto px-6">
-                {/* Logo y título */}
-                <div className="flex items-center justify-center gap-3 mb-4">
-                    <FaPaw className="text-2xl text-pink-500" />
-                    <h3 className="text-2xl font-bold bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent">
-                        {texto}
+        <footer className="bg-gradient-to-b from-[#127369] to-[#10403B] text-white text-center py-8 mt-0 border-t border-[#127369]">
+            <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+                
+                {/* Logo y título a la izquierda */}
+                <div className="flex items-center justify-center md:justify-start gap-3">
+                    <img 
+                        src={huellitasEnCasa} 
+                        alt="Logo" 
+                        className="w-12 h-12 rounded-md bg-[#FFFFFF] hover:scale-105 transition-transform duration-300 cursor-pointer" 
+                    />
+                    <h3 className="text-2xl font-bold text-white font-aclonica">
+                        Huellitas en Casa
                     </h3>
                 </div>
                 
-                {/* Texto principal */}
-                <p className="text-gray-700 mb-6 max-w-2xl mx-auto leading-relaxed">
-                    Dando hogar y amor a mascotas necesitadas. Juntos podemos hacer 
-                    del mundo un lugar mejor para nuestros amigos peludos.
+                {/* Info de contacto */}
+                <div className="flex flex-col items-center gap-2 text-sm">
+                    <h4 className="font-semibold text-white mb-2">Medios de Contacto</h4>
+                    <span className="flex items-center gap-2"><FaEnvelope /> contacto@huellitas.org</span>
+                    <span className="flex items-center gap-2"><FaPhone /> +1 (555) 134-4857</span>
+                    <span className="flex items-center gap-2"><FaMapMarkerAlt /> Fraccionamiento Vida Sana, CP 57210</span>
+                </div>
+
+                {/* Redes sociales */}
+                <div className="flex flex-col items-center md:items-end">
+                    <h4 className="font-semibold text-white mb-2">Redes sociales</h4>
+                    <div className="flex gap-4">
+                        {/* Imágen de Facebook */}
+                        <img src={facebookImg} alt="Icono" className="w-8 h-8 rounded-md hover:scale-105 transition-transform duration-300 cursor-pointer" />
+                        {/* Imágen de Instagram */}
+                        <img src={instaImg} alt="Icono" className="w-8 h-8 rounded-md hover:scale-105 transition-transform duration-300 cursor-pointer" />
+                        {/* Imágen de twitter (o X pues) */}
+                        <img src={xImg} alt="Icono" className="w-8 h-8 rounded-md hover:scale-105 transition-transform duration-300 cursor-pointer" />
+                    </div>
+                </div>
+
+            </div>
+            
+            {/* Derechos de autor */}
+            <div className="border-t border-[#C1D9C1] pt-4 mt-8">
+                <p className="text-xs text-white flex items-center justify-center gap-1">
+                    <FaRegCopyright /> {new Date().getFullYear()} Huellitas en Casa. Todos los derechos reservados.
                 </p>
-                
-                {/* Icono decorativo */}
-                <div className="flex justify-center mb-4">
-                    <div className="w-12 h-12 bg-gradient-to-r from-pink-400 to-pink-500 rounded-full flex items-center justify-center shadow-lg">
-                        <FaHeart className="text-white text-lg" />
-                    </div>
-                </div>
-                
-                {/* Información de contacto */}
-                <div className="flex flex-wrap justify-center gap-8 mb-6 text-sm">
-                    <div className="text-center">
-                        <p className="font-semibold text-pink-600">Email</p>
-                        <p className="text-gray-600">hola@adoptaunamascota.org</p>
-                    </div>
-                    <div className="text-center">
-                        <p className="font-semibold text-pink-600">Teléfono</p>
-                        <p className="text-gray-600">+1 (555) 123-4567</p>
-                    </div>
-                    <div className="text-center">
-                        <p className="font-semibold text-pink-600">Ubicación</p>
-                        <p className="text-gray-600">Ciudad Animal, CA 90210</p>
-                    </div>
-                </div>
-                
-                {/* Derechos de autor */}
-                <div className="border-t border-pink-200 pt-4">
-                    <p className="text-xs text-gray-500">
-                        © {new Date().getFullYear()} {texto}. Todos los derechos reservados. 
-                        Hecho con amor para las mascotas.
-                    </p>
-                </div>
             </div>
         </footer>
     );

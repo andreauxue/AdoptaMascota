@@ -1,67 +1,49 @@
-import { FaHeart, FaPaw, FaVenusMars } from 'react-icons/fa';
+import { FaHeart } from 'react-icons/fa';
 
 export default function TarjetaMascota({ 
     nombre, 
     edad, 
     descripcion, 
     imagen,
-    genero = "macho",
-    ubicacion = "Refugio Central"
+    genero,
+    ubicacion
 }) {
+    // Combinamos los datos en "Serie de datos"
+    const serieDeDatos = `${edad} · ${genero} · ${ubicacion}`;
+
     return (
-        <div className="group relative max-w-sm overflow-hidden rounded-3xl border border-pink-100 bg-white shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
-            {/* Imagen con overlay */}
-            <div className="relative overflow-hidden">
-                <img
-                    src={imagen}
-                    alt={nombre}
-                    className="h-64 w-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                {/* Badge de género */}
-                <div className={`absolute top-4 right-4 flex items-center gap-1 px-3 py-1.5 rounded-full text-white text-xs font-semibold ${
-                    genero === "hembra" ? "bg-pink-500" : "bg-blue-500"
-                }`}>
-                    <FaVenusMars className="text-xs" />
-                    <span>{genero}</span>
-                </div>
-                
-                {/* Overlay hover */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            </div>
+        <div className="w-full bg-[#FFFFFF] rounded-lg shadow-md flex flex-col md:flex-row items-center p-4 gap-4 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+            
+            {/* Imagen */}
+            <img
+                src={imagen} 
+                alt={nombre}
+                className="w-full h-48 md:w-32 md:h-32 object-cover rounded-lg bg-white"
+            />
 
             {/* Contenido */}
-            <div className="space-y-3 p-6">
-                {/* Header con nombre y edad */}
-                <div className="flex items-center justify-between">
-                    <h2 className="text-2xl font-bold bg-gradient-to-r from-pink-600 to-pink-700 bg-clip-text text-transparent">
+            <div className="flex-grow flex flex-col justify-between h-full w-full">
+                <div>
+                    <h2 className="text-xl md:text-2xl font-bold text-[#243B55] font-aclonica">
                         {nombre}
                     </h2>
-                    <div className="flex items-center gap-1 text-sm font-medium text-pink-700 bg-pink-50 px-3 py-1 rounded-full">
-                        <FaPaw className="text-xs" />
-                        <span>{edad}</span>
-                    </div>
-                </div>
 
-                {/* Ubicación */}
-                <div className="flex items-center gap-2 text-sm text-gray-600">
-                    <div className="w-2 h-2 bg-pink-400 rounded-full"></div>
-                    <span>{ubicacion}</span>
-                </div>
+                    <p className="text-sm text-[#127369] mt-1">
+                        {serieDeDatos}
+                    </p>
 
-                {/* Descripción */}
-                <p className="text-gray-700 leading-relaxed line-clamp-3">
-                    {descripcion}
-                </p>
+                    <p className="text-[#243B55] text-sm mt-2 line-clamp-2">
+                        {descripcion}
+                    </p>
+                </div>
 
                 {/* Botón de acción */}
-                <button className="mt-4 w-full inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-pink-500 to-pink-600 px-6 py-3 text-white font-semibold shadow-md transition-all duration-200 hover:from-pink-600 hover:to-pink-700 hover:shadow-lg active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-pink-300 focus-visible:ring-offset-2">
-                    <FaHeart className="text-sm" />
-                    <span>Quiero adoptar</span>
+                <button
+                    className="mt-3 w-full md:w-auto md:self-start inline-flex items-center justify-center gap-2 rounded-md bg-[#127369] px-4 py-2 text-white font-semibold shadow-md transition-all duration-300 hover:bg-[#243B55] hover:scale-105 hover:shadow-lg active:scale-95 active:shadow-md cursor-pointer font-belleza">
+                    <FaHeart className="text-sm"/>
+                    <span>Adoptar Mascota</span>
                 </button>
             </div>
-
-            {/* Efecto de borde sutil */}
-            <div className="absolute inset-0 rounded-3xl border-2 border-transparent group-hover:border-pink-200 transition-colors duration-300 pointer-events-none" />
         </div>
     );
 }
