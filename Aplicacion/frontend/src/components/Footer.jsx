@@ -1,13 +1,13 @@
 import { FaHeart, FaPaw } from 'react-icons/fa';
 
-export default function Footer({ color = "bg-pink-50", texto = "Adopta una Mascota" }) {
+export default function Footer({ color = "bg-brand-50", texto = "Pawly" }) {
     return (
-        <footer className={`${color} text-center py-8 mt-16 border-t border-pink-200`}>
+        <footer className={`${color} text-center py-8 mt-16 border-t border-brand-200`}>
             <div className="container mx-auto px-6">
                 {/* Logo y título */}
                 <div className="flex items-center justify-center gap-3 mb-4">
-                    <FaPaw className="text-2xl text-pink-500" />
-                    <h3 className="text-2xl font-bold bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent">
+                    <FaPaw className="text-2xl text-brand-500" />
+                    <h3 className="text-2xl font-bold bg-gradient-to-r from-brand-500 to-brand-600 bg-clip-text text-transparent">
                         {texto}
                     </h3>
                 </div>
@@ -20,7 +20,7 @@ export default function Footer({ color = "bg-pink-50", texto = "Adopta una Masco
                 
                 {/* Icono decorativo */}
                 <div className="flex justify-center mb-4">
-                    <div className="w-12 h-12 bg-gradient-to-r from-pink-400 to-pink-500 rounded-full flex items-center justify-center shadow-lg">
+                    <div className="w-12 h-12 bg-gradient-to-r from-brand-400 to-brand-500 rounded-full flex items-center justify-center shadow-lg">
                         <FaHeart className="text-white text-lg" />
                     </div>
                 </div>
@@ -28,15 +28,15 @@ export default function Footer({ color = "bg-pink-50", texto = "Adopta una Masco
                 {/* Información de contacto */}
                 <div className="flex flex-wrap justify-center gap-8 mb-6 text-sm">
                     <div className="text-center">
-                        <p className="font-semibold text-pink-600">Email</p>
+                        <p className="font-semibold text-brand-600">Email</p>
                         <p className="text-gray-600">hola@adoptaunamascota.org</p>
                     </div>
                     <div className="text-center">
-                        <p className="font-semibold text-pink-600">Teléfono</p>
+                        <p className="font-semibold text-brand-600">Teléfono</p>
                         <p className="text-gray-600">+1 (555) 123-4567</p>
                     </div>
                     <div className="text-center">
-                        <p className="font-semibold text-pink-600">Ubicación</p>
+                        <p className="font-semibold text-brand-600">Ubicación</p>
                         <p className="text-gray-600">Ciudad Animal, CA 90210</p>
                     </div>
                 </div>

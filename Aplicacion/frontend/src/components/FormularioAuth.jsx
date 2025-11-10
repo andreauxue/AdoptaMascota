@@ -57,14 +57,14 @@ export default function FormularioAuth({ tipo, onSubmit }) {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-pink-50 to-pink-100 flex items-center justify-center p-4">
-            <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-md border border-pink-200">
+        <div className="min-h-screen bg-gradient-to-br from-brand-50 to-brand-100 flex items-center justify-center p-4">
+            <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-md border border-brand-200">
                 {/* Header */}
                 <div className="text-center mb-8">
-                    <div className="w-16 h-16 bg-gradient-to-r from-pink-400 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <div className="w-16 h-16 bg-gradient-to-r from-brand-400 to-brand-500 rounded-full flex items-center justify-center mx-auto mb-4">
                         <FaUser className="text-2xl text-white" />
                     </div>
-                    <h2 className="text-3xl font-bold bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent">
+                    <h2 className="text-3xl font-bold bg-gradient-to-r from-brand-500 to-brand-600 bg-clip-text text-transparent">
                         {tipo === "login" ? "Bienvenido" : "Crear Cuenta"}
                     </h2>
                     <p className="text-gray-600 mt-2">
@@ -88,7 +88,7 @@ export default function FormularioAuth({ tipo, onSubmit }) {
                             value={formData.username}
                             onChange={handleChange}
                             required
-                            className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-all duration-200"
+                            className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-all duration-200"
                         />
                     </div>
 
@@ -105,7 +105,7 @@ export default function FormularioAuth({ tipo, onSubmit }) {
                                 value={formData.email}
                                 onChange={handleChange}
                                 required
-                                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-all duration-200"
+                                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-all duration-200"
                             />
                         </div>
                     )}
@@ -122,7 +122,7 @@ export default function FormularioAuth({ tipo, onSubmit }) {
                             value={formData.password}
                             onChange={handleChange}
                             required
-                            className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-all duration-200"
+                            className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-all duration-200"
                         />
                         <button 
                             type="button"
@@ -141,7 +141,7 @@ export default function FormularioAuth({ tipo, onSubmit }) {
                     className={`w-full mt-6 py-3 px-4 rounded-xl font-semibold text-white transition-all duration-200 ${
                         isLoading 
                             ? 'bg-gray-400 cursor-not-allowed' 
-                            : 'bg-gradient-to-r from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 shadow-lg hover:shadow-pink-200'
+                            : 'bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-600 hover:to-brand-700 shadow-lg hover:shadow-brand-200'
                     }`}
                 >
                     {isLoading ? (
@@ -163,7 +163,7 @@ export default function FormularioAuth({ tipo, onSubmit }) {
                         }
                         <button 
                             type="button"
-                            className="text-pink-500 hover:text-pink-600 font-semibold transition-colors"
+                            className="text-brand-500 hover:text-brand-600 font-semibold transition-colors"
                             onClick={() => console.log("Cambiar a:", tipo === "login" ? "register" : "login")}
                         >
                             {tipo === "login" ? "Regístrate" : "Inicia Sesión"}
