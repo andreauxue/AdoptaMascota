@@ -8,7 +8,7 @@ import React, { useRef } from 'react';
 import ListaMascotas from "../components/ListaMascotas"; 
 import Boton from "../components/Boton";
 import { useNavigate } from 'react-router-dom'; 
-import imgHome from "../assets/img/imagenHome.jpg"; 
+import Slide from '../components/Slide';
 
 /**
  * Componente funcional MuroMascotas.
@@ -57,16 +57,9 @@ export default function MuroMascotas() {
                         />
                     </div>
                     
-                    {/* Imagen */}
+                    {/* Slide de imagenes */}
                     <div className="md:w-1/2 flex justify-center p-4 mt-8 md:mt-0">
-                        <div className="h-64 w-64 md:h-96 md:w-96 flex items-center justify-center 
-                                        bg-verde-grisaseo/30 rounded-3xl p-4 shadow-inner">
-                            <img 
-                                src={imgHome} 
-                                alt="Grupo de perros listos para adopción" 
-                                className="object-contain w-full h-full rounded-2xl shadow-2xl transition-transform hover:scale-105 duration-500"
-                            />
-                        </div>
+                         <Slide />
                     </div>
                 </section>
 
