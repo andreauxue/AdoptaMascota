@@ -1,15 +1,15 @@
 import FormularioAuth from "../components/FormularioAuth";
 
 export default function Register() {
-    const handleRegister = (data) => {
-        console.log("Registro completado con datos:", data);
-        // Aquí tienen que agregar más lógica como redirección
-        // navigate("/login");
-    };
+  const handleRegister = async (data) => {
+    const res = await fetch("http://127.0.0.1:8000/api/register/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+    const resultado = await res.json();
+    console.log(resultado);
+  };
 
-    return (
-        <div>
-            <FormularioAuth tipo="register" onSubmit={handleRegister} />
-        </div>
-    );
+  return <FormularioAuth tipo="register" onSubmit={handleRegister} />;
 }

@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User 
+from django.conf import settings 
 
 class Especie(models.Model):
     # VARCHAR(50)
@@ -17,16 +17,16 @@ class Mascota(models.Model):
     imagen = models.ImageField(upload_to='mascotas/')
     
     especie = models.ForeignKey(Especie, on_delete=models.CASCADE)
-    publicador = models.ForeignKey(User, on_delete=models.CASCADE)
+    publicador = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     
     def __str__(self):
         return self.nombre
     
 class PerfilUsuario(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     bio = models.TextField(blank=True)
     avatar = models.ImageField(upload_to='perfiles/', null=True, blank=True)
         
     def __str__(self):
-        return self.nombre.username
+        return self.user.username
     
