@@ -6,6 +6,7 @@
 - Patrick A. C. Martínez Rodríguez: 726000986 - Mexidis 
 - Ariadna Beatríz Pérez Aparicio: 320215122 - AriadnaPA 
 - Angel Moisés Gónzalez Corrales: 32034619 - MoisesAGC
+- Ui Chul Shin: 314630810 - shucshin
 
 # Pasos para correr el proyecto
 
