@@ -1,37 +1,28 @@
 import { useState } from "react";
 import { FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
-import placeholderImage from '../assets/image.png'; // Imagen placeholder
-import adopcionMascotitas from '../assets/adopcion3.jpg'; // Imagen de adopción de mascotas
+import adopcionMascotitas from '../assets/adopcion3.jpg';
 
-export default function FormularioAuth({ tipo, onSubmit }) {
+export default function FormularioAuth({ tipo, onSubmit, isLoading }) {
     const [formData, setFormData] = useState({ 
         username: "", 
         password: "", 
         email: "" 
     });
     const [showPassword, setShowPassword] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
 
     const handleChange = (e) => 
         setFormData({ ...formData, [e.target.name]: e.target.value });
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setIsLoading(true);
         
-        setTimeout(() => {
-            console.log("Datos del formulario enviados:", { tipo, datos: formData });
-            setIsLoading(false);
-            alert(tipo === "login" ? "Inicio de sesión exitoso" : "Registro completado");
-            if (onSubmit) {
-                onSubmit({ success: true, ...formData });
-            }
-        }, 1500);
+        if (onSubmit) {
+            onSubmit(formData);
+        }
     };
 
     const togglePasswordVisibility = () => setShowPassword(!showPassword);
 
-    // Títulos de las páginas
     const titulo = tipo === "login" ? "Iniciar sesión" : "Registrarse";
     const subTitulo = tipo === "login" ? "Ingresas tus datos" : "Crea tu cuenta";
 
@@ -103,7 +94,7 @@ export default function FormularioAuth({ tipo, onSubmit }) {
                             </div>
                         </div>
 
-                        {/* Botón de envío */}
+                        {/* Botón de envío*/}
                         <button
                             type="submit"
                             disabled={isLoading}

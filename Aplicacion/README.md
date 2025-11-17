@@ -7,6 +7,12 @@ python -m venv venv
 venv\Scripts\activate
 ```
 
+Ve a la Aplicación:
+
+```bash
+cd Aplicacion
+```
+
 Instala los requerimientos:
 
 ```bash
