@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
 import Home from "./pages/Home";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
@@ -26,10 +27,10 @@ function AppContent() {
                 {/* Rutas de Autenticación */}
                 <Route path="/login" element={<Register initialType="login" />} />
                 <Route path="/register" element={<Register initialType="register" />} />
+                <Route path="/" element={<Home/>}/>
                 
                 {/* Rutas de Contenido */}
                 <Route path="/muro" element={<MuroMascotas/>}/>
-                <Route path="/" element={<Home/>}/>
                 <Route path="/mascotas" element={<ListaMascotas/>}/>
                 <Route path="/publicar" element={<Anuncio />} />
                 <Route path="/mascota/:id" element={<DetalleMascota />} />
@@ -40,11 +41,13 @@ function AppContent() {
     );
 }
 
-// El componente App solo se encarga de envolver con BrowserRouter
+// El componente App solo se encarga de envolver con BrowserRouter y AuthProvider
 export default function App() {
   return (
     <BrowserRouter>
-      <AppContent />
+      <AuthProvider>
+        <AppContent />
+      </AuthProvider>
     </BrowserRouter>
   )
 }

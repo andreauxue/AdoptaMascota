@@ -6,7 +6,8 @@
 
 import { useState } from "react";
 import { FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext"; 
 
 /**
  * Componente funcional FormularioAuth.
@@ -16,12 +17,14 @@ import { useNavigate } from "react-router-dom";
  */
 export default function FormularioAuth({ tipo, onToggleType }) { 
     
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
+    const { login, register } = useAuth();
     
     const [formData, setFormData] = useState({ 
         username: "", 
         password: "", 
-        email: "" 
+        password_confirm: "",
+        email: ""
     });
     
     const [showPassword, setShowPassword] = useState(false);
@@ -42,18 +45,25 @@ export default function FormularioAuth({ tipo, onToggleType }) {
 
         if (tipo === "login") {
             // --- LÓGICA DE INICIO DE SESIÓN ---
-            navigate("/muro"); 
+            const result = await login(formData.username, formData.password);
+            
+            if (result.success) {
+                navigate("/muro");
+            }
             setIsLoading(false);
+        } else {
+            // --- LÓGICA DE REGISTRO ---
+            const result = await register({
+                username: formData.username,
+                email: formData.email,
+                password: formData.password,
+                password_confirm: formData.password_confirm
+            });
 
-        } else { // tipo === "register"
-            // --- LÓGICA DE REGISTRO (1.5s de espera) ---
-            setTimeout(() => {
-                setMessage("¡Cuenta creada con éxito! Por favor, inicia sesión.");
-                setFormData({ username: "", password: "", email: "" }); 
-                onToggleType(); // Llama a la función del padre para cambiar a 'login'
-                setIsLoading(false);
-                setTimeout(() => setMessage(null), 4000);
-            }, 1500);
+            if (result.success) {
+                navigate("/muro");
+            }
+            setIsLoading(false);
         }
     };
 
@@ -132,6 +142,7 @@ export default function FormularioAuth({ tipo, onToggleType }) {
                         value={formData.password}
                         onChange={handleChange}
                         required
+                        minLength={6}
                         className="w-full pl-10 pr-12 py-3 border border-verde-grisaseo rounded-xl focus:ring-2 focus:ring-durazno focus:border-durazno transition-all duration-200 text-azul-fondo bg-blanco"
                     />
                     <button 
@@ -142,6 +153,24 @@ export default function FormularioAuth({ tipo, onToggleType }) {
                         {showPassword ? <FaEyeSlash /> : <FaEye />}
                     </button>
                 </div>
+
+                {/* Campo Confirmar Contraseña (solo registro) */}
+                {tipo === "register" && (
+                    <div className="relative">
+                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <FaLock className="text-verde-grisaseo" />
+                        </div>
+                        <input 
+                            type={showPassword ? "text" : "password"}
+                            name="password_confirm"
+                            placeholder="Confirmar contraseña"
+                            value={formData.password_confirm}
+                            onChange={handleChange}
+                            required
+                            className="w-full pl-10 pr-4 py-3 border border-verde-grisaseo rounded-xl focus:ring-2 focus:ring-durazno focus:border-durazno transition-all duration-200 text-azul-fondo bg-blanco"
+                        />
+                    </div>
+                )}
             </div>
 
             {/* Botón de envío */}
