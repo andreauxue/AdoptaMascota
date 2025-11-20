@@ -70,7 +70,7 @@ export default function Register() {
               value={formData.name}
               onChange={handleChange}
               className="w-full border border-pink-200 rounded-xl p-3 shadow-sm focus:ring-2 focus:ring-pink-300"
-              placeholder="Ejemplo: Karen"
+              placeholder="Ejemplo: Carlos"
               required
             />
           </div>
