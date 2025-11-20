@@ -24,17 +24,35 @@ export default function Home() {
       </div>
 
       {/* Objetivo */}
-      <div className="max-w-4xl text-gray-800 mb-14 bg-white rounded-2xl p-8 shadow-lg border border-pink-200">
+      {/* Objetivo */}
+      <div
+        className="
+          max-w-4xl 
+          text-gray-900
+          mb-14 
+          bg-white 
+          rounded-2xl 
+          p-8 
+          shadow-lg 
+          border-2
+          border-[#38657E]
+          transition-all 
+          duration-300
+          hover:shadow-[0_0_25px_#38657Eaa]
+          hover:-translate-y-1
+        "
+      >
         <p className="leading-relaxed text-center text-md">
           Nuestro objetivo principal es facilitar y humanizar el proceso de adopción, 
           asegurando la colocación responsable de animales mediante perfiles detallados y 
           formularios de solicitud. 
         </p>
-        <p className="leading-relaxed text-center text-md">  
+        <p className="leading-relaxed text-center text-md mt-3">  
           Buscamos ser una solución digital en la promoción 
           de la adopción responsable.
         </p>
       </div>
+
 
       {/* Lo que ofrece MatchPaw */}
       <h2 className="text-3xl font-bold text-[#CA2B5A] mb-6 text-center drop-shadow-sm">
