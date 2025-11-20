@@ -5,14 +5,18 @@ export default function TarjetaMascota({ nombre, tipo, info, imagen }) {
   const sexoIcono = sexoTexto.includes("Hembra") ? "♀️" : "♂️";
 
   return (
-    <div className="group relative max-w-xs overflow-hidden rounded-2xl bg-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
-
-      {/* Etiqueta tipo de animal (perro, gato, etc.) */}
+    <div className="
+      group relative max-w-xs overflow-hidden rounded-2xl 
+      bg-white shadow-md border border-black 
+      transition-all duration-300 hover:-translate-y-1 hover:shadow-xl
+      m-2
+    ">
+      {/* Etiqueta tipo */}
       <div className="absolute top-3 left-3 z-10 bg-amber-300 px-3 py-1 rounded-full text-black text-xs font-bold shadow">
         {tipo}
       </div>
 
-      {/* Botón de corazón en la tarjeta */}
+      {/* Corazón */}
       <button
         className="absolute top-3 right-3 z-10 rounded-full bg-white p-2 shadow-md hover:bg-pink-100 transition"
       >
@@ -24,31 +28,31 @@ export default function TarjetaMascota({ nombre, tipo, info, imagen }) {
         <img
           src={imagen}
           alt={nombre}
-          className="h-70 w-full object-cover transition-transform duration-300 group-hover:scale-110"
+          className="h-60 w-full object-cover transition-transform duration-300 group-hover:scale-105"
         />
       </div>
 
-      <div className="p-4 space-y-3">
+      <div className="p-4 space-y-2">
 
         {/* Nombre */}
-        <h2 className="text-2xl font-bold text-[#8A5A44] tracking-tight">
+        <h2 className="text-xl font-semibold text-[#8A5A44] tracking-tight">
           {nombre}
         </h2>
 
         <div className="flex flex-wrap gap-2">
 
-          {/* Etiqueta rosa para Edad */}
-          <span className="bg-pink-100 text-pink-700 px-3 py-1 rounded-full text-xs font-semibold inline-flex items-center gap-1">
+          {/* Edad */}
+          <span className="bg-pink-100 text-pink-700 px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1">
             🎂 {edad}
           </span>
 
-          {/* Etiqueta rosa para Género */}
-          <span className="bg-pink-100 text-pink-700 px-3 py-1 rounded-full text-xs font-semibold inline-flex items-center gap-1">
+          {/* Género */}
+          <span className="bg-pink-100 text-pink-700 px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1">
             {sexoIcono} {sexoTexto}
           </span>
         </div>
 
-        {/* Botón "Más Detalles" */}
+        {/* Botón detalles */}
         <div className="flex justify-center pt-2">
           <button
             className="
