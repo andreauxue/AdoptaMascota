@@ -9,7 +9,7 @@ import piolin from "../assets/img/pajaro1.jpeg";
 import sol from "../assets/img/perro3.png";
 import capitan from "../assets/img/tortuga.jpg";
 
-export default function ListaMascotas() {
+export default function ListaMascotas({verTodos}) {
   const mascotas = [
     { id: 1, nombre: "Tomillo", especie: "Hámster", genero: "hembra", edad: "5 meses", ubicacion: "Coyoacán, CDMX", vacunado: true, descripcion: "Es una bolilla de pelo, muy juguetón y cariñoso.", imagen: tomillo },
     { id: 2, nombre: "Erizo", especie: "Perro", genero: "macho", edad: "3 años", ubicacion: "Monterrey, N.L.", vacunado: false, descripcion: "Cuidado porque pica, pero es muy fiel.", imagen: erizo },
@@ -22,9 +22,11 @@ export default function ListaMascotas() {
     { id: 9, nombre: "Capitán", especie: "Tortuga", genero: "macho", edad: "10 años", ubicacion: "Veracruz, Ver.", vacunado: false, descripcion: "Lento, pero seguro. Necesita terrario grande.", imagen: capitan },
   ];
 
+  const mascotasAMostrar = verTodos ? mascotas : mascotas.slice(0, 3);
+
   return (
-    <div className="grid grid-cols-1 gap-8 md:grid-cols-3 lg:gap-10 place-items-center py-6 px-4">
-      {mascotas.map((m) => (
+    <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3 place-items-center py-6">
+      {mascotasAMostrar.map((m) => (
         <TarjetaMascota
           key={m.id}
           id={m.id} 

@@ -7,7 +7,7 @@ import perro3 from "../assets/img/imagenHome.jpg";
 const imagenes = [perro1, perro2, perro3];
 const extendidas = [...imagenes, imagenes[0]]; 
 
-export default function CarruselMascotas() {
+export default function CarruselMascotas({className}) {
   const [indice, setIndice] = useState(0);
   const [conTransicion, setConTransicion] = useState(true);
 
@@ -35,10 +35,9 @@ export default function CarruselMascotas() {
   }, [conTransicion]);
 
   return (
-    <div className="flex justify-center p-4 mt-8">
+    <div className="flex justify-center">
       <div
-        className="relative overflow-hidden h-64 w-64 md:h-96 md:w-96
-                   bg-verde-grisaseo/30 rounded-3xl p-0 shadow-inner"
+        className={`relative overflow-hidden bg-verde-grisaseo/30 rounded-3xl p-0 aspect-[4/3] shadow-inner ${className}`}
       >
         {/* Carril de slides */}
         <div

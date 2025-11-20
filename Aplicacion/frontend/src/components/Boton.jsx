@@ -19,7 +19,7 @@ export default function Boton ({
         <button
             onClick={onClick}
             className={`${color} ${customClasses} 
-                        px-6 py-3 rounded-xl font-semibold text-lg
+                        px-4 py-2 rounded-xl font-semibold text-lg
                         shadow-md hover:shadow-lg hover:scale-[1.02] 
                         transform transition-all duration-300 ease-in-out`}
         >
