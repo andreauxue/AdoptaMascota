@@ -1,26 +1,64 @@
-import TarjetaMascota from "./TarjetaMascota";
-import tomillo from "../assets/tomillo.jpg";
-import erizo from "../assets/img/perro1.jpeg";
-import luna from "../assets/img/gato1.jpg";
-import rocky from "../assets/img/perro2.jpg";
-import miko from "../assets/img/conejo1.jpeg";
-import mishka from "../assets/img/gato2.jpg";
-import piolin from "../assets/img/pajaro1.jpeg";
-import sol from "../assets/img/perro3.png";
-import capitan from "../assets/img/tortuga.jpg";
 
-export default function ListaMascotas({verTodos}) {
-  const mascotas = [
-    { id: 1, nombre: "Tomillo", especie: "Hámster", genero: "hembra", edad: "5 meses", ubicacion: "Coyoacán, CDMX", vacunado: true, descripcion: "Es una bolilla de pelo, muy juguetón y cariñoso.", imagen: tomillo },
-    { id: 2, nombre: "Erizo", especie: "Perro", genero: "macho", edad: "3 años", ubicacion: "Monterrey, N.L.", vacunado: false, descripcion: "Cuidado porque pica, pero es muy fiel.", imagen: erizo },
-    { id: 3, nombre: "Luna", especie: "Gato", genero: "hembra", edad: "2 años", ubicacion: "Guadalajara, Jal.", vacunado: true, descripcion: "Tranquila y amante de las siestas al sol.", imagen: luna },
-    { id: 4, nombre: "Rocky", especie: "Perro", genero: "macho", edad: "5 meses", ubicacion: "Ciudad de México", vacunado: true, descripcion: "Es un perro muy protector y juguetón.", imagen: rocky },
-    { id: 5, nombre: "Miko", especie: "Conejo", genero: "macho", edad: "1 año", ubicacion: "Puebla, Pue.", vacunado: true, descripcion: "Esponjoso y salta por toda la casa.", imagen: miko },
-    { id: 6, nombre: "Mishka", especie: "Gato", genero: "hembra", edad: "4 meses", ubicacion: "Cancún, Q.R.", vacunado: false, descripcion: "Una gatita con demasida energia.", imagen: mishka },
-    { id: 7, nombre: "Piolín", especie: "Pájaro", genero: "macho", edad: "1 año", ubicacion: "Mérida, Yuc.", vacunado: true, descripcion: "Canta todo el día y es muy activo.", imagen: piolin },
-    { id: 8, nombre: "Sol", especie: "Perro", genero: "hembra", edad: "7 años", ubicacion: "Tijuana, B.C.", vacunado: true, descripcion: "Un perro ideal para niños.", imagen: sol },
-    { id: 9, nombre: "Capitán", especie: "Tortuga", genero: "macho", edad: "10 años", ubicacion: "Veracruz, Ver.", vacunado: false, descripcion: "Lento, pero seguro. Necesita terrario grande.", imagen: capitan },
-  ];
+import { useState, useEffect } from "react";
+import TarjetaMascota from "./TarjetaMascota";
+import MensajeCargando from "../components/MensajeCarga";
+import MensajeError from "../components/MensajeError";
+
+export default function ListaMascotas({verTodos, totalCargadas}) {
+  const [mascotas, setMascotas] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:8000/api/mascotas/")
+      .then((res) => {
+        if (!res.ok) throw new Error("Error al obtener mascotas");
+        return res.json();
+      })
+      .then((data) => {
+        setMascotas(data);
+        // Notificamos al componente padre cuántas mascotas hay
+        // Esto sirve para ocultar el boton cuando no hay muchas mascotas de la galeria
+        totalCargadas?.(data.length);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Error al cargar mascotas:", err);
+        setError(err.message);
+        setLoading(false);
+      });
+  }, [totalCargadas]);
+
+  // Mensaje de cargando mascotas
+  if (loading)
+    return (
+      <MensajeCargando/>
+    );
+
+  // Caso de error
+  if (error)
+    return (
+      <MensajeError/>
+    );
+
+  // Caso si no hay mascotas
+  if (mascotas.length === 0)
+    return (
+    <section className="flex flex-col items-center px-4 py-12">
+      <div className="flex flex-col items-center p-12 rounded-3xl border b-2 border-azul-fondo max-w-2xl w-full">
+
+        {/* Título */}
+        <h2 className="text-2xl font-extrabold text-azul-fondo mb-2 font-serif text-center">
+            No hay nuevos amigos en adopción por ahora
+        </h2>
+        
+        {/* Descripción */}
+        <p className="text-lg text-azul-fondo text-center">
+            Parece que todas las mascotas han encontrado un hogar. ¡Vuelve pronto, actualizamos la lista constantemente!
+        </p>
+      </div>
+    </section>
+  );
 
   const mascotasAMostrar = verTodos ? mascotas : mascotas.slice(0, 3);
 

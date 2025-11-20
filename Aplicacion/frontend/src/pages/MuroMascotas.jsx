@@ -7,7 +7,7 @@
 import React, { useRef } from 'react'; 
 import ListaMascotas from "../components/ListaMascotas"; 
 import Boton from "../components/Boton";
-import { useNavigate } from 'react-router-dom'; 
+// import { useNavigate } from 'react-router-dom'; 
 import Slide from '../components/Slide';
 
 /**
@@ -18,10 +18,14 @@ import Slide from '../components/Slide';
  *
  */
 export default function MuroMascotas() {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const mascotaListRef = useRef(null);
 
     const [verTodos, setVerTodos] = React.useState(false);
+    const [totalMascotas, setTotalMascotas] = React.useState(0);
+    const handleTotalChange = React.useCallback((n) => {
+        setTotalMascotas(n);
+    }, []);
 
     return (
         // Fondo principal
@@ -65,10 +69,13 @@ export default function MuroMascotas() {
                     </div>
 
                     {/* Componente que renderiza la lista de TarjetasMascotas */}
-                    <ListaMascotas verTodos={verTodos}/>
+                    <ListaMascotas 
+                        verTodos={verTodos}
+                        onTotalChange={handleTotalChange}
+                    />
 
-                    {/* Botón "Ver todos " solo aparece si no se a dado click*/}
-                    {!verTodos && (
+                    {/* Botón "Ver todos" solo aparece si no se a dado click y hay mas de 3 mascotas*/}
+                    {!verTodos && totalMascotas >= 4 && (
                         <div className="text-center mt-12">
                             <Boton 
                                 texto="Ver todos" 
@@ -79,7 +86,6 @@ export default function MuroMascotas() {
                         </div>
                     )}
                 </section>
-
             </div>
         </div>
     );
