@@ -1,45 +1,65 @@
+import { Heart, Info } from "lucide-react";
+
 export default function TarjetaMascota({ nombre, tipo, info, imagen }) {
+  const [sexoTexto, edad] = info.split("•").map(t => t.trim());
+  const sexoIcono = sexoTexto.includes("Hembra") ? "♀️" : "♂️";
+
   return (
-    <div className="group relative max-w-xs overflow-hidden rounded-2xl border border-black bg-white shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+    <div className="group relative max-w-xs overflow-hidden rounded-2xl bg-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
 
-      <img
-        src={imagen}
-        alt={nombre}
-        className="h-48 w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
-      />
+      {/* Etiqueta tipo de animal (perro, gato, etc.) */}
+      <div className="absolute top-3 left-3 z-10 bg-amber-300 px-3 py-1 rounded-full text-black text-xs font-bold shadow">
+        {tipo}
+      </div>
 
-      <div className="space-y-1.5 p-4">
+      {/* Botón de corazón en la tarjeta */}
+      <button
+        className="absolute top-3 right-3 z-10 rounded-full bg-white p-2 shadow-md hover:bg-pink-100 transition"
+      >
+        <Heart className="w-5 h-5 text-pink-500" />
+      </button>
+
+      {/* Imagen */}
+      <div className="relative">
+        <img
+          src={imagen}
+          alt={nombre}
+          className="h-70 w-full object-cover transition-transform duration-300 group-hover:scale-110"
+        />
+      </div>
+
+      <div className="p-4 space-y-3">
 
         {/* Nombre */}
-        <h2 className="text-xl font-semibold tracking-tight" style={{ color: "#916431ff" }}>
+        <h2 className="text-2xl font-bold text-[#8A5A44] tracking-tight">
           {nombre}
         </h2>
 
-        {/* Tipo (Perro, Gato...) */}
-        <p className="text-xs text-gray-500">
-          {tipo}
-        </p>
+        <div className="flex flex-wrap gap-2">
 
-        {/* Edad o info */}
-        <p className="text-base text-black">
-          {info}
-        </p>
+          {/* Etiqueta rosa para Edad */}
+          <span className="bg-pink-100 text-pink-700 px-3 py-1 rounded-full text-xs font-semibold inline-flex items-center gap-1">
+            🎂 {edad}
+          </span>
 
-        <div className="flex justify-center">
+          {/* Etiqueta rosa para Género */}
+          <span className="bg-pink-100 text-pink-700 px-3 py-1 rounded-full text-xs font-semibold inline-flex items-center gap-1">
+            {sexoIcono} {sexoTexto}
+          </span>
+        </div>
+
+        {/* Botón "Más Detalles" */}
+        <div className="flex justify-center pt-2">
           <button
             className="
-              inline-flex items-center justify-center
-              rounded-full px-3 py-1.5 text-xs font-semibold 
-              text-black shadow-sm transition-all duration-200 
-              border border-black
-              active:scale-95 focus:outline-none focus-visible:ring-2
+              inline-flex items-center gap-2 rounded-full 
+              px-4 py-2 text-sm font-semibold 
+              text-white transition-all duration-300
+              bg-[#ff85a2] hover:bg-[#ff6c8f]
+              shadow-md active:scale-95
             "
-            style={{
-              backgroundColor: "#F0E68C",
-            }}
-            onMouseEnter={(e) => (e.target.style.backgroundColor = "#dfd15bff")}
-            onMouseLeave={(e) => (e.target.style.backgroundColor = "#F0E68C")}
           >
+            <Info className="w-4 h-4" />
             Más Detalles
           </button>
         </div>

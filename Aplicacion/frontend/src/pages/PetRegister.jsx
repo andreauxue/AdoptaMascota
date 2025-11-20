@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 import logoRosa from "../assets/logoRosa.png";
 
 export default function PetRegister() {
@@ -8,6 +7,11 @@ export default function PetRegister() {
     edad: "",
     especie: "",
     genero: "",
+    tamano: "",
+    vacunado: "",
+    esterilizado: "",
+    energia: "",
+    descripcion: "",
     foto: null,
   });
 
@@ -24,11 +28,7 @@ export default function PetRegister() {
     e.preventDefault();
 
     const data = new FormData();
-    data.append("nombre", formData.nombre);
-    data.append("edad", formData.edad);
-    data.append("especie", formData.especie);
-    data.append("genero", formData.genero);
-    data.append("foto", formData.foto);
+    for (let key in formData) data.append(key, formData[key]);
 
     console.log("Datos enviados:");
     for (let [key, value] of data.entries()) {
@@ -40,6 +40,11 @@ export default function PetRegister() {
       edad: "",
       especie: "",
       genero: "",
+      tamano: "",
+      vacunado: "",
+      esterilizado: "",
+      energia: "",
+      descripcion: "",
       foto: null,
     });
 
@@ -47,215 +52,200 @@ export default function PetRegister() {
   };
 
   return (
-    <div className="min-h-screen p-6">
-      <div className="flex flex-col items-center mb-12">
-        <img src={logoRosa} alt="MatchPaw Logo" className="w-50 h-24 mb-4" />
-        <h1 className="text-4xl font-bold text-[#38657E] text-center">
-          Registrar Nueva Mascota para Adopción
-        </h1>
-        <p className="mt-4 max-w-2xl text-center text-gray-700 text-lg">
-          Este es el formulario para poder registrar una mascota que necesite un
-          nuevo hogar. Por favor, completa toda la información para poder ayudar
-          a encontrarle un nuevo hogar.
-        </p>
+    <div className="min-h-screen p-6 bg-[#FFE6EC] flex justify-center">
+      <div className="w-full max-w-md bg-white rounded-3xl shadow-2xl p-10 border border-pink-200">
 
-        <div className="flex flex-col mb-12 mt-10 items-start">
-          <form onSubmit={handleSubmit}>
-            {/* Nombre */}
-            <div>
-              <label className="block font-semibold text-gray-700">
-                Nombre
-              </label>
-              <input
-                type="text"
-                name="nombre"
-                value={formData.nombre}
-                onChange={handleChange}
-                className="w-full mt-1 border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-500"
-                placeholder="Ejemplo: Max"
-                required
-              />
-            </div>
+        <div className="flex flex-col items-center mb-10">
+          <img src={logoRosa} alt="MatchPaw Logo" className="w-40 mb-4 drop-shadow-md" />
+          
+          <h1 className="text-4xl font-bold text-[#000000] text-center">
+            Registrar Nueva Mascota
+          </h1>
+          <p className="mt-4 max-w-xl text-center text-gray-700 text-base leading-relaxed">
+            Completa la información de la mascota para que podamos ayudarla 
+            a encontrar un nuevo hogar lleno de amor.
+          </p>
+        </div>
 
-            {/* Edad */}
-            <div className="mt-5">
-              <label className="block font-semibold text-gray-700">Edad</label>
-              <input
-                type="number"
-                name="edad"
-                value={formData.edad}
-                onChange={handleChange}
-                className="w-full mt-1 border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-500"
-                placeholder="Ejemplo: 2(años)"
-                required
-              />
-            </div>
+        {/* Formulario */}
+        <form onSubmit={handleSubmit} className="space-y-6">
 
-            {/* Especie */}
-            <div className="mt-5">
-              <label className="block font-semibold text-gray-700">
-                Especie
-              </label>
-              <input
-                type="text"
-                name="especie"
-                value={formData.especie}
-                onChange={handleChange}
-                className="w-full mt-1 border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-500"
-                placeholder="Ejemplo: Perro, Gato, etc."
-                required
-              />
-            </div>
+          {/* Nombre */}
+          <div>
+            <label className="block font-semibold text-pink-700 mb-1">Nombre</label>
+            <input
+              type="text"
+              name="nombre"
+              value={formData.nombre}
+              onChange={handleChange}
+              className="w-full border border-pink-200 rounded-xl p-3 shadow-sm focus:ring-2 focus:ring-pink-300"
+              placeholder="Ejemplo: Luna"
+              required
+            />
+          </div>
 
-            {/* Género */}
-            <div className="mt-5">
-              <label className="block font-semibold text-gray-700">
-                Género
-              </label>
-              <select
-                name="genero"
-                value={formData.genero}
-                onChange={handleChange}
-                className="w-full mt-1 border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-500"
-                required
-              >
-                <option value="">Selecciona una opción</option>
-                <option value="Macho">Macho</option>
-                <option value="Hembra">Hembra</option>
-              </select>
-            </div>
+          {/* Edad */}
+          <div>
+            <label className="block font-semibold text-pink-700 mb-1">Edad</label>
+            <input
+              type="number"
+              name="edad"
+              value={formData.edad}
+              onChange={handleChange}
+              className="w-full border border-pink-200 rounded-xl p-3 shadow-sm focus:ring-2 focus:ring-pink-300"
+              placeholder="Ejemplo: 3"
+              required
+            />
+          </div>
 
-            {/* Tamaño */}
-            <div className="mt-5">
-              <label className="block font-semibold text-gray-700">
-                Tamaño
-              </label>
-              <select
-                name="tamano"
-                value={formData.tamano}
-                onChange={handleChange}
-                className="w-full mt-1 border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-500"
-                required
-              >
-                <option value="">Selecciona una opción</option>
-                <option value="Chico">Chico</option>
-                <option value="Mediano">Mediano</option>
-                <option value="Grande">Grande</option>
-              </select>
-            </div>
+          {/* Especie */}
+          <div>
+            <label className="block font-semibold text-pink-700 mb-1">Especie</label>
+            <input
+              type="text"
+              name="especie"
+              value={formData.especie}
+              onChange={handleChange}
+              className="w-full border border-pink-200 rounded-xl p-3 shadow-sm focus:ring-2 focus:ring-pink-300"
+              placeholder="Perro, Gato, Conejo, Tortuga..."
+              required
+            />
+          </div>
 
-            {/* Vacunado */}
-            <div className="mt-5">
-              <label className="block font-semibold text-gray-700 mb-2">
-                Vacunado
-              </label>
-              <div className="flex gap-6">
-                <label className="flex items-center gap-2">
+          {/* Género */}
+          <div>
+            <label className="block font-semibold text-pink-700 mb-1">Género</label>
+            <select
+              name="genero"
+              value={formData.genero}
+              onChange={handleChange}
+              className="w-full border border-pink-200 rounded-xl p-3 shadow-sm focus:ring-2 focus:ring-pink-300"
+              required
+            >
+              <option value="">Selecciona una opción</option>
+              <option value="Macho">Macho ♂️</option>
+              <option value="Hembra">Hembra ♀️</option>
+            </select>
+          </div>
+
+          {/* Tamaño */}
+          <div>
+            <label className="block font-semibold text-pink-700 mb-1">Tamaño</label>
+            <select
+              name="tamano"
+              value={formData.tamano}
+              onChange={handleChange}
+              className="w-full border border-pink-200 rounded-xl p-3 shadow-sm focus:ring-2 focus:ring-pink-300"
+              required
+            >
+              <option value="">Selecciona una opción</option>
+              <option value="Chico">Chico</option>
+              <option value="Mediano">Mediano</option>
+              <option value="Grande">Grande</option>
+            </select>
+          </div>
+
+          {/* Vacunado */}
+          <div>
+            <label className="block font-semibold text-pink-700">Vacunado</label>
+            <div className="flex gap-6 mt-2">
+              {["Sí", "No"].map((op) => (
+                <label key={op} className="flex items-center gap-2 text-gray-700">
                   <input
                     type="radio"
                     name="vacunado"
-                    value="Sí"
-                    checked={formData.vacunado === "Sí"}
+                    value={op}
+                    checked={formData.vacunado === op}
                     onChange={handleChange}
-                    className="h-4 w-4 text-blue-500 focus:ring-blue-500 border-gray-300"
+                    className="h-4 w-4 text-pink-500 focus:ring-pink-300"
                   />
-                  Sí
+                  {op}
                 </label>
-                <label className="flex items-center gap-2">
-                  <input
-                    type="radio"
-                    name="vacunado"
-                    value="No"
-                    checked={formData.vacunado === "No"}
-                    onChange={handleChange}
-                    className="h-4 w-4 text-blue-500 focus:ring-blue-500 border-gray-300"
-                  />
-                  No
-                </label>
-              </div>
+              ))}
             </div>
+          </div>
 
-            {/* Esterilizado */}
-            <div className="mt-5">
-              <label className="block font-semibold text-gray-700 mb-2">
-                Esterilizado
-              </label>
-              <div className="flex gap-6">
-                <label className="flex items-center gap-2">
+          {/* Esterilizado */}
+          <div>
+            <label className="block font-semibold text-pink-700">Esterilizado</label>
+            <div className="flex gap-6 mt-2">
+              {["Sí", "No"].map((op) => (
+                <label key={op} className="flex items-center gap-2 text-gray-700">
                   <input
                     type="radio"
                     name="esterilizado"
-                    value="Sí"
-                    checked={formData.esterilizado === "Sí"}
+                    value={op}
+                    checked={formData.esterilizado === op}
                     onChange={handleChange}
-                    className="h-4 w-4 text-blue-500 focus:ring-blue-500 border-gray-300"
+                    className="h-4 w-4 text-pink-500 focus:ring-pink-300"
                   />
-                  Sí
+                  {op}
                 </label>
-                <label className="flex items-center gap-2">
-                  <input
-                    type="radio"
-                    name="esterilizado"
-                    value="No"
-                    checked={formData.esterilizado === "No"}
-                    onChange={handleChange}
-                    className="h-4 w-4 text-blue-500 focus:ring-blue-500 border-gray-300"
-                  />
-                  No
-                </label>
-              </div>
+              ))}
             </div>
+          </div>
 
-            {/* Nivel de Energía */}
-            <div className="mt-5">
-              <label className="block font-semibold text-gray-700">
-                Nivel de Energía
-              </label>
-              <select
-                name="energia"
-                value={formData.energia}
-                onChange={handleChange}
-                className="w-full mt-1 border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-500"
-                required
-              >
-                <option value="">Selecciona una opción</option>
-                <option value="Tranquilo">Tranquilo</option>
-                <option value="Moderado">Moderado</option>
-                <option value="Muy Activo">Muy Activo</option>
-              </select>
-            </div>
+          {/* Energía */}
+          <div>
+            <label className="block font-semibold text-pink-700 mb-1">
+              Nivel de Energía
+            </label>
+            <select
+              name="energia"
+              value={formData.energia}
+              onChange={handleChange}
+              className="w-full border border-pink-200 rounded-xl p-3 shadow-sm focus:ring-2 focus:ring-pink-300"
+              required
+            >
+              <option value="">Selecciona una opción</option>
+              <option value="Tranquilo">Tranquilo 💤</option>
+              <option value="Moderado">Moderado 🙂</option>
+              <option value="Muy Activo">Muy Activo ⚡</option>
+            </select>
+          </div>
 
-            <div className="mt-5">
-              <label className="block font-semibold text-gray-700">Foto</label>
-              <input
-                type="file"
-                name="foto"
-                accept="image/*"
-                onChange={handleChange}
-                className="w-full mt-1 border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-500"
-                required
-              />
-            </div>
+          {/* Descripción General */}
+          <div>
+            <label className="block font-semibold text-pink-700 mb-1">
+              Descripción General
+            </label>
+            <textarea
+              name="descripcion"
+              rows="4"
+              value={formData.descripcion}
+              onChange={handleChange}
+              placeholder="Ejemplo: Es una perrita muy cariñosa, le encantan los niños..."
+              className="w-full border border-pink-200 rounded-xl p-3 shadow-sm focus:ring-2 focus:ring-pink-300"
+              required
+            ></textarea>
+          </div>
 
-           <button
+          {/* Foto */}
+          <div>
+            <label className="block font-semibold text-pink-700 mb-1">Foto</label>
+            <input
+              type="file"
+              name="foto"
+              accept="image/*"
+              onChange={handleChange}
+              className="w-full border border-pink-200 rounded-xl p-3 shadow-sm bg-white focus:ring-2 focus:ring-pink-300"
+              required
+            />
+          </div>
+
+          {/* Botón para registrar mascota */}
+          <button
             type="submit"
             className="
-              mt-8 
-              bg-[#F0E68C] 
-              text-black 
-              font-normal 
-              py-2 px-6 
-              rounded-lg 
-              border border-black 
-              hover:bg-[#e6d85c] 
-              transition-colors
+              mt-6 w-full py-3 rounded-full
+              bg-[#ff85a2] hover:bg-[#ff6c8f]
+              text-white font-bold text-lg
+              shadow-md active:scale-95 transition
             "
           >
             Registrar Mascota
           </button>
-
-          </form>
-        </div>
+        </form>
       </div>
     </div>
   );
