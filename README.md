@@ -37,16 +37,16 @@ Está construido con:
 
 ## 🚀 **Instrucciones para ejecutar el proyecto**
 
-### ✅ 1. Entrar a la carpeta del frontend
+### 1. Entrar a la carpeta del frontend
 cd AdoptaMascota/Aplicacion/frontend
 
-### ✅ 2. Instalar dependencias
+### 2. Instalar dependencias
 npm install
 
-### ✅ 3. Ejecutar el servidor de desarrollo
+### 3. Ejecutar el servidor de desarrollo
 npm run dev
 
-### ✅ 4. Abrir el proyecto
+### 4. Abrir el proyecto
 http://localhost:5173/
 
 ## Instalaciones Extra
@@ -56,3 +56,5 @@ Tuvimos que instalar lo siguiente:
 npm install react-icons
 
 npm install react-router-dom
+
+npm install lucide-react
