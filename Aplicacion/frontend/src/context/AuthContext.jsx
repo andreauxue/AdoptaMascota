@@ -49,11 +49,51 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
+    // Función para iniciar sesión
+    const login = async (username, password) => {
+        setIsLoading(true);
+        try {
+            const data = await api.post("/api/login/", { username, password });
+            
+            if (data.success) {
+                setUser(data.user);
+                localStorage.setItem('user', JSON.stringify(data.user));
+                return { success: true, user: data.user };
+            } else {
+                throw new Error(data.message || 'Error al iniciar sesión');
+            }
+        } catch (error) {
+            throw error;
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    // Función para cerrar sesión
+    const logout = async () => {
+        setIsLoading(true);
+        try {
+            await api.post("/api/logout/");
+            setUser(null);
+            localStorage.removeItem('user');
+            return { success: true };
+        } catch (error) {
+            console.error("Error al cerrar sesión", error);
+            // Aunque falle, limpiamos localmente
+            setUser(null);
+            localStorage.removeItem('user');
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     const value = {
         user,
         isLoading,
         authLoading,
         register,
+        login,
+        logout,
     };
 
     return (
