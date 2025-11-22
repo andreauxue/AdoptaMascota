@@ -1,11 +1,10 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {
     FaPaw,
     FaHome,
     FaUser,
     FaUserPlus,
-    FaSignOutAlt,
     FaBars,
     FaTimes
 } from 'react-icons/fa';
@@ -14,20 +13,9 @@ import huellitasEnCasa from '../assets/huellitasEnCasa.jpg';
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
-    const { user, logout } = useAuth();
-    const navigate = useNavigate();
+    const { user } = useAuth(); 
 
     const linkStyle = "flex items-center gap-2 px-4 py-2 rounded-md bg-[#10403B] hover:bg-[#243B55] transition-all duration-300 text-white font-medium cursor-pointer hover:shadow-[0_0_15px_rgba(255,255,255,0.3)] hover:ring-2 hover:ring-white/50 hover:-translate-y-1 hover:scale-105 active:scale-95 active:translate-y-0 font-belleza";
-
-    const handleLogout = async () => {
-        try {
-            await logout();
-            setIsOpen(false);
-            navigate("/");
-        } catch (error) {
-            console.error("Error al cerrar sesión:", error);
-        }
-    };
 
     return (
         <nav className="bg-[#127369] text-white px-4 lg:px-8 py-4 flex flex-wrap justify-between items-center shadow-lg">
@@ -69,7 +57,7 @@ export default function Navbar() {
                         </Link>
                     </li>
 
-                    {/* Mostrar estos botones solo si NO está autenticado */}
+                    {/* Estos botones se muestran solo si no se ha iniciado sesión */}
                     {!user && (
                         <>
                             {/* Botón de Registrarse */}
@@ -86,27 +74,6 @@ export default function Navbar() {
                                     <FaUser className="text-lg group-hover:scale-110 transition-transform" />
                                     <span className="font-medium">Iniciar Sesión</span>
                                 </Link>
-                            </li>
-                        </>
-                    )}
-
-                    {/* Mostrar estos elementos solo si está autenticado */}
-                    {user && (
-                        <>
-                            {/* Mensaje de bienvenida */}
-                            <li className="text-white px-4 py-2 font-medium">
-                                Hola, {user.username}
-                            </li>
-
-                            {/* Botón de Cerrar Sesión */}
-                            <li>
-                                <button 
-                                    onClick={handleLogout}
-                                    className={linkStyle}
-                                >
-                                    <FaSignOutAlt className="text-lg group-hover:translate-x-1 transition-transform" />
-                                    <span className="font-medium">Cerrar Sesión</span>
-                                </button>
                             </li>
                         </>
                     )}

@@ -7,13 +7,13 @@ export const useAuth = () => {
     return useContext(AuthContext);
 };
 
-// Proveedor de contexto de autenticación
+// Provee el contexto de autenticación
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || null);
     const [isLoading, setIsLoading] = useState(false);
     const [authLoading, setAuthLoading] = useState(true);
 
-    // Al cargar la app, verifica la sesión con el backend
+    // Cuando carga la app, verificamos la sesión con el backend
     useEffect(() => {
         const verifySession = async () => {
             try {

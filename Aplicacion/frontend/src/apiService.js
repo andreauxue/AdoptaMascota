@@ -45,7 +45,8 @@ async function apiFetch(url, options = {}) {
         const data = await response.json();
 
         if (!response.ok) {
-            throw new Error(data.error || 'Ocurrió un error en la petición');
+            const errorMessage = data.error || data.message || data.detail || 'Ocurrió un error en la petición';
+            throw new Error(errorMessage);
         }
 
         return data;

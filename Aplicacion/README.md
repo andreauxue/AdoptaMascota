@@ -1,12 +1,6 @@
-# Pasos para correr el proyecto
+# Pasos para correr el Backend
 
-Ve a la Aplicación:
-
-```bash
-cd Aplicacion
-```
-
-Elimina la carpeta venv:
+La primera vez que corras el Backend, debes estar dentro de la carpeta Aplicacion. Una vez ahí, elimina la carpeta `venv`:
 
 - En Windows (CMD)
     ```bash
@@ -24,7 +18,7 @@ Elimina la carpeta venv:
     ```
 
 
-Crea la carpeta venv:
+Crea el entorno virtual:
 
 - En Windows (CMD/PowerShell)
     ```bash
@@ -37,10 +31,9 @@ Crea la carpeta venv:
     ```
 
 
-Crea un entorno virtual:
+Activa el entono virtual:
 
 ```bash
-python -m venv venv
 venv\Scripts\activate
 ```
 
@@ -60,10 +53,13 @@ Haz las migraciones:
 
 ```bash
 python manage.py makemigrations
+```
+
+```bash
 python manage.py migrate
 ```
 
-Crea un usuario administrador:
+Crea un usuario administrador. Guarda los datos que vas a ingresar:
 
 ```bash
 python manage.py createsuperuser
@@ -75,8 +71,10 @@ Inicia el servidor:
 python manage.py runserver
 ```
 
-Accede al panel de administración en:
+Accede al panel de administración:
 
 ```
 http://127.0.0.1:8000/admin/
 ```
+
+En el panel, se te solicitarán datos del usuario administrador que hiciste.

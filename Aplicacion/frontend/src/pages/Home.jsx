@@ -59,14 +59,14 @@ export default function Home() {
                             Encuentra a tu compañero ideal. Nuestra plataforma conecta a mascotas que necesitan un hogar con personas maravillosas dispuestas a dárselo. Sube mascotas para adopción o navega por los perfiles para encontrar a tu nuevo mejor amigo.
                         </p>
                         <div className="flex flex-col gap-4 w-full items-center lg:items-start">
-                            {/* Mostrar botón "Registrarse" solo si NO está autenticado */}
+                            {/* Mostrar botón "Registrarse" solo si no ha iniciado sesión */}
                             {!user && (
                                 <Link to="/register" className={buttonStyle}>
                                     Registrarse
                                 </Link>
                             )}
                             
-                            {/* Botón "Muro de mascotas" siempre visible */}
+                            {/* Botón "Muro de mascotas" */}
                             <Link to="/mascotas" className={buttonStyle}>
                                 Muro de mascotas
                             </Link>
