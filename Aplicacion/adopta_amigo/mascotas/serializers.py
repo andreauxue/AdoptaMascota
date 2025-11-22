@@ -43,6 +43,9 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
 class MascotaSerializer(serializers.ModelSerializer):
     publicador_username = serializers.CharField(source='publicador.username', read_only=True)
     especie_nombre = serializers.CharField(source='especie.nombre', read_only=True)
+    ubicacion_estado = serializers.CharField(source='ubicacion.estado', read_only=True)
+    ubicacion_abreviatura = serializers.CharField(source='ubicacion.abreviatura', read_only=True)
+    edad_formateada = serializers.ReadOnlyField()
     
     class Meta:
         model = Mascota

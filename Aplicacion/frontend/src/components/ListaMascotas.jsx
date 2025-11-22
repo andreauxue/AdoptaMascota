@@ -69,11 +69,10 @@ export default function ListaMascotas({verTodos, totalCargadas}) {
           key={m.id}
           id={m.id} 
           nombre={m.nombre}
-          especie={m.especie}
+          especie={m.especie_nombre}
           genero={m.genero}
-          ubicacion={m.ubicacion}
-          vacunado={m.vacunado}
-          edad={m.edad}
+          ubicacion={m.ubicacion_abreviatura}
+          edad={m.edad_formateada}
           descripcion={m.descripcion}
           imagen={m.imagen}
         />

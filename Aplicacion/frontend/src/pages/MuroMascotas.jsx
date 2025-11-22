@@ -71,11 +71,11 @@ export default function MuroMascotas() {
                     {/* Componente que renderiza la lista de TarjetasMascotas */}
                     <ListaMascotas 
                         verTodos={verTodos}
-                        onTotalChange={handleTotalChange}
+                        totalCargadas={handleTotalChange}
                     />
 
                     {/* Botón "Ver todos" solo aparece si no se a dado click y hay mas de 3 mascotas*/}
-                    {!verTodos && totalMascotas >= 4 && (
+                    {!verTodos && totalMascotas > 3 && (
                         <div className="text-center mt-12">
                             <Boton 
                                 texto="Ver todos" 
