@@ -1,27 +1,47 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import logo from "../assets/logo.png";
 
 export default function Navbar() {
+  const location = useLocation();
+  const isLoginPage = location.pathname === "/login";
+
   return (
     <nav
       className="w-full bg-[#38657E] text-white px-8 py-5 
                  flex justify-between items-center shadow-md"
     >
       {/* Logo + Nombre */}
-      <div className="flex items-center gap-3 group cursor-pointer">
-        <img 
-          src={logo} 
-          alt="MatchPaw logo"
-          className="w-10 h-10 object-contain transition-transform duration-300 group-hover:scale-110"
-        />
-        <h1 
-          className="text-2xl font-bold tracking-wide transition-transform duration-300 group-hover:scale-110"
+      {isLoginPage ? (
+        <div className="flex items-center gap-3 select-none opacity-70">
+          <img 
+            src={logo} 
+            alt="MatchPaw logo"
+            className="w-10 h-10 object-contain"
+          />
+          <h1 className="text-2xl font-bold tracking-wide">
+            MatchPaw
+          </h1>
+        </div>
+      ) : (
+        // Si le damos clic al logo o nombre nos lleva al Home 
+        <Link
+          to="/"
+          className="flex items-center gap-3 group cursor-pointer"
         >
-          MatchPaw
-        </h1>
-      </div>
+          <img 
+            src={logo} 
+            alt="MatchPaw logo"
+            className="w-10 h-10 object-contain transition-transform duration-300 group-hover:scale-110"
+          />
+          <h1 
+            className="text-2xl font-bold tracking-wide transition-transform duration-300 group-hover:scale-110"
+          >
+            MatchPaw
+          </h1>
+        </Link>
+      )}
 
-      {/* Opciones del menú de la navbar */}
+      {/* Opciones del menú */}
       <ul className="flex gap-8 text-sm font-medium">
         {[
           { to: "/login", label: "Login", isLink: false },
