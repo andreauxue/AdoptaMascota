@@ -11,13 +11,16 @@ class Especie(models.Model):
 class Mascota(models.Model):
     nombre = models.CharField(max_length=100) 
     descripcion = models.TextField()
-    edad = models.PositiveIntegerField()
+    edad = models.CharField(max_length=50)
     vacunado = models.BooleanField(default=False)
     fecha_reporte = models.DateField(auto_now_add=True)
     imagen = models.ImageField(upload_to='mascotas/')
     
     especie = models.ForeignKey(Especie, on_delete=models.CASCADE)
     publicador = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    genero = models.CharField(max_length=10, blank=True, null=True)
+    ubicacion = models.CharField(max_length=50, blank=True, null=True)
     
     def __str__(self):
         return self.nombre
