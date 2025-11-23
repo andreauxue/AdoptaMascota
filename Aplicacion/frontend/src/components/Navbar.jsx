@@ -44,7 +44,6 @@ export default function Navbar() {
       {/* Opciones del menú */}
       <ul className="flex gap-8 text-sm font-medium">
         {[
-          { to: "/login", label: "Login", isLink: false },
           { to: "/", label: "Inicio" },
           { to: "/galeria", label: "Ver Galería de Mascotas" },
           { to: "/registrar-mascota", label: "Registrar Mascota" },
