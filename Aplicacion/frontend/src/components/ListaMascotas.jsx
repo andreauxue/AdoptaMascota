@@ -28,6 +28,16 @@ export default function ListaMascotas() {
   return (
       <div className="relative py-6 px-4">
 
+        {/* Botón "Registrar Mascota" */}
+        <div className="flex justify-center md:justify-end mb-10">
+          <Link
+              to="/registrar-mascota"
+              className="px-6 py-3 rounded-lg bg-[#10403B] text-white font-semibold text-center hover:bg-[#243B55] hover:scale-105 hover:shadow-lg active:scale-95 active:shadow-md transition-all duration-300 cursor-pointer font-belleza"
+          >
+            Registrar Mascota
+          </Link>
+        </div>
+
         {/* Cuadrícula de 3 columnas */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 place-items-center">
           {mascotas.length > 0 ? (
@@ -50,16 +60,6 @@ export default function ListaMascotas() {
   No hay mascotas registradas. Comienza a registrar usando nuestro botón
 </p>
 )}
-        </div>
-
-        {/* Botón "Registrar Mascota" */}
-        <div className="flex justify-center md:justify-end mt-12">
-          <Link
-              to="/registrar-mascota"
-              className="px-6 py-3 rounded-lg bg-[#10403B] text-white font-semibold text-center hover:bg-[#243B55] hover:scale-105 hover:shadow-lg active:scale-95 active:shadow-md transition-all duration-300 cursor-pointer font-belleza"
-          >
-            Registrar Mascota
-          </Link>
         </div>
       </div>
   );

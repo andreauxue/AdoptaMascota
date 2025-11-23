@@ -35,11 +35,11 @@ export default function Footer() {
                     <h4 className="font-semibold text-white mb-2">Redes sociales</h4>
                     <div className="flex gap-4">
                         {/* Imágen de Facebook */}
-                        <img src={facebookImg} alt="Icono" className="w-8 h-8 rounded-md hover:scale-105 transition-transform duration-300 cursor-pointer" />
+                        <a href="https://www.facebook.com/p/AdoptaMx-100071067540611/" ><img src={facebookImg} alt="Icono" className="w-8 h-8 rounded-md hover:scale-105 transition-transform duration-300 cursor-pointer" /></a>
                         {/* Imágen de Instagram */}
-                        <img src={instaImg} alt="Icono" className="w-8 h-8 rounded-md hover:scale-105 transition-transform duration-300 cursor-pointer" />
+                        <a href="https://www.instagram.com/adopta.mx/?hl=es"><img src={instaImg} alt="Icono" className="w-8 h-8 rounded-md hover:scale-105 transition-transform duration-300 cursor-pointer" /></a>
                         {/* Imágen de twitter (o X pues) */}
-                        <img src={xImg} alt="Icono" className="w-8 h-8 rounded-md hover:scale-105 transition-transform duration-300 cursor-pointer" />
+                        <a href="https://x.com/mx_adopta?lang=es"><img src={xImg} alt="Icono" className="w-8 h-8 rounded-md hover:scale-105 transition-transform duration-300 cursor-pointer" /></a>
                     </div>
                 </div>
 
