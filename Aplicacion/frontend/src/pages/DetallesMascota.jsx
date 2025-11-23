@@ -1,6 +1,13 @@
 import galleta from "../assets/galleta.png";
+import { useNavigate } from "react-router-dom";
 
 export default function GalletaDetalles() {
+  const navigate = useNavigate(); 
+
+  const irAFormulario = () => {
+    navigate("/formulario-adopcion");   // ruta a tu nuevo formulario
+  };
+
   return (
     <div className="min-h-screen bg-[#FFE6EC] p-10">
 
@@ -12,7 +19,7 @@ export default function GalletaDetalles() {
       {/* Contenedor principal */}
       <div className="flex justify-center items-center">
         
-        {/* Imagen con Animación */}
+        {/* Animación */}
         <style>{`
           @keyframes zoomSlow {
             0% { transform: scale(1); }
@@ -61,9 +68,10 @@ export default function GalletaDetalles() {
             {/* Botón Adoptar */}
             <div className="pt-4 flex justify-center">
               <button
+                onClick={irAFormulario}
                 className="
                   px-6 py-3 rounded-full text-white font-semibold
-                  bg-[#ff85a2] hover:bg-[#ff6c8f] transition shadow-md
+                  bg-[#ff85a2] hover:bg-[#ff6c8f] transition shadow-md active:scale-95
                 "
               >
                 Adoptar

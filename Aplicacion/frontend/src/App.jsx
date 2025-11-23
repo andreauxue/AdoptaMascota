@@ -8,6 +8,7 @@ import PetRegister from "./pages/PetRegister";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import DetallesMascota from "./pages/DetallesMascota";
+import FormularioAdopcion from "./pages/FormularioAdopcion";
 
 
 export default function App() {
@@ -24,6 +25,7 @@ export default function App() {
             <Route path="/login" element={<Login/>}/>
             <Route path="/register" element={<Register/>}/>
             <Route path="/mascota/galleta" element={<DetallesMascota />} />
+            <Route path="/formulario-adopcion" element={<FormularioAdopcion />} />
           </Routes>
         </main>
 
