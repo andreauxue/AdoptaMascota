@@ -57,11 +57,7 @@ export default function RegistrarMascota() {
             data.append("genero", formData.genero);
             data.append("imagen", formData.imagen);
 
-            const response = await api.post("api/registrar-mascota/", data, {
-                headers:{
-                    "Content-Type": "multipart/form-data"
-                }
-            });
+            const response = await api.post("api/registrar-mascota/", data);
 
             alert("Mascota registrada con éxito.");
             navigate("/mascotas");

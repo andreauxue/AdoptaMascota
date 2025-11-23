@@ -119,6 +119,15 @@ def registrar_mascota(request):
         especie = especie_default,
         vacunado = False,
         publicador = request.user,
+        genero = data.get('genero', 'Desconocido'),
+        ubicacion = data.get('ubicacion', 'Desconocida') 
     )
-    mascota.save()
-    return Response({"success": "Mascota registrada exitosamente."}, status=status.HTTP_201_CREATED)
+
+    serializer = MascotaSerializer(mascota)
+    return Response(serializer.data, status = status.HTTP_201_CREATED)
+
+@api_view(['GET'])
+def listar_mascotas(request):
+    mascotas = Mascota.objects.all()
+    serializer = MascotaSerializer(mascotas, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)

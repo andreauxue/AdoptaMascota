@@ -35,6 +35,7 @@ urlpatterns = [
     path('api/check-session/', mascotas_views.check_session, name='check_session'),
 
     path('api/registrar-mascota/', mascotas_views.registrar_mascota, name='registrar_mascota'),
+    path('mascotas/', mascotas_views.listar_mascotas, name='lista_mascotas'),
 
 ]
 
