@@ -12,7 +12,7 @@ export default function ListaMascotas({verTodos, totalCargadas}) {
   useEffect(() => {
     fetch("http://127.0.0.1:8000/api/mascotas/")
       .then((res) => {
-        if (!res.ok) throw new Error("Error al obtener mascotas");
+        if (!res.ok) throw new Error("No se pudieron cargar las mascotas");
         return res.json();
       })
       .then((data) => {
@@ -38,7 +38,7 @@ export default function ListaMascotas({verTodos, totalCargadas}) {
   // Caso de error
   if (error)
     return (
-      <MensajeError/>
+      <MensajeError title = {error}/>
     );
 
   // Caso si no hay mascotas

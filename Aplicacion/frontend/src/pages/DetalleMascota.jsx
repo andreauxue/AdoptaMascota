@@ -7,29 +7,64 @@
 
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import { useState, useEffect } from "react";
 import { FaPaw, FaMapMarkerAlt, FaVenusMars, FaHeart, FaSyringe, FaInfoCircle } from 'react-icons/fa';
 import { Cake } from 'lucide-react';
-import luna from "../assets/img/gato1.jpg";
+import MensajeError from '../components/MensajeError';
+import MensajeInformativo from '../components/MensajeInformativo';
+import Boton from '../components/Boton';
+// import luna from "../assets/img/gato1.jpg";
 
 export default function DetalleMascota() {
     // Captura el ID de la mascota de la URL
-    const { id } = useParams(); 
+    const { id } = useParams();
+    const [mascota, setMascota] = useState(null);
+    const [noExiste, setNoExiste] = useState(false);
+    const [error, setError] = useState(null);
     
-    // Simulación de datos (Solo para ver como seria ver los detalles de la mascota)
-    const mascota = {
-        nombre: "Luna",
-        especie: "Gato",
-        genero: "hembra", 
-        edad: "2 Años",
-        ubicacion: "Guadalajara, Jal.",
-        vacunado: true, 
-        descripcion: "Luna es una gata tranquila y muy independiente. Ideal para personas que trabajan desde casa o que necesitan un compañero silencioso. Le encantan las siestas al sol y las caricias suaves.",
-        imagen: luna
-    };
+    useEffect(() => {
+        fetch(`http://127.0.0.1:8000/api/mascotas/${id}`)
+            .then(res => {
+                if (!res.ok) {
+                    if (res.status === 404) {
+                        setNoExiste(true);
+                        throw new Error(`No se encontro la mascota.`);
+                    }
+                    throw new Error(`Fallo la conexión con el servidor.`);
+                }
+                return res.json();
+            })
+            .then(data => {
+                setMascota(data);
+            })
+            .catch(err => {
+                console.error("Error al cargar detalle:", err);
+                setError(err.message);
+            });
+    }, [id]);
+
+    // Casos de error
+    if (error){
+        if (noExiste) {
+            return (
+                <div className = "mx-auto max-w-6xl px-4 py-12">
+                    <MensajeInformativo title = {error}
+                    description = "Lo sentimos, no pudimos encontrar el perfil de esta mascota. Es posible que el enlace sea incorrecto o que el peludo ya haya sido adoptado."/>
+                </div>
+            );
+        }
+        return (
+            <div className = "mx-auto max-w-6xl px-4 py-12">
+                <MensajeError title = {error}/>
+            </div>
+        );
+    }
+
+    if (!mascota) return null;
 
     const vacunadoStatus = mascota.vacunado 
         ? { text: "Sí", color: "text-azul-fondo" } 
-        : { text: "Pendiente", color: "text-durazno" };
+        : { text: "No", color: "text-durazno" };
 
     // Estilo para el género
     const generoInfo = mascota.genero === 'macho' 
@@ -37,15 +72,15 @@ export default function DetalleMascota() {
         : { text: "Hembra", icon: <FaVenusMars className="text-azul-fondo" /> };
 
     return (
-        <div className="max-w-4xl mx-auto bg-blanco p-8 rounded-xl shadow-2xl mt-10">
+        <div className="max-w-4xl mx-auto bg-blanco p-8 rounded-xl shadow-2xl border border-gray-200 my-12">
             <h1 className="text-3xl font-bold text-azul-fondo mb-8 border-b pb-4">
-                Conoce más a: <span className="text-durazno">{mascota.nombre}</span>
+                Conoce más a: <span className="text-verde-grisaseo">{mascota.nombre}</span>
             </h1>
 
             <div className="flex flex-col md:flex-row gap-8">
                 
                 {/* Columna Izquierda: Imagen */}
-                <div className="md:w-1/2">
+                <div className="md:w-1/2 w-full">
                     <img
                         src={mascota.imagen} 
                         alt={`Imagen de ${mascota.nombre}`}
@@ -53,41 +88,42 @@ export default function DetalleMascota() {
                     />
                     
                     <div className="flex justify-center">
-                        <button className="bg-durazno text-azul-fondo py-3 px-8 rounded-full font-semibold hover:bg-durazno/80 transition-colors flex items-center gap-2 shadow-md">
-                            <FaHeart className="text-azul-fondo" /> ¡Quiero Adoptar!
-                        </button>
+                        <Boton 
+                            texto="¡Quiero Adoptar!"
+                            customClasses="w-full text-base px-4 shadow-lg"
+                        />
                     </div>
                 </div>
 
                 {/* Columna Derecha: Detalles y Descripción */}
-                <div className="md:w-1/2 space-y-6">
+                <div className="md:w-1/2 space-y-6 w-full">
                     
                     {/* Fila de Datos Cortos */}
-                    <div className="grid grid-cols-2 gap-4 text-azul-fondo text-lg">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-azul-fondo text-lg">
                         
                         {/* 1. Especie */}
-                        <p className="bg-verde-grisaseo/30 p-3 rounded-lg flex items-center gap-2">
-                            <FaPaw className="text-azul-fondo" /> <span className="font-bold">Especie:</span> {mascota.especie}
+                        <p className="bg-verde-grisaseo/30 p-3 rounded-lg flex items-center gap-1">
+                            <FaPaw className="text-azul-fondo" /> <span className="font-bold">Especie:</span> {mascota.especie_nombre}
                         </p>
                         
                         {/* 2. Edad */}
-                        <p className="bg-verde-grisaseo/30 p-3 rounded-lg flex items-center gap-2">
-                            <Cake size={18} className="text-azul-fondo" /> <span className="font-bold">Edad:</span> {mascota.edad}
+                        <p className="bg-verde-grisaseo/30 p-3 rounded-lg flex items-center gap-1">
+                            <Cake size={18} className="text-azul-fondo" /> <span className="font-bold">Edad:</span> {mascota.edad_formateada}
                         </p>
                         
                         {/* 3. Género */}
-                        <p className="bg-verde-grisaseo/30 p-3 rounded-lg flex items-center gap-2">
+                        <p className="bg-verde-grisaseo/30 p-3 rounded-lg flex items-center gap-1">
                             {generoInfo.icon} <span className="font-bold">Género:</span> {generoInfo.text}
                         </p>
 
                         {/* 4. Vacunado */}
-                        <p className="bg-verde-grisaseo/30 p-3 rounded-lg flex items-center gap-2">
-                            <FaSyringe className={vacunadoStatus.color} /> <span className="font-bold">Vacunado:</span> {vacunadoStatus.text}
+                        <p className="bg-verde-grisaseo/30 p-3 rounded-lg flex items-center gap-1">
+                            <FaSyringe/> <span className="font-bold">Vacunado:</span> {vacunadoStatus.text}
                         </p>
 
                         {/* 5. Ubicación */}
-                        <p className="bg-verde-grisaseo/30 p-3 rounded-lg col-span-2 flex items-center gap-2">
-                            <FaMapMarkerAlt className="text-azul-fondo" /> <span className="font-bold">Ubicación:</span> {mascota.ubicacion}
+                        <p className="bg-verde-grisaseo/30 p-3 rounded-lg col-span-1 sm:col-span-2 flex items-center gap-2">
+                            <FaMapMarkerAlt className="text-azul-fondo" /> <span className="font-bold">Ubicación:</span> {mascota.ubicacion_estado}
                         </p>
                     </div>
 

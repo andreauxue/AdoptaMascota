@@ -1,4 +1,5 @@
 import React from 'react';
+import Boton from './Boton';
 
 /**
  * @fileoverview Componente de mensaje de error.
@@ -10,11 +11,10 @@ export default function MensajeError ({
     description = "No pudimos conectar con la base de datos. Por favor, verifica tu conexión a internet e intenta recargar la página." 
 }) {
     return (
-        // Cubre todo el viewport y se centra.
-        <div className="fixed inset-0 flex flex-col items-center justify-start md:justify-center bg-white/80 z-50 p-4 backdrop-blur-sm overflow-auto">
+        <div className="flex flex-col items-center justify-center w-full min-h-96 rounded-lg">
             
             {/* Tarjeta de mensaje de error con sombra y esquinas redondeadas */}
-            <div className="max-w-md w-full flex flex-col items-center space-y-5 p-6 md:p-12 bg-white rounded-3xl shadow-2xl border border-red-100">
+            <div className="w-full flex flex-col items-center space-y-5 p-6 md:p-12 bg-white rounded-3xl bg-red-50 border-2 border-red-200">
                 
                 {/* Icono de Error (Triángulo con signo de exclamación) */}
                 <svg 
@@ -33,22 +33,22 @@ export default function MensajeError ({
                 </svg>
                 
                 {/* Texto de Error principal */}
-                <h2 className="text-xl font-extrabold text-red-700 font-serif tracking-wide text-center">
+                <h2 className="text-xl font-extrabold text-red-700 font-serif tracking-wide text-center max-w-md">
                     {title}
                 </h2>
                 
                 {/* Texto de descripción y acción secundaria */}
-                <p className="text-sm text-azul-fondo text-center max-w-sm">
+                <p className="text-sm text-azul-fondo text-center max-w-md">
                     {description}
                 </p>
 
                 {/* Botón de Recarga para intentar de nuevo */}
-                <button 
-                    onClick={() => window.location.reload()}
-                    className="mt-4 px-6 py-2 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-xl shadow-md transition-colors duration-300"
-                >
-                    Recargar Página
-                </button>
+                <Boton 
+                    texto="Recargar Página" 
+                    color="bg-red-500 hover:bg-red-600 text-blanco"
+                    onClick={() => window.location.reload()} 
+                    customClasses="text-lg py-2 px-6 shadow-lg"
+                />
             </div>
         </div>
     );
