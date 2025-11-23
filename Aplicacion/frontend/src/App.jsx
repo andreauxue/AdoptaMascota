@@ -7,7 +7,8 @@ import Galeria from "./pages/Galeria";
 import PetRegister from "./pages/PetRegister";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Protected from "./components/Protected";
+import DetallesMascota from "./pages/DetallesMascota";
+
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
             <Route path="/registrar-mascota" element={<PetRegister/>}/>
             <Route path="/login" element={<Login/>}/>
             <Route path="/register" element={<Register/>}/>
+            <Route path="/mascota/galleta" element={<DetallesMascota />} />
           </Routes>
         </main>
 
