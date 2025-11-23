@@ -36,7 +36,10 @@ async function apiFetch(url, options = {}) {
     }
 
     try {
-        const response = await fetch(url, options);
+        const response = await fetch(url, {
+            ...options,
+            credentials: "include"  
+        });
         
         if (response.status === 204) { 
             return { success: true };

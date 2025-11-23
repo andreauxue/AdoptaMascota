@@ -4,4 +4,4 @@ from .models import Mascota
 class MascotaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Mascota
-        fields = '__all__'
+        exclude = ['publicador']  # ese lo asignamos desde backend

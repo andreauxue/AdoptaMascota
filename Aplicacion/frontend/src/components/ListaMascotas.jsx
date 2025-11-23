@@ -9,7 +9,8 @@ import yoshi from "../assets/yoshi.jpg";
 import garfield from "../assets/garfield.jpg";
 import srgato from "../assets/srgato.jpg";
 import Langosta from "../assets/Langosta.webp";
-import { Link } from "react-router-dom";
+import { Link, useLocation} from "react-router-dom";
+
 
 export default function ListaMascotas() {
   

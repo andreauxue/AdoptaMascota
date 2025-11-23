@@ -1,7 +1,12 @@
 import { useState, useEffect } from "react";
 import { FaPaw, FaFileImage, FaPen, FaCalendarAlt, FaMapMarkerAlt, FaVenusMars } from 'react-icons/fa';
+import { api } from "../apiService";
+import { useAuth } from "../context/AuthContext"; 
+import { useNavigate } from "react-router-dom";
 
 export default function RegistrarMascota() {
+    const navigate = useNavigate();
+    
     const [formData, setFormData] = useState({ 
         nombre: "", 
         descripcion: "", 
@@ -30,14 +35,43 @@ export default function RegistrarMascota() {
         return () => { if (imagePreview) URL.revokeObjectURL(imagePreview); };
     }, [imagePreview]); 
 
-    const handleSubmit = (e) => {
+    useEffect(() => {
+        api.get("/api/get-csrf/").catch(err => {
+            console.warn("No se pudo obtener el token CSRF inicial", err);
+        });
+    }, []);
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setIsLoading(true);
-        setTimeout(() => {
-            console.log("Datos de la nueva mascota:", formData); 
-            setIsLoading(false);
-            alert("Mascota registrada");
-        }, 1500);
+
+
+        try {
+            const data = new FormData();
+
+
+            data.append("nombre", formData.nombre);
+            data.append("descripcion", formData.descripcion);
+            data.append("edad", formData.edad);
+            data.append("ubicacion", formData.ubicacion);
+            data.append("genero", formData.genero);
+            data.append("imagen", formData.imagen);
+
+            const response = await api.post("api/registrar-mascota/", data, {
+                headers:{
+                    "Content-Type": "multipart/form-data"
+                }
+            });
+
+            alert("Mascota registrada con éxito.");
+            navigate("/mascotas");
+        }
+        catch (error){
+            console.error("Error al registrar la mascota:", error);
+            alert("Hubo un error al registrar la mascota. Por favor, intenta de nuevo.");
+        }
+
+        setIsLoading(false);
     };
 
     // Estilo de Input del prototipo

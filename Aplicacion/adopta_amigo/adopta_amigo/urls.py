@@ -33,6 +33,9 @@ urlpatterns = [
     path('api/get-csrf/', mascotas_views.get_csrf_token, name='get_csrf_token'),
     path('api/login/', mascotas_views.login_view, name='login'),
     path('api/check-session/', mascotas_views.check_session, name='check_session'),
+
+    path('api/registrar-mascota/', mascotas_views.registrar_mascota, name='registrar_mascota'),
+
 ]
 
 if settings.DEBUG:

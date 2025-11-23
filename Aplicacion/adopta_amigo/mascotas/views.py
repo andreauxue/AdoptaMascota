@@ -84,3 +84,41 @@ def check_session(request):
 @ensure_csrf_cookie 
 def get_csrf_token(request):
     return Response({'success': 'CSRF cookie set'}, status=status.HTTP_200_OK)
+
+#vista para registro de mascotas
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def registrar_mascota(request):
+    data = request.data
+
+    print("Datos recibidos",data)
+
+    # validamos campos básicos
+    required_fields=['nombre', 'descripcion', 'edad']
+    for field in required_fields:
+        if field not in data:
+            return Response(
+                {'error': f'El campo {field} es requerido.'}, 
+                status=status.HTTP_400_BAD_REQUEST
+            )
+    imagen = request.FILES.get('imagen')
+    if not imagen:
+        return Response(
+            {'error': 'La imagen es requerida.'}, 
+            status=status.HTTP_400_BAD_REQUEST
+        )
+    
+    from .models import Especie
+    especie_default = Especie.objects.first()
+
+    mascota = Mascota.objects.create(
+        nombre = data.get('nombre'),
+        descripcion = data.get('descripcion'),
+        edad = data.get('edad'),
+        imagen= imagen,
+        especie = especie_default,
+        vacunado = False,
+        publicador = request.user,
+    )
+    mascota.save()
+    return Response({"success": "Mascota registrada exitosamente."}, status=status.HTTP_201_CREATED)
