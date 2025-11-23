@@ -11,12 +11,15 @@ import oreo from "../assets/oreo.png";
 import paco from "../assets/paco.png";
 import peluche from "../assets/peluche.png";
 
-
-import reactLogo from "../assets/react.svg";
-
 export default function Home() {
   return (
-    <div className="min-h-screen p-6 bg-[#FFE6EC]">  
+    <div className="min-h-screen p-6 bg-[#FFE6EC]">
+
+      {/* Título */}
+      <h1 className="text-3xl font-bold text-center text-black mt-8 mb-10">
+        Galería de Mascotas en Adopción
+      </h1>
+
       {/* Contenedor de tarjetas */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 place-items-center">
 
