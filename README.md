@@ -16,6 +16,8 @@ Nuestro objetivo es facilitar, modernizar y hacer más humano el proceso de adop
 | Juan Daniel Barrera Holan | [Daniiel314](https://github.com/Daniiel314) |
 | Diego Castro Rendón | [DiegoCastroRendon](https://github.com/DiegoCastroRendon) |
 | Bruno Fernando Ortiz Amaya | [BrunsO27](https://github.com/BrunsO27) |
+| Juan Ramón Franco Anaya  | [Juan-FA](https://github.com/Juan-FA) |
+| Patrick Alberto Camilo Martínez Rodríguez | [Mexidis](https://github.com/Mexidis) |
 
 ---
 
