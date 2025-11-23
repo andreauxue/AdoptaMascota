@@ -9,7 +9,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import DetallesMascota from "./pages/DetallesMascota";
 import FormularioAdopcion from "./pages/FormularioAdopcion";
-
+import FormularioRecibido from "./pages/FormularioRecibido";
 
 export default function App() {
   return (
@@ -26,6 +26,7 @@ export default function App() {
             <Route path="/register" element={<Register/>}/>
             <Route path="/mascota/galleta" element={<DetallesMascota />} />
             <Route path="/formulario-adopcion" element={<FormularioAdopcion />} />
+            <Route path="/formulario-recibido" element={<FormularioRecibido />} />
           </Routes>
         </main>
 

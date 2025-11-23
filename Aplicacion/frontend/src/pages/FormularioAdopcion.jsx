@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom"; // <-- Importa esto
 import logoRosa from "../assets/logoRosa.png";
 
-export default function AdoptionForm() {
+export default function FormularioAdopcion() {
+  const navigate = useNavigate(); // <-- Crea la función para redirigir
   const [formData, setFormData] = useState({
     razon: "",
     vivienda: "",
@@ -12,21 +14,18 @@ export default function AdoptionForm() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log("Formulario de Adopción:");
-    console.log(formData);
+    console.log("Formulario de Adopción:", formData);
 
-    alert("Formulario enviado :D");
+    // Aquí reemplazamos el alert por navegar a la otra página
+    navigate("/formulario-recibido"); // <-- Redirige a tu pantalla de gracias
 
+    // Opcional: si quieres limpiar el formulario
     setFormData({
       razon: "",
       vivienda: "",
@@ -45,11 +44,7 @@ export default function AdoptionForm() {
         {/* Encabezado */}
         <div className="flex flex-col items-center mb-10">
           <img src={logoRosa} alt="MatchPaw Logo" className="w-40 mb-4 drop-shadow-md" />
-
-          <h1 className="text-4xl font-bold text-[#000000] text-center">
-            Formulario de Adopción
-          </h1>
-
+          <h1 className="text-4xl font-bold text-black text-center">Formulario de Adopción</h1>
           <p className="mt-4 max-w-xl text-center text-gray-700 text-base leading-relaxed">
             Queremos conocerte un poco más para asegurar una adopción responsable.
           </p>
@@ -71,7 +66,7 @@ export default function AdoptionForm() {
               placeholder="Escribe tu respuesta..."
               className="w-full border border-pink-200 rounded-xl p-3 shadow-sm focus:ring-2 focus:ring-pink-300"
               required
-            ></textarea>
+            />
           </div>
 
           {/* Pregunta 2 */}
@@ -87,7 +82,7 @@ export default function AdoptionForm() {
               placeholder="Describe el espacio donde vivirá..."
               className="w-full border border-pink-200 rounded-xl p-3 shadow-sm focus:ring-2 focus:ring-pink-300"
               required
-            ></textarea>
+            />
           </div>
 
           {/* Pregunta 3 */}
@@ -103,10 +98,10 @@ export default function AdoptionForm() {
               placeholder="Comparte tu experiencia..."
               className="w-full border border-pink-200 rounded-xl p-3 shadow-sm focus:ring-2 focus:ring-pink-300"
               required
-            ></textarea>
+            />
           </div>
 
-          {/* Pregunta 4 — AHORA ABIERTA */}
+          {/* Pregunta 4 */}
           <div>
             <label className="block font-semibold text-pink-700 mb-1">
               4. ¿Puedes cubrir gastos veterinarios y de cuidado?
@@ -119,7 +114,7 @@ export default function AdoptionForm() {
               placeholder="Escribe tu respuesta..."
               className="w-full border border-pink-200 rounded-xl p-3 shadow-sm focus:ring-2 focus:ring-pink-300"
               required
-            ></textarea>
+            />
           </div>
 
           {/* Pregunta 5 */}
@@ -135,7 +130,7 @@ export default function AdoptionForm() {
               placeholder="Cuéntanos un poco de ti..."
               className="w-full border border-pink-200 rounded-xl p-3 shadow-sm focus:ring-2 focus:ring-pink-300"
               required
-            ></textarea>
+            />
           </div>
 
           {/* Botón Enviar */}
