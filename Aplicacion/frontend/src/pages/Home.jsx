@@ -20,7 +20,8 @@ import Langosta from "../assets/Langosta.webp";
 export default function Home() {
     const { user } = useAuth(); // Obtener usuario del contexto
 
-    const buttonStyle = "w-full max-w-xs px-6 py-3 rounded-lg text-white font-semibold text-center hover:opacity-90 transition duration-300 shadow-md bg-[#10403B] font-belleza";
+    const buttonStyle = "w-full max-w-xs px-6 py-3 rounded-lg text-white font-semibold bg-[#10403B] text-center hover:bg-[#243B55] transition-all duration-300 text-white font-medium cursor-pointer hover:shadow-[0_0_15px_rgba(255,255,255,0.3)] hover:ring-2 hover:ring-white/50 hover:-translate-y-1 hover:scale-105 active:scale-95 active:translate-y-0 font-belleza";
+                    
 
     // Lógica del carrusel de imágenes
     const scrollContainerRef = useRef(null);
