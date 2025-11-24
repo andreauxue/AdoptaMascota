@@ -53,6 +53,11 @@ class Mascota(models.Model):
     especie = models.ForeignKey(Especie, on_delete=models.CASCADE)
     publicador = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    sexo = models.CharField(
+        max_length=10,
+        choices=[('macho', 'Macho'), ('hembra', 'Hembra')],
+        default='macho',          
+    )
     # Relacion con el nuevo atributo de ubicacion, evitamos eliminar ubicaciones en uso
     ubicacion = models.ForeignKey(Ubicacion, on_delete=models.PROTECT)
     
