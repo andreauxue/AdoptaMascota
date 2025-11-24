@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import TarjetaMascota from "./TarjetaMascota";
 import MensajeCargando from "../components/MensajeCarga";
@@ -70,7 +69,7 @@ export default function ListaMascotas({verTodos, totalCargadas}) {
           id={m.id} 
           nombre={m.nombre}
           especie={m.especie_nombre}
-          genero={m.genero}
+          genero={m.sexo}
           ubicacion={m.ubicacion_abreviatura}
           edad={m.edad_formateada}
           descripcion={m.descripcion}
