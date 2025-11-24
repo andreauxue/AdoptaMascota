@@ -6,6 +6,7 @@ import ListaMascotas from "./components/ListaMascotas";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import RegistrarMascota from "./pages/RegistrarMascota";
+import NotFound from "./pages/NotFound.jsx";
 import { AuthProvider } from "./context/AuthContext";
 
 export default function App() {
@@ -21,6 +22,7 @@ export default function App() {
               <Route path="/register" element={<Register/>}/>
               <Route path="/login" element={<Login/>}/>
               <Route path="/registrar-mascota" element={<RegistrarMascota/>}/>
+              <Route path="*" element={<NotFound/>}/>
             </Routes>
           </main>
           <Footer/>
