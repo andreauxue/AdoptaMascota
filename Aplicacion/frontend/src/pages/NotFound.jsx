@@ -37,7 +37,7 @@ export default function NotFound() {
                     </button>
 
                     <button
-                        onClick={() => window.location.href = '/adoptar'}
+                        onClick={() => window.location.href = '/mascotas'}
                         className="flex items-center gap-2 bg-white hover:bg-gray-50 text-[#127369] font-semibold px-8 py-3 rounded-full border-2 border-[#127369] transition-all transform hover:scale-105"
                     >
                         <FaPaw />
@@ -54,4 +54,5 @@ export default function NotFound() {
             </div>
         </div>
     );
+
 }
