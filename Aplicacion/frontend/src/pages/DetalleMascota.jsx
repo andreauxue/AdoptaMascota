@@ -9,10 +9,12 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import { FaPaw, FaMapMarkerAlt, FaVenusMars, FaHeart, FaSyringe, FaInfoCircle } from 'react-icons/fa';
-import { Cake } from 'lucide-react';
+import { Cake, Smile } from 'lucide-react';
 import MensajeError from '../components/MensajeError';
 import MensajeInformativo from '../components/MensajeInformativo';
 import Boton from '../components/Boton';
+import FeedbackModal from "../components/FeedbackModal";
+import { useNavigate } from 'react-router-dom'; 
 // import luna from "../assets/img/gato1.jpg";
 
 export default function DetalleMascota() {
@@ -21,7 +23,9 @@ export default function DetalleMascota() {
     const [mascota, setMascota] = useState(null);
     const [noExiste, setNoExiste] = useState(false);
     const [error, setError] = useState(null);
-    
+    const [showAdoptModal, setShowAdoptModal] = useState(false);
+    const navigate = useNavigate();
+
     useEffect(() => {
         fetch(`http://127.0.0.1:8000/api/mascotas/${id}`)
             .then(res => {
@@ -71,7 +75,14 @@ export default function DetalleMascota() {
         ? { text: "Macho", icon: <FaVenusMars className="text-azul-fondo" /> } 
         : { text: "Hembra", icon: <FaVenusMars className="text-azul-fondo" /> };
 
+    // Cuando el usuario hace click en "¡Quiero Adoptar!"
+    const handleAdoptarClick = () => {
+        // aquí se puede llamar al backend para registrar la adopción
+        setShowAdoptModal(true);
+    };
+
     return (
+    <>
         <div className="max-w-4xl mx-auto bg-blanco p-8 rounded-xl shadow-2xl border border-gray-200 my-12">
             <h1 className="text-3xl font-bold text-azul-fondo mb-8 border-b pb-4">
                 Conoce más a: <span className="text-verde-grisaseo">{mascota.nombre}</span>
@@ -91,6 +102,7 @@ export default function DetalleMascota() {
                         <Boton 
                             texto="¡Quiero Adoptar!"
                             customClasses="w-full text-base px-4 shadow-lg"
+                            onClick={handleAdoptarClick}
                         />
                     </div>
                 </div>
@@ -139,5 +151,22 @@ export default function DetalleMascota() {
                 </div>
             </div>
         </div>
+
+        <FeedbackModal
+            isOpen={showAdoptModal}
+            title="¡SOLICITUD DE ADOPCIÓN EXITOSA!"
+            message="Te mandaremos las especificaciones al correo registrado en un periodo de 10 días."
+            icon={<Smile size={32} className="text-azul-fondo" />}
+            showButtons={false}
+            centerContent={true}
+            showCloseIcon={true}
+            iconPosition="below"
+            onConfirm={() => {
+                setShowAdoptModal(false);
+                navigate("/muro");
+            }}
+        />
+    </>
+
     );
 }

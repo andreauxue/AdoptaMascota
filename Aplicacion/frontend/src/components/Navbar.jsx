@@ -8,6 +8,7 @@ import React, { useState } from 'react';
 import logo from "../assets/img/LOGO.png";
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from "../context/AuthContext";
+import FeedbackModal from "../components/FeedbackModal";
 
 export default function Navbar() {
     const navigate = useNavigate();
@@ -126,33 +127,16 @@ export default function Navbar() {
                 )}
             </ul>
 
-            {/* Modal */}
-            {showLogoutModal && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-                    <div className="bg-blanco p-6 rounded-lg shadow-xl w-full max-w-sm">
-                        <h3 className="text-xl font-bold text-azul-fondo mb-4">Confirmar Cierre de Sesión</h3>
-                        <p className="text-azul-fondo/80 mb-6">
-                            ¿Estás seguro que deseas cerrar la sesión?
-                        </p>
-
-                        <div className="flex justify-end gap-4">
-                            <button
-                                onClick={() => setShowLogoutModal(false)}
-                                className="px-4 py-2 border border-verde-grisaseo text-azul-fondo rounded-lg hover:bg-verde-grisaseo/50 transition"
-                            >
-                                Cancelar
-                            </button>
-
-                            <button
-                                onClick={handleConfirmLogout}
-                                className="px-4 py-2 bg-durazno text-azul-fondo rounded-lg font-semibold hover:bg-durazno/80 transition"
-                            >
-                                Sí, Cerrar Sesión
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            )}
+            <FeedbackModal
+                isOpen={showLogoutModal}
+                title="Confirmar Cierre de Sesión"
+                message="¿Estás seguro que deseas cerrar sesión? Serás redirigido a la página de inicio."
+                showCancel={true}
+                cancelText="Cancelar"
+                confirmText="Sí, Cerrar Sesión"
+                onCancel={() => setShowLogoutModal(false)}
+                onConfirm={handleConfirmLogout}
+            />
         </nav>
     );
 }

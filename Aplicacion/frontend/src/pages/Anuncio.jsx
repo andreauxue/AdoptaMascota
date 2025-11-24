@@ -8,7 +8,8 @@ import { useState } from "react";
 // Importar useNavigate para la redirección
 import { useNavigate } from 'react-router-dom'; 
 import { FaPaw, FaVenusMars, FaCalendar, FaInfoCircle, FaMapMarkerAlt, FaUpload } from 'react-icons/fa'; 
-import { MapPin } from 'lucide-react'; 
+import { MapPin, Smile } from 'lucide-react'; 
+import FeedbackModal from "../components/FeedbackModal";
 
 /**
  * Componente funcional Anuncio.
@@ -56,11 +57,11 @@ export default function Anuncio() {
         // --- Simulación de envío de datos al backend (retraso de 2s) ---
         await new Promise(resolve => setTimeout(resolve, 2000));
         setIsLoading(false);
-        alert("Mascota registrada exitosamente (simulación)");
-        
-        // 2. Redirección al Muro de Mascotas después del éxito
-        navigate('/muro');
+
+        setShowPublishModal(true);
     };
+
+    const [showPublishModal, setShowPublishModal] = useState(false);
 
     return (
         <div className="min-h-screen flex items-center justify-center p-4 bg-verde-grisaseo">
@@ -224,6 +225,21 @@ export default function Anuncio() {
                     )}
                 </button>
             </form>
+
+            <FeedbackModal
+                isOpen={showPublishModal}
+                title="¡Se ha publicado con éxito!"
+                message=""
+                icon={<Smile size={32} className="text-azul-fondo" />}
+                showButtons={false}        
+                centerContent={true}      
+                showCloseIcon={true}
+                iconPosition="below"       
+                onConfirm={() => {
+                    setShowPublishModal(false);
+                    navigate("/muro");
+                }}
+            />
         </div>
     );
 }
