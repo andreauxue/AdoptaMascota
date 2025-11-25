@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import TarjetaMascota from "../components/TarjetaMascota";
 
 import angel from "../assets/angel.png";
@@ -12,6 +13,27 @@ import paco from "../assets/paco.png";
 import peluche from "../assets/peluche.png";
 
 export default function Home() {
+
+  const [mascotasApi, setMascotasApi] = useState([]);
+  const [cargando, setCargando] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    async function cargarMascotas() {
+      try {
+        const res = await fetch("/api/mascotas/");
+        if (!res.ok) throw new Error("No se pudieron cargar las mascotas.");
+        const data = await res.json();
+        setMascotasApi(data);
+      } catch (e) {
+        setError(e.message);
+      } finally {
+        setCargando(false);
+      }
+    }
+    cargarMascotas();
+  }, []);
+
   return (
     <div className="min-h-screen p-6 bg-[#FFE6EC]">
 
@@ -92,6 +114,24 @@ export default function Home() {
           tipo="Perro" 
           info="Macho • 1 año" 
         />
+
+        {cargando && <p>Cargando mascotas desde la API...</p>}
+        {error && <p className="text-red-600">{error}</p>}
+
+        {mascotasApi.length > 0 && (
+          <div className="mt-6 bg-white rounded-2xl p-4 shadow-md">
+            <h2 className="text-lg font-bold mb-2">
+              Mascotas cargadas desde la base de datos
+            </h2>
+            <ul className="list-disc list-inside">
+              {mascotasApi.map((m) => (
+                <li key={m.id}>
+                  {m.nombre} — {m.edad} años
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
 
       </div>
     </div>

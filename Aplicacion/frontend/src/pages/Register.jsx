@@ -34,14 +34,20 @@ export default function Register() {
         throw new Error("Las contraseñas no coinciden.");
 
       await new Promise((r) => setTimeout(r, 350));
-      register(formData);
-      nav("/galeria", { replace: true });
+
+      const user = await register(formData);
+
+      nav("/galeria", {
+        replace: true,
+        state: { welcome: `¡Hola, ${user?.name || "amigo"}!` },
+      });
     } catch (e) {
-      setErr(e.message);
+      setErr(e.message || "Ocurrió un error al registrarte.");
     } finally {
       setLoading(false);
     }
   };
+
 
   return (
     <div className="min-h-screen p-6 bg-[#FFE6EC] flex justify-center items-center">
