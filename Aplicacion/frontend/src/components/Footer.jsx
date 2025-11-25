@@ -35,11 +35,11 @@ export default function Footer() {
                     <h4 className="font-semibold text-white mb-2">Redes sociales</h4>
                     <div className="flex gap-4">
                         {/* Imágen de Facebook */}
-                        <a href="https://www.facebook.com/p/AdoptaMx-100071067540611/" ><img src={facebookImg} alt="Icono" className="w-8 h-8 rounded-md hover:scale-105 transition-transform duration-300 cursor-pointer" /></a>
+                        <a href="https://www.facebook.com/p/AdoptaMx-100071067540611/" target="_blank"><img src={facebookImg} alt="Icono" className="w-8 h-8 rounded-md hover:scale-105 transition-transform duration-300 cursor-pointer" /></a>
                         {/* Imágen de Instagram */}
-                        <a href="https://www.instagram.com/adopta.mx/?hl=es"><img src={instaImg} alt="Icono" className="w-8 h-8 rounded-md hover:scale-105 transition-transform duration-300 cursor-pointer" /></a>
+                        <a href="https://www.instagram.com/adopta.mx/?hl=es" target="_blank"><img src={instaImg} alt="Icono" className="w-8 h-8 rounded-md hover:scale-105 transition-transform duration-300 cursor-pointer" /></a>
                         {/* Imágen de twitter (o X pues) */}
-                        <a href="https://x.com/mx_adopta?lang=es"><img src={xImg} alt="Icono" className="w-8 h-8 rounded-md hover:scale-105 transition-transform duration-300 cursor-pointer" /></a>
+                        <a href="https://x.com/mx_adopta?lang=es" target="_blank"><img src={xImg} alt="Icono" className="w-8 h-8 rounded-md hover:scale-105 transition-transform duration-300 cursor-pointer" /></a>
                     </div>
                 </div>
 
