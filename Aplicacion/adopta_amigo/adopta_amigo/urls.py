@@ -28,15 +28,17 @@ router.register(r'mascotas', MascotaViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
-    # Rutas para registro, token y login
+    
+    # Rutas de autenticación
     path('api/register/', mascotas_views.register_user, name='register'),
     path('api/get-csrf/', mascotas_views.get_csrf_token, name='get_csrf_token'),
     path('api/login/', mascotas_views.login_view, name='login'),
+    
+    # Ruta de Logout
+    path('api/logout/', mascotas_views.logout_view, name='logout'), 
+    
     path('api/check-session/', mascotas_views.check_session, name='check_session'),
-
     path('api/registrar-mascota/', mascotas_views.registrar_mascota, name='registrar_mascota'),
-    path('mascotas/', mascotas_views.listar_mascotas, name='lista_mascotas'),
-
 ]
 
 if settings.DEBUG:

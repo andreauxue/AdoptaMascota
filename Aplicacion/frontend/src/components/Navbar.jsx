@@ -18,7 +18,7 @@ export default function Navbar() {
     //Para rederigor despues de hacer el logout
     const navigate = useNavigate();
 
-    const linkStyle = "flex items-center gap-2 px-4 py-2 rounded-md bg-[#10403B] hover:bg-[#243B55] transition-all duration-300 text-white font-medium cursor-pointer hover:shadow-[0_0_15px_rgba(255,255,255,0.3)] hover:ring-2 hover:ring-white/50 hover:-translate-y-1 hover:scale-105 active:scale-95 active:translate-y-0 font-belleza";
+    const linkStyle = "w-full lg:w-auto flex items-center gap-2 px-4 py-2 rounded-md bg-[#10403B] hover:bg-[#243B55] transition-all duration-300 text-white font-medium cursor-pointer hover:shadow-[0_0_15px_rgba(255,255,255,0.3)] hover:ring-2 hover:ring-white/50 hover:-translate-y-1 hover:scale-105 active:scale-95 active:translate-y-0 font-belleza";
 
     //Manejo de logout
     const handleLogout = async () => {
@@ -26,6 +26,7 @@ export default function Navbar() {
         setIsOpen(false);
         navigate("/");
     };
+
     return (
         <nav className="bg-[#127369] text-white px-4 lg:px-8 py-4 flex flex-wrap justify-between items-center shadow-lg">
 
@@ -88,7 +89,7 @@ export default function Navbar() {
                     )}
                     {/* si hay una sesion abierta se muestra el boton de logout */}
                     {user && (
-                        <li>
+                        <li className="w-full lg:w-auto">
                             <button
                                 onClick={handleLogout}
                                 className={linkStyle}

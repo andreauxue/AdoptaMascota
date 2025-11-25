@@ -2,9 +2,18 @@ import { useState, useEffect } from "react";
 import { FaFileImage, FaPaw, FaMapMarkerAlt, FaBirthdayCake, FaVenusMars } from 'react-icons/fa';
 import { api } from "../apiService";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 export default function RegistrarMascota() {
     const navigate = useNavigate();
+    const { user } = useAuth(); // Obtenemos el usuario
+
+    // Si no hay usuario logueado, redirigir al inicio inmediatamente
+    useEffect(() => {
+        if (!user) {
+            navigate("/");
+        }
+    }, [user, navigate]);
 
     const [formData, setFormData] = useState({
         nombre: "",
@@ -18,10 +27,16 @@ export default function RegistrarMascota() {
     const [imagePreview, setImagePreview] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [focusedField, setFocusedField] = useState(null);
+    
+    // Estado para mensajes de error en el formulario
+    const [formError, setFormError] = useState(null);
+
     const maxDescriptionLength = 500;
 
-    const handleChange = (e) =>
+    const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
+        setFormError(null);
+    }
 
     const handleImageChange = (e) => {
         const file = e.target.files[0];
@@ -29,6 +44,7 @@ export default function RegistrarMascota() {
             setFormData({ ...formData, imagen: file });
             if (imagePreview) URL.revokeObjectURL(imagePreview);
             setImagePreview(URL.createObjectURL(file));
+            setFormError(null);
         }
     };
 
@@ -44,7 +60,20 @@ export default function RegistrarMascota() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setFormError(null);
         setIsLoading(true);
+
+        if (!formData.nombre.trim() || !formData.edad.trim() || !formData.ubicacion.trim() || !formData.descripcion.trim()) {
+            setFormError("Por favor, completa todos los campos de texto.");
+            setIsLoading(false);
+            return;
+        }
+
+        if (!formData.imagen) {
+            setFormError("Es obligatorio subir una imagen de la mascota.");
+            setIsLoading(false);
+            return;
+        }
 
         try {
             const data = new FormData();
@@ -56,18 +85,20 @@ export default function RegistrarMascota() {
             data.append("genero", formData.genero);
             data.append("imagen", formData.imagen);
 
-            const response = await api.post("api/registrar-mascota/", data);
+            await api.post("api/registrar-mascota/", data);
 
             alert("Mascota registrada con éxito.");
             navigate("/mascotas");
         }
         catch (error){
             console.error("Error al registrar la mascota:", error);
-            alert("Hubo un error al registrar la mascota. Por favor, intenta de nuevo.");
+            setFormError("Hubo un error al registrar la mascota. Intenta de nuevo.");
         }
 
         setIsLoading(false);
     };
+
+    if (!user) return null;
 
     // Estilos
     const inputStyle = "w-full px-4 py-3 pl-12 bg-white border border-gray-300 rounded-md focus:ring-2 focus:ring-[#127369] focus:border-[#127369] focus:outline-none transition-all duration-300 hover:border-[#127369]/50";
@@ -86,6 +117,13 @@ export default function RegistrarMascota() {
                 <h3 className="text-xl text-[#243B55] text-center mb-6 drop-shadow-sm font-aclonica">
                     Rellena el formulario
                 </h3>
+                
+                {/* Mensajes de error*/}
+                {formError && (
+                    <div className="mb-6 p-3 bg-red-100 border-l-4 border-red-500 text-red-700 rounded shadow-sm">
+                        <p className="font-medium">{formError}</p>
+                    </div>
+                )}
 
                 <div className="space-y-5">
 
@@ -101,7 +139,6 @@ export default function RegistrarMascota() {
                             onChange={handleChange}
                             onFocus={() => setFocusedField('nombre')}
                             onBlur={() => setFocusedField(null)}
-                            required
                             className={inputStyle}
                         />
                     </div>
@@ -118,7 +155,6 @@ export default function RegistrarMascota() {
                             onChange={handleChange}
                             onFocus={() => setFocusedField('edad')}
                             onBlur={() => setFocusedField(null)}
-                            required
                             className={inputStyle}
                         />
                     </div>
@@ -135,7 +171,6 @@ export default function RegistrarMascota() {
                             onChange={handleChange}
                             onFocus={() => setFocusedField('ubicacion')}
                             onBlur={() => setFocusedField(null)}
-                            required
                             className={inputStyle}
                         />
                     </div>
@@ -194,7 +229,7 @@ export default function RegistrarMascota() {
                         </div>
                     </div>
 
-                    {/* Input de Imagen mejorado */}
+                    {/* Input de Imagen */}
                     <label className={`${inputStyle} flex items-center gap-3 cursor-pointer hover:bg-gradient-to-r hover:from-[#127369]/5 hover:to-[#243B55]/5 group`}>
                         <FaFileImage className="text-[#127369] text-2xl group-hover:scale-110 transition-transform duration-300"/>
                         <span className="text-[#243B55] font-medium">
@@ -209,7 +244,7 @@ export default function RegistrarMascota() {
                         />
                     </label>
 
-                    {/* Previsualización mejorada */}
+                    {/* Previsualización*/}
                     {imagePreview && (
                         <div className="relative group">
                             <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-md pointer-events-none z-10"></div>

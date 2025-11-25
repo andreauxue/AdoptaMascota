@@ -13,7 +13,7 @@ class MascotaViewSet(viewsets.ModelViewSet):
     queryset = Mascota.objects.all()
     serializer_class = MascotaSerializer
         
-# Vista para el registro
+# Vista para el registro de usuarios
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def register_user(request):
@@ -40,7 +40,6 @@ def login_view(request):
 
     # Verificamos si el usuario existe
     if not User.objects.filter(username=username).exists():
-        # Enviamos mensje para que apiService lo capture
         return Response({
             'success': False,
             'message': 'Este usuario no existe'
@@ -64,6 +63,13 @@ def login_view(request):
             'message': 'Contraseña incorrecta'
         }, status=status.HTTP_401_UNAUTHORIZED)
 
+# Vista para cerrar sesión
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def logout_view(request):
+    logout(request)
+    return Response({'success': True, 'message': 'Sesión cerrada exitosamente'}, status=status.HTTP_200_OK)
+
 # Vista para verificar la sesión
 @api_view(['GET'])
 @permission_classes([AllowAny])
@@ -85,15 +91,15 @@ def check_session(request):
 def get_csrf_token(request):
     return Response({'success': 'CSRF cookie set'}, status=status.HTTP_200_OK)
 
-#vista para registro de mascotas
+# Vista para registrar una mascota
 @api_view(['POST'])
-@permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated]) 
 def registrar_mascota(request):
     data = request.data
 
-    print("Datos recibidos",data)
+    print("Datos recibidos", data)
 
-    # validamos campos básicos
+    # Validamos campos básicos
     required_fields=['nombre', 'descripcion', 'edad']
     for field in required_fields:
         if field not in data:
@@ -101,6 +107,7 @@ def registrar_mascota(request):
                 {'error': f'El campo {field} es requerido.'}, 
                 status=status.HTTP_400_BAD_REQUEST
             )
+    
     imagen = request.FILES.get('imagen')
     if not imagen:
         return Response(
@@ -111,6 +118,13 @@ def registrar_mascota(request):
     from .models import Especie
     especie_default = Especie.objects.first()
 
+    if request.user.is_authenticated:
+        publicador_usuario = request.user
+    else:
+        publicador_usuario = User.objects.first()
+        if not publicador_usuario:
+             return Response({'error': 'No hay usuarios en el sistema para asignar la mascota.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
     mascota = Mascota.objects.create(
         nombre = data.get('nombre'),
         descripcion = data.get('descripcion'),
@@ -118,7 +132,7 @@ def registrar_mascota(request):
         imagen= imagen,
         especie = especie_default,
         vacunado = False,
-        publicador = request.user,
+        publicador = publicador_usuario,
         genero = data.get('genero', 'Desconocido'),
         ubicacion = data.get('ubicacion', 'Desconocida') 
     )
@@ -126,7 +140,9 @@ def registrar_mascota(request):
     serializer = MascotaSerializer(mascota)
     return Response(serializer.data, status = status.HTTP_201_CREATED)
 
+# Vista para listar todas las mascotas
 @api_view(['GET'])
+@permission_classes([AllowAny])
 def listar_mascotas(request):
     mascotas = Mascota.objects.all()
     serializer = MascotaSerializer(mascotas, many=True)

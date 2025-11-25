@@ -1,6 +1,12 @@
 # Pasos para correr el Backend
 
-La primera vez que corras el Backend, debes estar dentro de la carpeta Aplicacion. Una vez ahí, elimina la carpeta `venv`:
+La primera vez que corras el Backend, debes estar dentro de la carpeta Aplicacion. 
+
+```bash
+cd Aplicacion
+```
+
+Una vez ahí, elimina la carpeta `venv`:
 
 - En Windows (CMD)
     ```bash
