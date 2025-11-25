@@ -1,16 +1,18 @@
 /**
  * @fileoverview Componente de Página Home.
  * Página de aterrizaje principal para usuarios no autenticados (Landing Page).
- * @version 1.0.1
+ * @version 1.0.2
  * @author Equipo Slytherin
  */
 
 import Boton from "../components/Boton";
 import { useNavigate } from "react-router-dom";
 import imgHome from "../assets/img/imagenInicio2.png"; 
+import { useAuth } from "../context/AuthContext";
 
 export default function Home() {
     const navigate = useNavigate();
+    const { isAuthenticated } = useAuth();
 
     return (
         // Contenedor principal
@@ -37,30 +39,42 @@ export default function Home() {
                     </p>
 
                     {/* Contenedor de Autenticación */}
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mt-10">
-                        <Boton 
-                            texto="Iniciar Sesión" 
-                            onClick={() => navigate("/login")}
-                            color="bg-azul-fondo hover:bg-azul-fondo/80 text-blanco"
-                            className="text-lg py-3 px-8" 
-                        />
-                        <Boton 
-                            texto="Registrate" 
-                            onClick={() => navigate("/register")}
-                            color="bg-durazno hover:bg-durazno/80 text-azul-fondo"
-                            className="text-lg py-3 px-8" 
-                        />
-                    </div>
+                    {!isAuthenticated ? (
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mt-10">
+                            <Boton 
+                                texto="Iniciar Sesión" 
+                                onClick={() => navigate("/login")}  
+                                color="bg-azul-fondo hover:bg-azul-fondo/80 text-blanco"
+                                className="text-lg py-3 px-8" 
+                            />
+                            <Boton 
+                                texto="Registrate" 
+                                onClick={() => navigate("/register")}
+                                color="bg-durazno hover:bg-durazno/80 text-azul-fondo"
+                                className="text-lg py-3 px-8" 
+                            />
+                        </div>
+                    ) : (
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mt-10">
+                            <Boton 
+                                texto="Muro de las Mascotas" 
+                                onClick={() => navigate("/muro")}
+                                color="bg-azul-fondo hover:bg-azul-fondo/80 text-blanco"
+                                className="text-lg py-3 px-8" 
+                            />
+                        </div>
+                    )}
                     
-                    {/* Enlace de Navegación Rápida al Muro de Mascotas*/}
-                    <div className="mt-6 text-center lg:text-left">
-                        <button 
-                            className="font-medium font-serif text-azul-fondo text-xl underline hover:text-verde-grisaseo transition-colors py-2"
-                            onClick={() => navigate("/muro")} 
-                        >
-                           Muro de las Mascotas
-                        </button>
-                    </div>
+                    {!isAuthenticated && (
+                        <div className="mt-6 text-center lg:text-left">
+                            <button 
+                                className="font-medium font-serif text-azul-fondo text-xl underline hover:text-verde-grisaseo transition-colors py-2"
+                                onClick={() => navigate("/muro")} 
+                            >
+                            Muro de las Mascotas
+                            </button>
+                        </div>
+                    )}
                     
                 </div>
 
