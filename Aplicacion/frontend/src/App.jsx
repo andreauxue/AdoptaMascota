@@ -8,6 +8,7 @@ import Register from "./pages/Register";
 import MuroMascotas from "./pages/MuroMascotas";
 import Anuncio from "./pages/Anuncio";
 import DetalleMascota from "./pages/DetalleMascota";
+import EditProfile from "./pages/EditProfile";
 
 function AppContent() {
     const location = useLocation();
@@ -34,6 +35,7 @@ function AppContent() {
                 <Route path="/mascotas" element={<ListaMascotas/>}/>
                 <Route path="/publicar" element={<Anuncio />} />
                 <Route path="/mascota/:id" element={<DetalleMascota />} />
+                <Route path="/perfil" element={<EditProfile />} />
               </Routes>
             </main>
             <Footer/>
