@@ -37,3 +37,8 @@ Aplicacion/adopta_amigo/media/
 # Django migrations cache
 *.pyc
 
+venv/
+env/
+.venv/
+venvpython/
+
