@@ -38,6 +38,13 @@ export default function ListaMascotas() {
     }
   };
 
+  // Para cuando se da clic en Adoptar mascota sin iniciar sesión
+  const handleAdoptarClick = () => {
+    if (!user) {
+      setShowModal(true);
+    }
+  };
+
   const modalButtonStyle = "w-full flex items-center justify-center gap-2 px-4 py-3 rounded-md bg-[#10403B] hover:bg-[#243B55] transition-all duration-300 text-white font-medium cursor-pointer hover:shadow-[0_0_15px_rgba(255,255,255,0.3)] hover:ring-2 hover:ring-white/50 hover:-translate-y-1 hover:scale-105 active:scale-95 active:translate-y-0 font-belleza";
 
   return (
@@ -70,6 +77,7 @@ export default function ListaMascotas() {
                   imagen={m.imagen}
                   genero={m.genero}
                   ubicacion={m.ubicacion}
+                  onAdoptarClick={handleAdoptarClick}
                 />
               </div>
             </div>
@@ -109,7 +117,7 @@ export default function ListaMascotas() {
                 ¡Necesitas una cuenta!
               </h2>
               <p className="text-gray-600 mb-8 font-belleza text-lg leading-relaxed">
-                Para poder registrar una mascota en nuestra plataforma y ayudarla a encontrar un hogar, es necesario que tengas una cuenta registrada.
+                Para poder adoptar o registrar una mascota y ayudarla a encontrar un hogar, es necesario que tengas una cuenta registrada.
               </p>
 
               <div className="flex flex-col gap-4">
