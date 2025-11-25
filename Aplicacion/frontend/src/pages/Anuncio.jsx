@@ -7,7 +7,7 @@
 import { useState } from "react";
 // Importar useNavigate para la redirección
 import { useNavigate } from 'react-router-dom'; 
-import { FaPaw, FaVenusMars, FaCalendar, FaInfoCircle, FaMapMarkerAlt, FaUpload } from 'react-icons/fa'; 
+import { FaPaw, FaVenusMars, FaCalendar, FaInfoCircle, FaUpload } from 'react-icons/fa'; 
 import { MapPin, Smile } from 'lucide-react'; 
 import FeedbackModal from "../components/FeedbackModal";
 
@@ -73,58 +73,19 @@ export default function Anuncio() {
 
             //  Construir FormData con los campos que el backend espera
             const data = new FormData();
-                data.append("nombre", formData.nombre);
-                data.append("edad_meses", formData.edad);
-                data.append("descripcion", formData.descripcion);
-                data.append("vacunado", formData.vacunado ? "true" : "false");
-                data.append("sexo", formData.sexo);
-                //  Convertir texto de ubicación a ID esperado por el backend
-                const ubicacionTexto = formData.ubicacion.trim().toLowerCase();
-                let ubicacionId = null;
-                const ubicacionesMap = {
-                    "ciudad de méxico": 1,
-                    "cdmx": 1,
-                    "estado de méxico": 2,
-                    "edomex": 2,
-                    "jalisco": 3,
-                    "jal": 3,
-                    "nuevo león": 4,
-                    "nl": 4,
-                    "puebla": 5,
-                    "pue": 5,
-                    "querétaro": 6,
-                    "qro": 6,
-                    "morelos": 7,
-                    "mor": 7,
-                    "baja california": 8,
-                    "bc": 8,
-                    "guanajuato": 9,
-                    "gto": 9,
-                    "yucatán": 10,
-                    "yuc": 10,
-                };
+            data.append("nombre", formData.nombre);
+            data.append("edad_meses", formData.edad);
+            data.append("descripcion", formData.descripcion);
+            data.append("vacunado", formData.vacunado ? "true" : "false");
+            data.append("sexo", formData.sexo);
+            
+            // Enviamos directamente el ID seleccionado en el dropdown
+            data.append("ubicacion", formData.ubicacion);
+            data.append("especie", formData.especie);
 
-                // Buscar el ID según el texto
-                ubicacionId = ubicacionesMap[ubicacionTexto];
-
-                // Validar
-                if (!ubicacionId) {
-                alert("Ubicación no válida. Debe ser un estado existente.");
-                setIsLoading(false);
-                return;
-                }
-
-        data.append("ubicacion", ubicacionId);
-                if (formData.imagen) {
-                    data.append("imagen", formData.imagen);
-                }
-            const especieTexto = formData.especie.trim().toLowerCase();
-            let especieId;
-            if (especieTexto === "perro") especieId = 2;
-            else if (especieTexto === "gato") especieId = 3;
-            else if (especieTexto === "hamster" || especieTexto === "hámster") especieId = 1;
-
-            data.append("especie", especieId);
+            if (formData.imagen) {
+                data.append("imagen", formData.imagen);
+            }
 
             // Enviar POST al backend
             const response = await fetch("http://127.0.0.1:8000/api/mascotas/", {
@@ -225,14 +186,18 @@ export default function Anuncio() {
                         {/* Especie */}
                         <div className="relative">
                             <FaPaw className="absolute inset-y-0 left-0 pl-3 flex items-center text-verde-grisaseo" />
-                            <input
+                            <select
                                 name="especie"
-                                placeholder="Especie (Ej: Perro, Gato, Erizo)"
                                 value={formData.especie}
                                 onChange={handleChange}
                                 required
-                                className="w-full pl-10 pr-4 py-3 border border-verde-grisaseo rounded-xl focus:ring-2 focus:ring-durazno focus:border-durazno transition-all duration-200 text-azul-fondo bg-blanco"
-                            />
+                                className="w-full pl-10 pr-4 py-3 border border-verde-grisaseo rounded-xl focus:ring-2 focus:ring-durazno focus:border-durazno transition-all duration-200 bg-blanco appearance-none text-azul-fondo"
+                            >
+                                <option value="" disabled>Selecciona Especie</option>
+                                <option value="2">Perro</option>
+                                <option value="3">Gato</option>
+                                <option value="1">Hámster</option>
+                            </select>
                         </div>
 
                         {/* Edad */}
@@ -269,14 +234,25 @@ export default function Anuncio() {
                         {/* Ubicación */}
                         <div className="relative">
                             <MapPin size={20} className="absolute inset-y-0 left-0 pl-3 flex items-center text-verde-grisaseo mt-2.5" />
-                            <input
+                            <select
                                 name="ubicacion"
-                                placeholder="Ubicación (Ciudad/Estado)"
                                 value={formData.ubicacion}
                                 onChange={handleChange}
                                 required
-                                className="w-full pl-10 pr-4 py-3 border border-verde-grisaseo rounded-xl focus:ring-2 focus:ring-durazno focus:border-durazno transition-all duration-200 text-azul-fondo bg-blanco"
-                            />
+                                className="w-full pl-10 pr-4 py-3 border border-verde-grisaseo rounded-xl focus:ring-2 focus:ring-durazno focus:border-durazno transition-all duration-200 bg-blanco appearance-none text-azul-fondo"
+                            >
+                                <option value="" disabled>Selecciona Ubicación</option>
+                                <option value="1">Ciudad de México (CDMX)</option>
+                                <option value="2">Estado de México</option>
+                                <option value="3">Jalisco</option>
+                                <option value="4">Nuevo León</option>
+                                <option value="5">Puebla</option>
+                                <option value="6">Querétaro</option>
+                                <option value="7">Morelos</option>
+                                <option value="8">Baja California</option>
+                                <option value="9">Guanajuato</option>
+                                <option value="10">Yucatán</option>
+                            </select>
                         </div>
 
                         {/* Vacunado Checkbox */}
