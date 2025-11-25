@@ -12,7 +12,7 @@ export default function TarjetaMascota({
     const serieDeDatos = `${edad} · ${genero} · ${ubicacion}`;
 
     return (
-        <div className="w-full bg-[#FFFFFF] rounded-lg shadow-md flex flex-col md:flex-row items-center p-4 gap-4 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+        <div className="w-full bg-white rounded-lg shadow-md flex flex-col md:flex-row items-center p-4 gap-4 transition-all duration-300 hover:shadow-xl">
             
             {/* Imagen */}
             <img
