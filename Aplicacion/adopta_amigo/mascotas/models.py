@@ -7,17 +7,40 @@ class Especie(models.Model):
     
     def __str__(self):
         return self.nombre
+
+class Genero(models.Model):
+    # VARCHAR(50)
+    nombre = models.CharField(max_length=50) 
     
+    def __str__(self):
+        return self.nombre
+    
+class Energia(models.Model):
+    # VARCHAR(50)
+    nombre = models.CharField(max_length=50) 
+    
+    def __str__(self):
+        return self.nombre
+    
+class Tamanio(models.Model):
+    # VARCHAR(50)
+    nombre = models.CharField(max_length=50) 
+    
+    def __str__(self):
+        return self.nombre
 class Mascota(models.Model):
     nombre = models.CharField(max_length=100) 
-    descripcion = models.TextField()
     edad = models.PositiveIntegerField()
-    vacunado = models.BooleanField(default=False)
-    fecha_reporte = models.DateField(auto_now_add=True)
-    imagen = models.ImageField(upload_to='mascotas/')
-    
     especie = models.ForeignKey(Especie, on_delete=models.CASCADE)
+    genero = models.ForeignKey(Genero, on_delete=models.CASCADE, null=True, blank=True)
+    tamanio = models.ForeignKey(Tamanio, on_delete=models.CASCADE, null=True, blank=True)
+    vacunado = models.BooleanField(default=False)
+    esterilizado = models.BooleanField(default=False)
+    energia = models.ForeignKey(Energia, on_delete=models.CASCADE, null=True, blank=True)
+    descripcion = models.TextField()
+    imagen = models.ImageField(upload_to='mascotas/')
     publicador = models.ForeignKey(User, on_delete=models.CASCADE)
+    fecha_reporte = models.DateField(auto_now_add=True)
     
     def __str__(self):
         return self.nombre
