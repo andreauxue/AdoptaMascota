@@ -1,5 +1,8 @@
 from django.db import models
 from django.conf import settings 
+from django.contrib.auth import get_user_model
+
+Usuario = get_user_model()
 
 class Especie(models.Model):
     # VARCHAR(50)
@@ -18,7 +21,14 @@ class Mascota(models.Model):
     
     especie = models.ForeignKey(Especie, on_delete=models.CASCADE)
     publicador = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    
+    adoptada = models.BooleanField(default=False)
+    adoptante = models.ForeignKey(
+        Usuario,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="adopciones"
+    )
     def __str__(self):
         return self.nombre
     
