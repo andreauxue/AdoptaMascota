@@ -16,6 +16,7 @@ import Boton from '../components/Boton';
 import FeedbackModal from "../components/FeedbackModal";
 import { useNavigate } from 'react-router-dom'; 
 // import luna from "../assets/img/gato1.jpg";
+import { useAuth } from "../context/AuthContext";
 
 export default function DetalleMascota() {
     // Captura el ID de la mascota de la URL
@@ -25,6 +26,7 @@ export default function DetalleMascota() {
     const [error, setError] = useState(null);
     const [showAdoptModal, setShowAdoptModal] = useState(false);
     const navigate = useNavigate();
+        const { isAuthenticated } = useAuth();
 
     useEffect(() => {
         fetch(`http://127.0.0.1:8000/api/mascotas/${id}`)
@@ -77,7 +79,12 @@ export default function DetalleMascota() {
 
     // Cuando el usuario hace click en "¡Quiero Adoptar!"
     const handleAdoptarClick = () => {
-        // aquí se puede llamar al backend para registrar la adopción
+        if (!isAuthenticated) {
+            navigate("/login");
+            return;
+        }
+
+        // Si sí está logueado, mostrar modal de éxito
         setShowAdoptModal(true);
     };
 
