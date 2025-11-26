@@ -71,9 +71,9 @@ export default function DetalleMascota() {
         : { text: "No", color: "text-durazno" };
 
     // Estilo para el género
-    const generoInfo = mascota.genero === 'macho' 
-        ? { text: "Macho", icon: <FaVenusMars className="text-azul-fondo" /> } 
-        : { text: "Hembra", icon: <FaVenusMars className="text-azul-fondo" /> };
+    const generoInfo = mascota.sexo === 'macho'
+    ? { text: "Macho", icon: <FaVenusMars className="text-azul-fondo" /> }
+    : { text: "Hembra", icon: <FaVenusMars className="text-azul-fondo" /> };
 
     // Cuando el usuario hace click en "¡Quiero Adoptar!"
     const handleAdoptarClick = () => {
