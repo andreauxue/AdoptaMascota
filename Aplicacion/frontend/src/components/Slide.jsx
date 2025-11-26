@@ -5,55 +5,34 @@ import perro2 from "../assets/img/adoptame-perro.jpg";
 import perro3 from "../assets/img/imagenHome.jpg";
 
 const imagenes = [perro1, perro2, perro3];
-const extendidas = [...imagenes, imagenes[0]]; 
-
 export default function CarruselMascotas({className}) {
   const [indice, setIndice] = useState(0);
-  const [conTransicion, setConTransicion] = useState(true);
 
   useEffect(() => {
     const intervalo = setInterval(() => {
-      setIndice((prev) => prev + 1);
-      setConTransicion(true);
+      setIndice((prev) => (prev + 1) % imagenes.length);
     }, 4000);
 
     return () => clearInterval(intervalo);
   }, []);
 
-  const handleTransitionEnd = () => {
-    if (indice === imagenes.length) {
-      setConTransicion(false);
-      setIndice(0);
-    }
-  };
-
-  useEffect(() => {
-    if (!conTransicion) {
-      const id = requestAnimationFrame(() => setConTransicion(true));
-      return () => cancelAnimationFrame(id);
-    }
-  }, [conTransicion]);
-
   return (
     <div className="flex justify-center">
       <div
         className={`relative overflow-hidden bg-verde-grisaseo/30 rounded-3xl p-0 aspect-[4/3] shadow-inner ${className}`}
-      >
-        {/* Carril de slides */}
+      > {/* Carril de slides */}
         <div
-          className="flex h-full"
+          className="flex h-full transition-transform duration-1000 ease-in-out"
           style={{
-            width: `${extendidas.length * 100}%`,
-            transform: `translateX(-${indice * (100 / extendidas.length)}%)`,
-            transition: conTransicion ? "transform 0.8s ease-in-out" : "none",
+            width: `${imagenes.length * 100}%`,
+            transform: `translateX(-${indice * (100 / imagenes.length)}%)`,
           }}
-          onTransitionEnd={handleTransitionEnd}
         >
-          {extendidas.map((img, i) => (
+          {imagenes.map((img, i) => (
             <div
               key={i}
               className="flex-shrink-0 w-full h-full flex items-center justify-center"
-              style={{ width: `${100 / extendidas.length}%` }}
+              style={{ width: `${100 / imagenes.length}%` }}
             >
               <img
                 src={img}
