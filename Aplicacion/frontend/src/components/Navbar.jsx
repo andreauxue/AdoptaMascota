@@ -9,14 +9,19 @@ import logo from "../assets/img/LOGO.png";
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from "../context/AuthContext";
 import FeedbackModal from "../components/FeedbackModal";
+import { useBusqueda } from "../context/BusquedaContext";
 
 export default function Navbar() {
     const navigate = useNavigate();
     const { isAuthenticated, logout } = useAuth();
+    const { setTerminoBusqueda } = useBusqueda();
 
     const [showLogoutModal, setShowLogoutModal] = useState(false);
 
-    const handleLogoClick = () => navigate('/');
+    const handleLogoClick = () => {
+        setTerminoBusqueda(""); 
+        navigate('/');
+    };
 
     const handleConfirmLogout = async () => {
         await logout();
@@ -24,13 +29,21 @@ export default function Navbar() {
         navigate('/');
     };
 
+    const handleSearchChange = (e) => {
+        setTerminoBusqueda(e.target.value);
+        navigate('/muro'); 
+    };
+
+
     const searchBarClass =
         "w-full py-2 pl-6 pr-12 text-blanco bg-azul-fondo rounded-full " +
         "focus:outline-none focus:ring-2 focus:ring-durazno hover:bg-blanco " +
-        "hover:text-azul-fondo transition-all duration-200 border border-azul-fondo";
+        "hover:text-azul-fondo transition-all duration-200 border border-azul-fondo " +
+        "appearance-none cursor-pointer font-serif";
+
 
     const searchIconClass =
-        "absolute right-3 top-1/2 transform -translate-y-1/2 p-2 text-blanco hover:text-azul-fondo";
+        "absolute right-3 top-1/2 transform -translate-y-1/2 p-2 text-blanco pointer-events-none";
 
     const UnderlineEffect = () => (
         <span className="absolute left-0 bottom-0 w-full h-0.5 bg-verde-menta scale-x-0 group-hover:scale-x-100 origin-right group-hover:origin-left transition-transform duration-300 ease-out" />
@@ -48,17 +61,24 @@ export default function Navbar() {
             {/* Barra de búsqueda */}
             <div className="flex-grow flex justify-center mx-10">
                 <div className="relative w-full max-w-lg group">
-                    <input
-                        type="text"
-                        placeholder="¿Qué tipo de amigo estás buscando?"
+                    {/* Funciona como select (para no complicarno la vida y hacerlo lo mas facil posible)*/}
+                    <select
+                        onChange={handleSearchChange}
                         className={searchBarClass}
-                    />
-                    <button className={searchIconClass}>
+                        defaultValue=""
+                    >
+                        <option value="" className="text-azul-fondo bg-blanco">¿Qué amigo estas buscando?</option>
+                        <option value="perro" className="text-azul-fondo bg-blanco">Perro</option>
+                        <option value="gato" className="text-azul-fondo bg-blanco">Gato</option>
+                        <option value="hamster" className="text-azul-fondo bg-blanco">Hámster</option>
+                    </select>
+
+                    <div className={searchIconClass}>
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
                                   d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
-                    </button>
+                    </div>
                 </div>
             </div>
 

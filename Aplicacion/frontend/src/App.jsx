@@ -9,6 +9,7 @@ import MuroMascotas from "./pages/MuroMascotas";
 import Anuncio from "./pages/Anuncio";
 import DetalleMascota from "./pages/DetalleMascota";
 import EditProfile from "./pages/EditProfile";
+import { BusquedaProvider } from './context/BusquedaContext';
 
 function AppContent() {
     const location = useLocation();
@@ -48,7 +49,9 @@ export default function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <AppContent />
+        <BusquedaProvider>
+            <AppContent />
+        </BusquedaProvider>
       </AuthProvider>
     </BrowserRouter>
   )
