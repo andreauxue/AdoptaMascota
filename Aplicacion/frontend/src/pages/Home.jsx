@@ -106,7 +106,7 @@ export default function Home() {
           transition-all duration-300 active:scale-95
         "
       >
-        Ver Galería de Mascotas 🐶🐱
+        Ver Galería de Mascotas
       </a>
 
     </div>

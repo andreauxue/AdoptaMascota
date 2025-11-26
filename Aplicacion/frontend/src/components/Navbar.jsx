@@ -1,58 +1,9 @@
-import { Link, useNavigate, useLocation} from "react-router-dom";
-import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import logo from "../assets/logo.png";
 
 export default function Navbar() {
-  const navigate = useNavigate(); // <-- Importar y usar useNavigate
   const location = useLocation();
-
-
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    const token = localStorage.getItem("mpaw_session");
-    // Si hay token, pone true. Si no, pone false.
-    setIsLoggedIn(!!token); 
-  }, [location]);
-
-  const handleLogout = () => {
-    //Eliminar el token de autenticación del almacenamiento local
-    localStorage.removeItem("mpaw_session"); 
-
-    setIsLoggedIn(false);
-    
-    //Redireccionar al usuario a la página de Login
-    navigate("/"); 
-    
-    //Recargar la página si el estado no se actualiza correctamente
-    window.location.reload(); 
-  };
-
-  const menuItems = [
-    // Opción visible SOLO cuando NO está logueado
-    { to: "/login", label: "Login", action: null, protected: false },
-    
-    // Opciones visibles SOLO cuando SÍ está logueado
-    { to: "/", label: "Inicio", action: null,protected: true},
-    { to: "/galeria", label: "Ver Galería de Mascotas", action: null, protected: true },
-    { to: "/registrar-mascota", label: "Registrar Mascota", action: null, protected: true },
-    
-    // Opción de Logout visible SOLO cuando SÍ está logueado
-    { label: "Cerrar Sesión", action: handleLogout, protected: true } 
-  ];
-
-  //  Filtrar los enlaces que se deben mostrar
-  const visibleMenuItems = menuItems.filter(item => {
-      // Mostrar si está protegido Y el usuario está logueado
-      if (item.protected) {
-          return isLoggedIn;
-      } 
-      // Mostrar si NO está protegido Y el usuario NO está logueado
-      if (!item.protected) {
-          return !isLoggedIn;
-      }
-      return true; // Enlace default
-  });
+  const isLoginPage = location.pathname === "/login";
 
   return (
     <nav
@@ -60,22 +11,44 @@ export default function Navbar() {
                  flex justify-between items-center shadow-md"
     >
       {/* Logo + Nombre */}
-      <div className="flex items-center gap-3 group cursor-pointer">
-        <img 
-          src={logo} 
-          alt="MatchPaw logo"
-          className="w-10 h-10 object-contain transition-transform duration-300 group-hover:scale-110"
-        />
-        <h1 
-          className="text-2xl font-bold tracking-wide transition-transform duration-300 group-hover:scale-110"
+      {isLoginPage ? (
+        <div className="flex items-center gap-3 select-none opacity-70">
+          <img 
+            src={logo} 
+            alt="MatchPaw logo"
+            className="w-10 h-10 object-contain"
+          />
+          <h1 className="text-2xl font-bold tracking-wide">
+            MatchPaw
+          </h1>
+        </div>
+      ) : (
+        // Si le damos clic al logo o nombre nos lleva al Home 
+        <Link
+          to="/"
+          className="flex items-center gap-3 group cursor-pointer"
         >
-          MatchPaw
-        </h1>
-      </div>
+          <img 
+            src={logo} 
+            alt="MatchPaw logo"
+            className="w-10 h-10 object-contain transition-transform duration-300 group-hover:scale-110"
+          />
+          <h1 
+            className="text-2xl font-bold tracking-wide transition-transform duration-300 group-hover:scale-110"
+          >
+            MatchPaw
+          </h1>
+        </Link>
+      )}
 
-      {/* Opciones del menú de la navbar */}
+      {/* Opciones del menú */}
       <ul className="flex gap-8 text-sm font-medium">
-        {visibleMenuItems.map((item, index) => ( // <-- Usamos los elementos filtrados
+        {[
+          { to: "/", label: "Inicio" },
+          { to: "/galeria", label: "Ver Galería de Mascotas" },
+          { to: "/registrar-mascota", label: "Registrar Mascota" },
+          { to: "/login", label: "Cerrar Sesión", isLink: false }
+        ].map((item, index) => (
           <li key={index}>
             {item.action ? (
               <span

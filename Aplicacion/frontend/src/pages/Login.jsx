@@ -3,7 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import AuthForm from "../components/AuthForm";
 import logoRosa from "../assets/logoRosa.png";
 import inicio from "../assets/inicio.png";
-import { login, getSession } from "../services/auth";
+import { login } from "../services/auth";
 
 export default function Login() {
   const nav = useNavigate();
@@ -15,18 +15,23 @@ export default function Login() {
     setLoading(true);
     try {
       await new Promise((r) => setTimeout(r, 350));
-      login({ email: data.email, password: data.password });
-      const me = getSession();
+
+      const me = await login({
+        email: data.email,
+        password: data.password,
+      });
+
       nav("/galeria", {
         replace: true,
         state: { welcome: `¡Hola, ${me?.name || "amigo"}!` },
       });
     } catch (e) {
-      setErr(e.message);
+      setErr(e.message || "Ocurrió un error al iniciar sesión.");
     } finally {
       setLoading(false);
     }
   };
+
 
   return (
     <div className="min-h-screen grid place-items-center bg-[#FFE6EC] relative">
