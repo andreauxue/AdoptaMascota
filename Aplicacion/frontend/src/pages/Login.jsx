@@ -1,52 +1,61 @@
-import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
+// Importamos los componentes y hooks necesarios
 import FormularioAuth from "../components/FormularioAuth";
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
 
-const getCookie = (name) => {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(";").shift();
-};
-
 export default function Login() {
-    const navigate = useNavigate();
-    const { loginUser } = useContext(UserContext);
+  // Hook de React Router para navegar entre páginas
+  const navigate = useNavigate();
+  
+  // Obtenemos la función loginUser del contexto de usuario
+  // El contexto permite compartir estado entre componentes sin pasar props manualmente
+  const { loginUser } = useContext(UserContext);
 
-    const handleLogin = async (data) => {
-        try {
-            await fetch("http://127.0.0.1:8000/api/login/", {
-            method: "GET",
-            credentials: "include",
-        });
+  // Función que maneja el proceso de inicio de sesión
+  const handleLogin = async (data) => {
+    // Realizamos la petición HTTP al endpoint de login del backend
+    const res = await fetch("http://127.0.0.1:8000/api/login/", {
+      method: "POST", // Método HTTP para enviar datos
+      headers: { "Content-Type": "application/json" }, // Indicamos que enviamos JSON
+      credentials: "include", // Crucial para manejar cookies de sesión
+      body: JSON.stringify(data), // Convertimos los datos del formulario a JSON
+    });
 
-        const csrfToken = getCookie("csrftoken");
+    // Procesamos la respuesta del servidor como JSON
+    const result = await res.json();
+    console.log("Respuesta del login:", result); // Para debugging
 
-        const res = await fetch("http://127.0.0.1:8000/api/login/", 
-        {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "X-CSRFToken": csrfToken,
-            },
-            credentials: "include",
-            body: JSON.stringify(data), 
-        });
-         
-        const resultado = await res.json();
+    // Verificamos si la respuesta contiene información del usuario (login exitoso)
+    if (result.user) {
+      // LOGIN EXITOSO - Proceso en tres pasos:
 
-        if (!res.ok) {
-            alert(resultado.error || "Error al iniciar sesión"); 
-        } else {
-            alert(` ${resultado.message}`);
-            loginUser();
-            navigate("/mascotas");
-        }
-    } catch (error) {
-        console.error("Error al iniciar sesión:", error);
-        alert("Error al conectar con el servidor.");
+      // Paso 1: Guardar información en localStorage para persistencia
+      // localStorage mantiene los datos incluso al recargar la página
+      localStorage.setItem("rol", result.user.rol); // Guardamos el rol del usuario
+      localStorage.setItem("user_id", result.user.id); // Guardamos el ID del usuario
+
+      // Paso 2: Actualizar el contexto global de la aplicación
+      // Esto actualiza el estado de React y notifica a todos los componentes suscritos
+      loginUser(result.user.rol); // La función del contexto actualiza isAuthenticated y rol
+
+      // Paso 3: Redirigir al usuario según su rol
+      // Cada tipo de usuario va a una sección diferente de la aplicación
+      if (result.user.rol === "admin") {
+        navigate("/admin"); // Redirige al panel de administración
+      } else if (result.user.rol === "publicador") {
+        navigate("/publicador"); // Redirige al panel del publicador
+      } else {
+        navigate("/adoptante"); // Redirige al panel del adoptante
+      }
+
+    } else {
+      // LOGIN FALLIDO - Mostrar mensaje de error
+      alert("Credenciales inválidas");
     }
-    };
+  };
 
-    return <FormularioAuth tipo="login" onSubmit={handleLogin}/>;
+  // Renderizamos el componente de formulario de autenticación
+  // Le pasamos el tipo "login" y la función handleLogin como prop
+  return <FormularioAuth tipo="login" onSubmit={handleLogin} />;
 }

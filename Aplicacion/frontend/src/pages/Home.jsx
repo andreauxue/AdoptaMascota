@@ -2,11 +2,94 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import Boton from "../components/Boton";
-import { FaHeart, FaPaw, FaSearch, FaDog, FaPlusCircle } from "react-icons/fa";
+import { FaHeart, FaPaw, FaSearch, FaDog, FaPlusCircle, FaCog } from "react-icons/fa";
 
 export default function Home() {
   const navigate = useNavigate();
-  const { isAuthenticated } = useContext(UserContext);
+  const { isAuthenticated, rol } = useContext(UserContext);
+
+  // 🔥 BOTONES DINÁMICOS
+  const renderBotonesPorRol = () => {
+    if (!isAuthenticated) {
+      // Visitante
+      return (
+        <>
+          <Boton
+            texto="Ver mascotas"
+            icono={<FaSearch className="text-lg" />}
+            onClick={() => navigate("/mascotas")}
+          />
+          <Boton
+            texto="Registrarme"
+            color="bg-pink-500 hover:bg-pink-600"
+            icono={<FaPaw className="text-lg" />}
+            onClick={() => navigate("/register")}
+          />
+        </>
+      );
+    }
+
+    // Usuario autenticado
+    if (rol === "admin") {
+      return (
+        <>
+          <Boton
+            texto="Panel Admin"
+            icono={<FaCog className="text-lg" />}
+            onClick={() => navigate("/admin")}
+          />
+          <Boton
+            texto="Registrar Especie"
+            color="bg-pink-500 hover:bg-pink-600"
+            icono={<FaPlusCircle className="text-lg" />}
+            onClick={() => navigate("/registrar-especie")}
+          />
+          <Boton
+            texto="Registrar Mascota"
+            color="bg-pink-500 hover:bg-pink-600"
+            icono={<FaPlusCircle className="text-lg" />}
+            onClick={() => navigate("/registrar-mascota")}
+          />
+        </>
+      );
+    }
+
+    if (rol === "publicador") {
+      return (
+        <>
+          <Boton
+            texto="Mis Mascotas"
+            icono={<FaDog className="text-lg" />}
+            onClick={() => navigate("/publicador")}
+          />
+          <Boton
+            texto="Registrar Mascota"
+            color="bg-pink-500 hover:bg-pink-600"
+            icono={<FaPlusCircle className="text-lg" />}
+            onClick={() => navigate("/registrar-mascota")}
+          />
+        </>
+      );
+    }
+
+    if (rol === "adoptante") {
+      return (
+        <>
+          <Boton
+            texto="Ver mascotas"
+            icono={<FaDog className="text-lg" />}
+            onClick={() => navigate("/mascotas")}
+          />
+          <Boton
+            texto="Mi Panel"
+            color="bg-pink-500 hover:bg-pink-600"
+            icono={<FaHeart className="text-lg" />}
+            onClick={() => navigate("/adoptante")}
+          />
+        </>
+      );
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 to-pink-100">
@@ -22,63 +105,27 @@ export default function Home() {
 
           <h2 className="text-2xl lg:text-3xl font-semibold text-pink-700 mb-6">
             {isAuthenticated
-              ? "¡Bienvenido de nuevo, héroe animal!"
+              ? rol === "admin"
+                ? "Bienvenido, administrador"
+                : rol === "publicador"
+                ? "Bienvenido, publicador"
+                : "¡Bienvenido, adoptante!"
               : "Encuentra a tu compañero perfecto"}
           </h2>
 
           <p className="text-lg text-gray-700 mb-8 leading-relaxed max-w-lg mx-auto lg:mx-0">
             {isAuthenticated
-              ? "Explora las mascotas en adopción, registra nuevos amigos peludos y ayuda a más animales a encontrar un hogar lleno de amor."
-              : "Descubre a tu nuevo mejor amigo peludo. Miles de mascotas esperan un hogar lleno de amor y cuidados. ¡Haz la diferencia en una vida hoy!"}
+              ? rol === "admin"
+                ? "Gestiona el sistema, las especies y todas las mascotas desde un solo lugar."
+                : rol === "publicador"
+                ? "Registra y administra las mascotas que deseas publicar para adopción."
+                : "Explora, elige y adopta a tu nuevo mejor amigo peludo."
+              : "Miles de mascotas esperan un hogar lleno de amor. ¡Cambia una vida hoy!"}
           </p>
 
-          {/* Stats */}
-          <div className="flex justify-center lg:justify-start gap-8 mb-8">
-            <div className="text-center">
-              <div className="text-2xl font-bold text-pink-600">500+</div>
-              <div className="text-sm text-gray-600">Mascotas</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-pink-600">300+</div>
-              <div className="text-sm text-gray-600">Familias</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-pink-600">98%</div>
-              <div className="text-sm text-gray-600">Éxito</div>
-            </div>
-          </div>
-
-          {/* Botones dinámicos */}
+          {/* Botones dinámicos según rol */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-            {isAuthenticated ? (
-              <>
-                <Boton
-                  texto="Ver mascotas"
-                  icono={<FaDog className="text-lg" />}
-                  onClick={() => navigate("/mascotas")}
-                />
-                <Boton
-                  texto="Registrar nueva"
-                  color="bg-pink-500 hover:bg-pink-600"
-                  icono={<FaPlusCircle className="text-lg" />}
-                  onClick={() => navigate("/registrar-mascota")}
-                />
-              </>
-            ) : (
-              <>
-                <Boton
-                  texto="Ver mascotas"
-                  icono={<FaSearch className="text-lg" />}
-                  onClick={() => navigate("/mascotas")}
-                />
-                <Boton
-                  texto="Registrarme"
-                  color="bg-pink-500 hover:bg-pink-600"
-                  icono={<FaPaw className="text-lg" />}
-                  onClick={() => navigate("/register")}
-                />
-              </>
-            )}
+            {renderBotonesPorRol()}
           </div>
         </div>
 
@@ -104,40 +151,34 @@ export default function Home() {
             ¿Por qué adoptar con nosotros?
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center p-6 rounded-2xl bg-pink-50 hover:bg-pink-100 transition-colors duration-300">
+            <div className="text-center p-6 rounded-2xl bg-pink-50 hover:bg-pink-100 transition-colors">
               <div className="w-16 h-16 bg-pink-400 rounded-full flex items-center justify-center mx-auto mb-4">
                 <FaHeart className="text-2xl text-white" />
               </div>
               <h4 className="text-xl font-semibold text-pink-700 mb-2">
                 Amor Garantizado
               </h4>
-              <p className="text-gray-600">
-                Cada mascota viene con amor infinito y gratitud
-              </p>
+              <p className="text-gray-600">Cada mascota viene con amor infinito.</p>
             </div>
 
-            <div className="text-center p-6 rounded-2xl bg-pink-50 hover:bg-pink-100 transition-colors duration-300">
+            <div className="text-center p-6 rounded-2xl bg-pink-50 hover:bg-pink-100 transition-colors">
               <div className="w-16 h-16 bg-pink-400 rounded-full flex items-center justify-center mx-auto mb-4">
                 <FaPaw className="text-2xl text-white" />
               </div>
               <h4 className="text-xl font-semibold text-pink-700 mb-2">
                 Salud Verificada
               </h4>
-              <p className="text-gray-600">
-                Todas nuestras mascotas tienen control veterinario
-              </p>
+              <p className="text-gray-600">Control veterinario completo.</p>
             </div>
 
-            <div className="text-center p-6 rounded-2xl bg-pink-50 hover:bg-pink-100 transition-colors duration-300">
+            <div className="text-center p-6 rounded-2xl bg-pink-50 hover:bg-pink-100 transition-colors">
               <div className="w-16 h-16 bg-pink-400 rounded-full flex items-center justify-center mx-auto mb-4">
                 <FaSearch className="text-2xl text-white" />
               </div>
               <h4 className="text-xl font-semibold text-pink-700 mb-2">
                 Seguimiento
               </h4>
-              <p className="text-gray-600">
-                Acompañamos el proceso de adaptación
-              </p>
+              <p className="text-gray-600">Apoyo durante la adaptación.</p>
             </div>
           </div>
         </div>
@@ -154,7 +195,7 @@ export default function Home() {
           </p>
           <Boton
             texto={isAuthenticated ? "Ver mascotas" : "Comenzar ahora"}
-            color="bg-pink-600 text-white hover:bg-pink-50"
+            color="bg-pink-600 text-white hover:bg-pink-700"
             onClick={() => navigate("/mascotas")}
           />
         </div>
