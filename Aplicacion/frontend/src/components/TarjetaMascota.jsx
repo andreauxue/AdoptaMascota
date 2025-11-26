@@ -1,77 +1,82 @@
-import { FaHeart, FaPaw, FaVenusMars } from "react-icons/fa";
+// src/components/TarjetaMascota.jsx
+import { FaPaw, FaTrash, FaHeart } from "react-icons/fa";
 
-export default function TarjetaMascota({
-  nombre,
-  edad,
-  descripcion,
-  imagen,
-  genero = "macho",
-  ubicacion = "Refugio Central",
-}) {
+export default function TarjetaMascota({ mascota, rol, onEliminar, onAdoptar }) {
+  const userId = Number(localStorage.getItem("user_id"));
+
+  const puedeEliminar =
+    rol === "admin" ||
+    (rol === "publicador" && mascota.publicador?.id === userId);
+
+  const puedeAdoptar = rol === "adoptante" && !mascota.adoptada;
+
   return (
-    <div className="group relative max-w-sm overflow-hidden rounded-3xl border border-pink-100 bg-white shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
-      {/* Imagen con overlay */}
-      <div className="relative overflow-hidden">
+    <div className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all max-w-xs overflow-hidden border border-pink-100">
+      
+      {/* IMAGEN */}
+      <div className="relative">
         <img
-          src={imagen}
-          alt={nombre}
-          className="h-64 w-full object-cover transition-transform duration-500 group-hover:scale-110"
-          onError={(e) => {
-            e.target.src =
-              "https://cdn-icons-png.flaticon.com/512/616/616408.png";
-          }}
+          src={mascota.imagen}
+          alt={mascota.nombre}
+          className="w-full h-52 object-cover"
         />
 
-        {/* Badge de género */}
-        <div
-          className={`absolute top-4 right-4 flex items-center gap-1 px-3 py-1.5 rounded-full text-white text-xs font-semibold ${
-            genero.toLowerCase() === "hembra" ? "bg-pink-500" : "bg-blue-500"
-          }`}
-        >
-          <FaVenusMars className="text-xs" />
-          <span className="capitalize">{genero}</span>
-        </div>
-
-        {/* Overlay hover */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        {/* Badge si ya está adoptada */}
+        {mascota.adoptada && (
+          <span className="absolute top-3 right-3 bg-green-600 text-white text-xs font-bold px-3 py-1 rounded-full">
+            Adoptada
+          </span>
+        )}
       </div>
 
-      {/* Contenido */}
-      <div className="space-y-3 p-6">
-        {/* Nombre y edad */}
-        <div className="flex items-center justify-between">
-          <h2 className="text-2xl font-bold bg-gradient-to-r from-pink-600 to-pink-700 bg-clip-text text-transparent">
-            {nombre}
-          </h2>
-          <div className="flex items-center gap-1 text-sm font-medium text-pink-700 bg-pink-50 px-3 py-1 rounded-full">
-            <FaPaw className="text-xs" />
-            <span>{edad}</span>
-          </div>
-        </div>
+      {/* CONTENIDO */}
+      <div className="p-4">
+        <h2 className="text-xl font-semibold text-pink-600 flex items-center gap-2">
+          <FaPaw className="text-pink-400" />
+          {mascota.nombre}
+        </h2>
 
-        {/* Ubicación */}
-        <div className="flex items-center gap-2 text-sm text-gray-600">
-          <div className="w-2 h-2 bg-pink-400 rounded-full"></div>
-          <span>{ubicacion}</span>
-        </div>
-
-        {/* Descripción */}
-        <p className="text-gray-700 leading-relaxed line-clamp-3">
-          {descripcion}
+        <p className="text-sm text-gray-700 mt-1">
+          <span className="font-semibold">Edad:</span> {mascota.edad}
         </p>
 
-        {/* Botón */}
-        <button
-          onClick={() => alert(`Gracias por interesarte en ${nombre} `)}
-          className="mt-4 w-full inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-pink-500 to-pink-600 px-6 py-3 text-white font-semibold shadow-md transition-all duration-200 hover:from-pink-600 hover:to-pink-700 hover:shadow-lg active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-pink-300 focus-visible:ring-offset-2"
-        >
-          <FaHeart className="text-sm" />
-          <span>Quiero adoptar</span>
-        </button>
-      </div>
+        <p className="text-gray-600 text-sm mt-2 leading-snug">
+          {mascota.descripcion || "Sin descripción disponible"}
+        </p>
 
-      {/* Efecto de borde al hover */}
-      <div className="absolute inset-0 rounded-3xl border-2 border-transparent group-hover:border-pink-200 transition-colors duration-300 pointer-events-none" />
+        {/* BOTONES */}
+        <div className="mt-4 flex flex-col gap-3">
+          
+          {/* Adoptar */}
+          {puedeAdoptar && (
+            <button
+              onClick={onAdoptar}
+              className="flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white py-2 rounded-lg font-medium shadow-sm transition"
+            >
+              <FaHeart className="text-white" />
+              Adoptar
+            </button>
+          )}
+
+          {/* Mensaje de adoptada */}
+          {mascota.adoptada && (
+            <div className="text-center text-green-700 font-semibold text-sm">
+              Ya está con una familia
+            </div>
+          )}
+
+          {/* Eliminar */}
+          {puedeEliminar && (
+            <button
+              onClick={onEliminar}
+              className="flex items-center justify-center gap-2 bg-red-500 hover:bg-red-600 text-white py-2 rounded-lg font-medium shadow-sm transition"
+            >
+              <FaTrash className="text-white" />
+              Eliminar
+            </button>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
