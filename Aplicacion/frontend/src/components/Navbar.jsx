@@ -70,7 +70,7 @@ export default function Navbar() {
                         <option value="" className="text-azul-fondo bg-blanco">¿Qué amigo estas buscando?</option>
                         <option value="perro" className="text-azul-fondo bg-blanco">Perro</option>
                         <option value="gato" className="text-azul-fondo bg-blanco">Gato</option>
-                        <option value="hamster" className="text-azul-fondo bg-blanco">Hámster</option>
+                        <option value="Hámster" className="text-azul-fondo bg-blanco">Hámster</option>
                     </select>
 
                     <div className={searchIconClass}>
