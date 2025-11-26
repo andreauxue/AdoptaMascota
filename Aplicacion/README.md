@@ -25,10 +25,7 @@
 
 Crea y activa un entorno virtual de Python:
 
-```bash
-python -m venv venv
-venv\Scripts\activate
-```
+### **✨ Objetivo del Proyecto**
 
 En Linux o macOS:
 
@@ -45,10 +42,7 @@ pip install -r requirements.txt
 ```
 Crea las migraciones y aplica los cambios:
 
-```bash
-python manage.py makemigrations
-python manage.py migrate
-```
+#### **1. Configuración del Entorno Virtual**
 
 Cargar Mascotas Iniciales (Base de Datos Precargada)
 

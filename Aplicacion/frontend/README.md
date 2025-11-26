@@ -1,12 +1,30 @@
-# React + Vite
+# 🐾 Proyecto: Adopta Amigo
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+---
 
-Currently, two official plugins are available:
+### **✨ Objetivo del Proyecto**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Este proyecto, llamado **Adopta Amigo**, es una **plataforma web desarrollada en Django que facilita el proceso de adopción responsable de mascotas.** Nuestro objetivo es conectar de manera eficiente a los refugios de animales y a los posibles adoptantes, permitiendo la visualización, filtrado y gestión de perfiles de animales que buscan un hogar.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### **👥 Nuestro Equipo**
+- Leslie Geronimo Soto: 320032848 - lesliegeronimo
+- Ximena Andrade Luviano: 320249150 - xim28-25
+- Israel Rivera: 320490747 - Orbitalx1
+- Patrick A. C. Martínez Rodríguez: 726000986 - Mexidis 
+- Ariadna Beatríz Pérez Aparicio: 320215122 - AriadnaPA 
+- Angel Moisés Gónzalez Corrales: 32034619 - MoisesAGC 
+---
+
+### **🚀 Pasos para correr el proyecto**
+
+Para comenzar a trabajar con el proyecto localmente, sigue los siguientes pasos:
+
+#### **1. Configuración del Entorno Virtual**
+
+Recuerda que para poder correr esto es necesario crear un entorno virtual para aislar las dependencias:
+
+```bash
+python -m venv venv
+venv\Scripts\activate

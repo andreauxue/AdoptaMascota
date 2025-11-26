@@ -26,6 +26,10 @@ export default function FormularioAuth({ tipo, onToggleType }) {
     const [message, setMessage] = useState(null); 
     const [isError, setIsError] = useState(false);
 
+    /**
+     * Manejador de cambio para actualizar el estado del formulario.
+     * @param {Event} e Evento de cambio del input.
+     */
     const handleChange = (e) => 
         setFormData({ ...formData, [e.target.name]: e.target.value });
 

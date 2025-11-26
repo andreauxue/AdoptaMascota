@@ -1,6 +1,12 @@
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import Home from "./pages/Home";
+import Register from "./pages/Register";
+import Adoptar from "./pages/Adoptar";
+import PublicarMascota from "./pages/PublicarMascota"; // <-- Importación corregida y esencial
+import Perfil from "./pages/Perfil"; 
+import DetalleMascota from "./pages/DetalleMascota"; 
+// Importación de Componentes de Layout y Seguridad
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import ListaMascotas from "./components/ListaMascotas";
@@ -46,6 +52,8 @@ function AppContent() {
 
 // El componente App solo se encarga de envolver con BrowserRouter y AuthProvider
 export default function App() {
+  // NOTA: Asegúrate de que AuthProvider (del AuthContext) envuelva a este componente
+  // en tu archivo index.js o main.jsx para que las ProtectedRoutes funcionen.
   return (
     <BrowserRouter>
       <AuthProvider>

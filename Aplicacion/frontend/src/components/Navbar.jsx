@@ -11,6 +11,14 @@ import { useAuth } from "../context/AuthContext";
 import FeedbackModal from "../components/FeedbackModal";
 import { useBusqueda } from "../context/BusquedaContext";
 
+/**
+ * Componente funcional Navbar.
+ *
+ * Barra de navegación superior con logo, barra de búsqueda y enlaces condicionales
+ * basados en el estado de autenticación del usuario (Login/Logout).
+ *
+ * @returns {JSX.Element} El elemento de navegación renderizado.
+ */
 export default function Navbar() {
     const navigate = useNavigate();
     const { isAuthenticated, logout } = useAuth();

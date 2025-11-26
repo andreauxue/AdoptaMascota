@@ -10,6 +10,14 @@ import { useNavigate } from "react-router-dom";
 import imgHome from "../assets/img/imagenInicio2.png"; 
 import { useAuth } from "../context/AuthContext";
 
+/**
+ * Componente funcional Home.
+ *
+ * Página de aterrizaje que saluda al usuario, destaca la misión de la aplicación
+ * y proporciona botones para iniciar el proceso de autenticación.
+ *
+ * @returns {JSX.Element} La página de inicio renderizada.
+ */
 export default function Home() {
     const navigate = useNavigate();
     const { isAuthenticated } = useAuth();
