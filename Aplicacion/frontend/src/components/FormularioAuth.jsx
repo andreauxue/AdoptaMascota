@@ -9,12 +9,6 @@ import { FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext"; 
 
-/**
- * Componente funcional FormularioAuth.
- *
- * Muestra el formulario de autenticación (Login o Registro).
- *
- */
 export default function FormularioAuth({ tipo, onToggleType }) { 
     
     const navigate = useNavigate();
@@ -30,6 +24,7 @@ export default function FormularioAuth({ tipo, onToggleType }) {
     const [showPassword, setShowPassword] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [message, setMessage] = useState(null); 
+    const [isError, setIsError] = useState(false);
 
     const handleChange = (e) => 
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -41,6 +36,7 @@ export default function FormularioAuth({ tipo, onToggleType }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setMessage(null);
+        setIsError(false);
         setIsLoading(true);
 
         if (tipo === "login") {
@@ -49,6 +45,10 @@ export default function FormularioAuth({ tipo, onToggleType }) {
             
             if (result.success) {
                 navigate("/muro");
+            } else {
+                // Si falla el login, avisar
+                setIsError(true);
+                setMessage("Usuario o contraseña incorrectos.");
             }
             setIsLoading(false);
         } else {
@@ -62,6 +62,9 @@ export default function FormularioAuth({ tipo, onToggleType }) {
 
             if (result.success) {
                 navigate("/muro");
+            } else {
+                setIsError(true);
+                setMessage(result.message || "Error: Ya existe una cuenta con este correo o usuario.");
             }
             setIsLoading(false);
         }
@@ -90,7 +93,11 @@ export default function FormularioAuth({ tipo, onToggleType }) {
             
             {/* Mensaje de notificación */}
             {message && (
-                <div className="bg-verde-menta text-azul-fondo p-3 rounded-lg text-sm mb-4 border border-verde-grisaseo">
+                <div className={`p-3 rounded-lg text-sm mb-4 border ${
+                    isError 
+                    ? "bg-red-100 text-red-700 border-red-400" 
+                    : "bg-verde-menta text-azul-fondo border-verde-grisaseo"
+                }`}>
                     {message}
                 </div>
             )}
