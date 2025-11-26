@@ -118,20 +118,15 @@ export default function Home() {
         {cargando && <p>Cargando mascotas desde la API...</p>}
         {error && <p className="text-red-600">{error}</p>}
 
-        {mascotasApi.length > 0 && (
-          <div className="mt-6 bg-white rounded-2xl p-4 shadow-md">
-            <h2 className="text-lg font-bold mb-2">
-              Mascotas cargadas desde la base de datos
-            </h2>
-            <ul className="list-disc list-inside">
-              {mascotasApi.map((m) => (
-                <li key={m.id}>
-                  {m.nombre} — {m.edad} años
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+        {mascotasApi.map((m) => (
+          <TarjetaMascota 
+            key={m.id}
+            imagen={m.imagen} 
+            nombre={m.nombre} 
+            tipo={m.especie_nombre} 
+            info={`${m.genero_nombre} • ${m.edad} años`} 
+          />
+        ))}
 
       </div>
     </div>

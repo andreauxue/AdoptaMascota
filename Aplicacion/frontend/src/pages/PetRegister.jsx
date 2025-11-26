@@ -91,7 +91,7 @@ export default function PetRegister() {
       }
 
       // Éxito
-      setSuccess("¡Mascota registrada exitosamente! 🎉");
+      setSuccess("¡Mascota registrada exitosamente!");
 
       // Limpiar formulario
       setFormData({
@@ -255,9 +255,8 @@ export default function PetRegister() {
               {["Sí", "No"].map((op) => (
                 <label
                   key={op}
-                  className={`flex items-center gap-2 text-gray-700 ${
-                    loading ? "cursor-not-allowed opacity-50" : "cursor-pointer"
-                  }`}
+                  className={`flex items-center gap-2 text-gray-700 ${loading ? "cursor-not-allowed opacity-50" : "cursor-pointer"
+                    }`}
                 >
                   <input
                     type="radio"
@@ -283,9 +282,8 @@ export default function PetRegister() {
               {["Sí", "No"].map((op) => (
                 <label
                   key={op}
-                  className={`flex items-center gap-2 text-gray-700 ${
-                    loading ? "cursor-not-allowed opacity-50" : "cursor-pointer"
-                  }`}
+                  className={`flex items-center gap-2 text-gray-700 ${loading ? "cursor-not-allowed opacity-50" : "cursor-pointer"
+                    }`}
                 >
                   <input
                     type="radio"
@@ -370,10 +368,9 @@ export default function PetRegister() {
               mt-6 w-full py-3 rounded-full
               text-white font-bold text-lg
               shadow-md transition-all duration-200
-              ${
-                loading
-                  ? "bg-gray-400 cursor-not-allowed"
-                  : "bg-[#ff85a2] hover:bg-[#ff6c8f] active:scale-95"
+              ${loading
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-[#ff85a2] hover:bg-[#ff6c8f] active:scale-95"
               }
             `}
           >
