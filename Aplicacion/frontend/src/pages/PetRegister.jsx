@@ -15,40 +15,116 @@ export default function PetRegister() {
     foto: null,
   });
 
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+
   const handleChange = (e) => {
     const { name, value, type, files } = e.target;
 
-    setFormData({
-      ...formData,
-      [name]: type === "file" ? files[0] : value,
-    });
+    if (type === "file") {
+      const file = files[0];
+      if (file) {
+        console.log("Archivo seleccionado:", file.name, file.type, file.size);
+        setFormData({
+          ...formData,
+          [name]: file,
+        });
+      }
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
+
+    // Limpiar mensajes al editar
+    if (error) setError("");
+    if (success) setSuccess("");
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setError("");
+    setSuccess("");
 
+    // Validar que haya una foto antes de enviar
+    if (!formData.foto) {
+      setError("Por favor selecciona una foto");
+      setLoading(false);
+      return;
+    }
+
+    // Crear FormData para enviar al backend
     const data = new FormData();
-    for (let key in formData) data.append(key, formData[key]);
+    data.append("nombre", formData.nombre);
+    data.append("edad", formData.edad);
+    data.append("especie", formData.especie);
+    data.append("genero", formData.genero);
+    data.append("tamano", formData.tamano);
+    data.append("vacunado", formData.vacunado);
+    data.append("esterilizado", formData.esterilizado);
+    data.append("energia", formData.energia);
+    data.append("descripcion", formData.descripcion);
+    data.append("foto", formData.foto, formData.foto.name);
 
-    console.log("Datos enviados:");
+    // Debug: Ver qué se está enviando
+    console.log("=== Datos que se enviarán ===");
     for (let [key, value] of data.entries()) {
       console.log(`${key}:`, value);
     }
 
-    setFormData({
-      nombre: "",
-      edad: "",
-      especie: "",
-      genero: "",
-      tamano: "",
-      vacunado: "",
-      esterilizado: "",
-      energia: "",
-      descripcion: "",
-      foto: null,
-    });
+    try {
+      const response = await fetch(
+        "http://localhost:8000/api/registrar-mascota/",
+        {
+          method: "POST",
+          body: data,
+        }
+      );
 
-    e.target.reset();
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || "Error al registrar la mascota");
+      }
+
+      // Éxito
+      setSuccess("¡Mascota registrada exitosamente! 🎉");
+
+      // Limpiar formulario
+      setFormData({
+        nombre: "",
+        edad: "",
+        especie: "",
+        genero: "",
+        tamano: "",
+        vacunado: "",
+        esterilizado: "",
+        energia: "",
+        descripcion: "",
+        foto: null,
+      });
+
+      // Resetear el input file manualmente
+      e.target.reset();
+
+      // Auto-ocultar mensaje de éxito después de 5 segundos
+      setTimeout(() => {
+        setSuccess("");
+      }, 5000);
+    } catch (err) {
+      setError(err.message || "Error al conectar con el servidor");
+      console.error("Error:", err);
+
+      // Auto-ocultar mensaje de error después de 5 segundos
+      setTimeout(() => {
+        setError("");
+      }, 5000);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -82,9 +158,10 @@ export default function PetRegister() {
               name="nombre"
               value={formData.nombre}
               onChange={handleChange}
-              className="w-full border border-pink-200 rounded-xl p-3 shadow-sm focus:ring-2 focus:ring-pink-300"
+              className="w-full border border-pink-200 rounded-xl p-3 shadow-sm focus:ring-2 focus:ring-pink-300 disabled:bg-gray-100 disabled:cursor-not-allowed"
               placeholder="Ejemplo: Luna"
               required
+              disabled={loading}
             />
           </div>
 
@@ -98,9 +175,12 @@ export default function PetRegister() {
               name="edad"
               value={formData.edad}
               onChange={handleChange}
-              className="w-full border border-pink-200 rounded-xl p-3 shadow-sm focus:ring-2 focus:ring-pink-300"
+              className="w-full border border-pink-200 rounded-xl p-3 shadow-sm focus:ring-2 focus:ring-pink-300 disabled:bg-gray-100 disabled:cursor-not-allowed"
               placeholder="Ejemplo: 3"
+              min="0"
+              max="30"
               required
+              disabled={loading}
             />
           </div>
 
@@ -113,8 +193,9 @@ export default function PetRegister() {
               name="especie"
               value={formData.especie}
               onChange={handleChange}
-              className="w-full border border-pink-200 rounded-xl p-3 shadow-sm focus:ring-2 focus:ring-pink-300"
+              className="w-full border border-pink-200 rounded-xl p-3 shadow-sm focus:ring-2 focus:ring-pink-300 disabled:bg-gray-100 disabled:cursor-not-allowed"
               required
+              disabled={loading}
             >
               <option value="">Selecciona una especie</option>
               <option value="Conejo">Conejo</option>
@@ -135,8 +216,9 @@ export default function PetRegister() {
               name="genero"
               value={formData.genero}
               onChange={handleChange}
-              className="w-full border border-pink-200 rounded-xl p-3 shadow-sm focus:ring-2 focus:ring-pink-300"
+              className="w-full border border-pink-200 rounded-xl p-3 shadow-sm focus:ring-2 focus:ring-pink-300 disabled:bg-gray-100 disabled:cursor-not-allowed"
               required
+              disabled={loading}
             >
               <option value="">Selecciona una opción</option>
               <option value="Macho">Macho ♂️</option>
@@ -153,8 +235,9 @@ export default function PetRegister() {
               name="tamano"
               value={formData.tamano}
               onChange={handleChange}
-              className="w-full border border-pink-200 rounded-xl p-3 shadow-sm focus:ring-2 focus:ring-pink-300"
+              className="w-full border border-pink-200 rounded-xl p-3 shadow-sm focus:ring-2 focus:ring-pink-300 disabled:bg-gray-100 disabled:cursor-not-allowed"
               required
+              disabled={loading}
             >
               <option value="">Selecciona una opción</option>
               <option value="Chico">Chico</option>
@@ -172,7 +255,9 @@ export default function PetRegister() {
               {["Sí", "No"].map((op) => (
                 <label
                   key={op}
-                  className="flex items-center gap-2 text-gray-700"
+                  className={`flex items-center gap-2 text-gray-700 ${
+                    loading ? "cursor-not-allowed opacity-50" : "cursor-pointer"
+                  }`}
                 >
                   <input
                     type="radio"
@@ -180,7 +265,8 @@ export default function PetRegister() {
                     value={op}
                     checked={formData.vacunado === op}
                     onChange={handleChange}
-                    className="h-4 w-4 text-pink-500 focus:ring-pink-300"
+                    className="h-4 w-4 text-pink-500 focus:ring-pink-300 disabled:cursor-not-allowed"
+                    disabled={loading}
                   />
                   {op}
                 </label>
@@ -197,7 +283,9 @@ export default function PetRegister() {
               {["Sí", "No"].map((op) => (
                 <label
                   key={op}
-                  className="flex items-center gap-2 text-gray-700"
+                  className={`flex items-center gap-2 text-gray-700 ${
+                    loading ? "cursor-not-allowed opacity-50" : "cursor-pointer"
+                  }`}
                 >
                   <input
                     type="radio"
@@ -205,7 +293,8 @@ export default function PetRegister() {
                     value={op}
                     checked={formData.esterilizado === op}
                     onChange={handleChange}
-                    className="h-4 w-4 text-pink-500 focus:ring-pink-300"
+                    className="h-4 w-4 text-pink-500 focus:ring-pink-300 disabled:cursor-not-allowed"
+                    disabled={loading}
                   />
                   {op}
                 </label>
@@ -222,8 +311,9 @@ export default function PetRegister() {
               name="energia"
               value={formData.energia}
               onChange={handleChange}
-              className="w-full border border-pink-200 rounded-xl p-3 shadow-sm focus:ring-2 focus:ring-pink-300"
+              className="w-full border border-pink-200 rounded-xl p-3 shadow-sm focus:ring-2 focus:ring-pink-300 disabled:bg-gray-100 disabled:cursor-not-allowed"
               required
+              disabled={loading}
             >
               <option value="">Selecciona una opción</option>
               <option value="Tranquilo">Tranquilo 💤</option>
@@ -243,8 +333,9 @@ export default function PetRegister() {
               value={formData.descripcion}
               onChange={handleChange}
               placeholder="Ejemplo: Es una perrita muy cariñosa, le encantan los niños..."
-              className="w-full border border-pink-200 rounded-xl p-3 shadow-sm focus:ring-2 focus:ring-pink-300"
+              className="w-full border border-pink-200 rounded-xl p-3 shadow-sm focus:ring-2 focus:ring-pink-300 disabled:bg-gray-100 disabled:cursor-not-allowed"
               required
+              disabled={loading}
             ></textarea>
           </div>
 
@@ -256,25 +347,101 @@ export default function PetRegister() {
             <input
               type="file"
               name="foto"
-              accept="image/*"
+              accept="image/jpeg,image/jpg,image/png,image/gif,image/webp"
               onChange={handleChange}
-              className="w-full border border-pink-200 rounded-xl p-3 shadow-sm bg-white focus:ring-2 focus:ring-pink-300"
+              className="w-full border border-pink-200 rounded-xl p-3 shadow-sm bg-white focus:ring-2 focus:ring-pink-300 disabled:bg-gray-100 disabled:cursor-not-allowed"
               required
+              disabled={loading}
             />
+            {formData.foto && (
+              <p className="mt-2 text-sm text-gray-600">
+                ✓ Archivo seleccionado:{" "}
+                <span className="font-semibold">{formData.foto.name}</span> (
+                {(formData.foto.size / 1024).toFixed(2)} KB)
+              </p>
+            )}
           </div>
 
           {/* Botón para registrar mascota */}
           <button
             type="submit"
-            className="
+            disabled={loading}
+            className={`
               mt-6 w-full py-3 rounded-full
-              bg-[#ff85a2] hover:bg-[#ff6c8f]
               text-white font-bold text-lg
-              shadow-md active:scale-95 transition
-            "
+              shadow-md transition-all duration-200
+              ${
+                loading
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-[#ff85a2] hover:bg-[#ff6c8f] active:scale-95"
+              }
+            `}
           >
-            Registrar Mascota
+            {loading ? (
+              <span className="flex items-center justify-center gap-2">
+                <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                    fill="none"
+                  />
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                  />
+                </svg>
+                Registrando...
+              </span>
+            ) : (
+              "Registrar Mascota"
+            )}
           </button>
+
+          {/* Mensajes de error y éxito */}
+          {error && (
+            <div className="mb-6 p-4 bg-red-100 border-l-4 border-red-500 text-red-700 rounded-lg flex items-start gap-3 animate-fade-in">
+              <svg
+                className="w-6 h-6 flex-shrink-0 mt-0.5"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              <div>
+                <p className="font-semibold">Error</p>
+                <p className="text-sm">{error}</p>
+              </div>
+            </div>
+          )}
+
+          {success && (
+            <div className="mb-6 p-4 bg-green-100 border-l-4 border-green-500 text-green-700 rounded-lg flex items-start gap-3 animate-fade-in">
+              <svg
+                className="w-6 h-6 flex-shrink-0 mt-0.5"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              <div>
+                <p className="font-semibold">¡Éxito!</p>
+                <p className="text-sm">{success}</p>
+              </div>
+            </div>
+          )}
         </form>
       </div>
     </div>
