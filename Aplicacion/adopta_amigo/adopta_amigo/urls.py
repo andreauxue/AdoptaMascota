@@ -18,9 +18,9 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-
 from rest_framework.routers import DefaultRouter 
 from mascotas.views import MascotaViewSet
+from mascotas import views as mascotas_views
 
 router = DefaultRouter()
 router.register(r'mascotas', MascotaViewSet)
@@ -28,9 +28,18 @@ router.register(r'mascotas', MascotaViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
+    
+    # Rutas de autenticación
+    path('api/register/', mascotas_views.register_user, name='register'),
+    path('api/get-csrf/', mascotas_views.get_csrf_token, name='get_csrf_token'),
+    path('api/login/', mascotas_views.login_view, name='login'),
+    
+    # Ruta de Logout
+    path('api/logout/', mascotas_views.logout_view, name='logout'), 
+    
+    path('api/check-session/', mascotas_views.check_session, name='check_session'),
+    path('api/registrar-mascota/', mascotas_views.registrar_mascota, name='registrar_mascota'),
 ]
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    
-    
