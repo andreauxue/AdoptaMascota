@@ -20,7 +20,13 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from rest_framework.routers import DefaultRouter 
-from mascotas.views import MascotaViewSet
+from mascotas.views import (
+    MascotaViewSet, 
+    get_csrf_token,
+    login_view, 
+    register_view,
+    check_auth
+)
 
 router = DefaultRouter()
 router.register(r'mascotas', MascotaViewSet)
@@ -28,6 +34,12 @@ router.register(r'mascotas', MascotaViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
+    
+    # Endpoints de autenticación
+    path('api/auth/csrf/', get_csrf_token, name='csrf'),
+    path('api/auth/login/', login_view, name='login'),
+    path('api/auth/register/', register_view, name='register'),
+    path('api/auth/check/', check_auth, name='check_auth'),
 ]
 
 if settings.DEBUG:

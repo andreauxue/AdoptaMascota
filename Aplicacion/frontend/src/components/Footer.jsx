@@ -13,10 +13,6 @@ import logo from '../assets/img/LOGO.png';
  * El pie de página principal de la aplicación, con diseño de 3 columnas (logo, info, redes).
  * Permite personalizar el color de fondo y el título del logo.
  *
- * @param {object} props Las propiedades del componente.
- * @param {string} [props.color="bg-azul-fondo"] Las clases de Tailwind para el color de fondo del footer.
- * @param {string} [props.texto="Adopta un Amigo"] El texto que acompaña al logo como título principal.
- * @returns {JSX.Element} El elemento footer renderizado.
  */
 export default function Footer({ color = "bg-azul-fondo", texto = "Adopta un Amigo" }) {
   return (

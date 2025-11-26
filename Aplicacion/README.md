@@ -1,30 +1,92 @@
-# 🐾 Proyecto: Adopta Amigo
+# Equipo Slytherin
+
+**Integrantes:**
+
+- Leslie Geronimo Soto — 320032848 — *lesliegeronimo*  
+- Ximena Andrade Luviano — 320249150 — *xim28-25*  
+- Israel Rivera — 320490747 — *Orbitalx1*  
+- Ariadna Beatríz Pérez Aparicio — 320215122 — *AriadnaPA*  
+- Angel Moisés Gónzalez Corrales — 32034619 — *MoisesAGC*  
+- Ui Chul Shin — 314630810 — *shucshin*  
+- Roberto Samuel Sanchez Rosas — 318355159 — *samuelsrosas*  
 
 ---
+
+# Pasos para correr el proyecto
+
+---
+
+## Backend (Django)
+
+> **IMPORTANTE:** Todos los comandos deben ejecutarse dentro de la carpeta  
+> **`Aplicacion/adopta_amigo`**
+
+
+
+Crea y activa un entorno virtual de Python:
 
 ### **✨ Objetivo del Proyecto**
 
-Este proyecto, llamado **Adopta Amigo**, es una **plataforma web desarrollada en Django que facilita el proceso de adopción responsable de mascotas.** Nuestro objetivo es conectar de manera eficiente a los refugios de animales y a los posibles adoptantes, permitiendo la visualización, filtrado y gestión de perfiles de animales que buscan un hogar.
+En Linux o macOS:
 
----
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
 
-### **👥 Nuestro Equipo**
-- Leslie Geronimo Soto: 320032848 - lesliegeronimo
-- Ximena Andrade Luviano: 320249150 - xim28-25
-- Israel Rivera: 320490747 - Orbitalx1
-- Patrick A. C. Martínez Rodríguez: 726000986 - Mexidis 
-- Ariadna Beatríz Pérez Aparicio: 320215122 - AriadnaPA 
-- Angel Moisés Gónzalez Corrales: 32034619 - MoisesAGC 
----
 
-### **🚀 Pasos para correr el proyecto**
+Instala los requerimientos necesarios:
 
-Para comenzar a trabajar con el proyecto localmente, sigue los siguientes pasos:
+```bash
+pip install -r requirements.txt
+```
+Crea las migraciones y aplica los cambios:
 
 #### **1. Configuración del Entorno Virtual**
 
-Recuerda que para poder correr esto es necesario crear un entorno virtual para aislar las dependencias:
+Cargar Mascotas Iniciales (Base de Datos Precargada)
 
 ```bash
-python -m venv venv
-venv\Scripts\activate
+python manage.py loaddata mascotas_iniciales.json
+```
+Creación de usuario administrador
+
+```bash
+python manage.py createsuperuser
+```
+
+Ejecución del servidor backend
+
+```bash
+python manage.py runserver
+```
+
+El backend estará disponible en:
+
+```
+http://127.0.0.1:8000/
+```
+
+---
+## Frontend
+
+> **IMPORTANTE:** Todos los comandos deben ejecutarse dentro de la carpeta  
+> **`Aplicacion/frontend`**
+
+Instala las dependencias del proyecto React:
+
+```bash
+npm install
+```
+
+Ejecuta el servidor de desarrollo:
+
+```bash
+npm run dev
+```
+
+El frontend se ejecutará por defecto en:
+
+```
+http://127.0.0.1:5173/
+```

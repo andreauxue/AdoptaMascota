@@ -1,88 +1,107 @@
-/**
- * @fileoverview Componente ListaMascotas.
- * @version 1.0.0
- * @author Equipo Slytherin
- */
+import { useState, useEffect } from "react";
+import TarjetaMascota from "./TarjetaMascota";
+import MensajeCargando from "../components/MensajeCarga";
+import MensajeError from "../components/MensajeError";
+import { useBusqueda } from "../context/BusquedaContext";
 
-// NOTA: Estas imágenes deben existir en tu proyecto, de lo contrario, causarán errores de importación.
-import pastor from "../assets/img/Pastor.jpg";
-import mestizo from "../assets/img/Mestizo.jpg";
-import gato from "../assets/img/Gato.png";
-import labrador from "../assets/img/Labrador.jpg";
+export default function ListaMascotas({verTodos, totalCargadas}) {
+  const [mascotas, setMascotas] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const { terminoBusqueda } = useBusqueda();
 
-import React from 'react';
-import TarjetaMascota from "./TarjetaMascota"; // <-- IMPORTAR TarjetaMascota
+  useEffect(() => {
+    fetch("http://127.0.0.1:8000/api/mascotas/")
+      .then((res) => {
+        if (!res.ok) throw new Error("No se pudieron cargar las mascotas");
+        return res.json();
+      })
+      .then((data) => {
+        setMascotas(data);
+        // Notificamos al componente padre cuántas mascotas hay
+        // Esto sirve para ocultar el boton cuando no hay muchas mascotas de la galeria
+        totalCargadas?.(data.length);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Error al cargar mascotas:", err);
+        setError(err.message);
+        setLoading(false);
+      });
+  }, [totalCargadas]);
 
-/**
- * Datos de ejemplo para las mascotas. Se utilizan si la prop 'mascotas' no se proporciona.
- * Cada objeto incluye propiedades necesarias para el componente TarjetaMascota (id, nombre, imagen, etc.).
- */
-const mascotasDeEjemplo = [
-    { 
-        id: 1, 
-        nombre: "Max", 
-        imagen: labrador, 
-        raza: "Labrador", 
-        edad: "2 años", 
-        descripcion: "Un labrador muy juguetón y leal.",
-        genero: "macho"
-    },
-    { 
-        id: 2, 
-        nombre: "Luna", 
-        imagen: mestizo, 
-        raza: "Mestizo", 
-        edad: "1 año",
-        descripcion: "Mestizo pequeño y tranquilo, ideal para apartamentos.",
-        genero: "hembra"
-    },
-    { 
-        id: 3, 
-        nombre: "Toby", 
-        imagen: pastor, 
-        raza: "Pastor Alemán", 
-        edad: "3 años",
-        descripcion: "Pastor Alemán activo, perfecto para exteriores y guardia.",
-        genero: "macho"
-    },
-    { 
-        id: 4, 
-        nombre: "Bella", 
-        imagen: gato, 
-        raza: "Gato", 
-        edad: "6 meses",
-        descripcion: "Gatita curiosa y enérgica, necesita un hogar amoroso.",
-        genero: "hembra"
-    },
-];
+  const mascotasFiltradas = mascotas.filter((m) => {
+    // Si no hay búsqueda, mostramos todas
+    if (!terminoBusqueda) return true;
+    
+    // Si hay búsqueda, comparamos solo con la especie
+    return m.especie_nombre?.toLowerCase().includes(terminoBusqueda.toLowerCase());
+  });
 
-/**
- * Componente funcional ListaMascotas.
- *
- * Renderiza una cuadrícula de componentes TarjetaMascota para mostrar las opciones de adopción.
- * El diseño de cuadrícula es responsivo, ajustándose desde 1 a 4 columnas.
- *
- * @param {object} props Las propiedades del componente.
- * @param {Array<object>} [props.mascotas=mascotasDeEjemplo] Array de objetos de mascotas a mostrar.
- * @returns {JSX.Element} La cuadrícula de tarjetas de mascotas.
- */
-export default function ListaMascotas({ mascotas = mascotasDeEjemplo }) {
+  // Mensaje de cargando mascotas
+  if (loading)
     return (
-        // Contenedor principal con diseño de cuadrícula responsiva (grid-cols-1 a lg:grid-cols-4)
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-            {mascotas.map(mascota => (
-                // Se mapea el array y se renderiza una TarjetaMascota por cada elemento.
-                <TarjetaMascota
-                    key={mascota.id}
-                    id={mascota.id} // ID crucial para generar la URL de detalle (e.g., /adopta/1)
-                    nombre={mascota.nombre}
-                    edad={mascota.edad}
-                    // Usa la descripción, si no existe, usa la raza (como fallback)
-                    descripcion={mascota.descripcion || mascota.raza} 
-                    imagen={mascota.imagen}
-                    genero={mascota.genero}
-                />
-            ))}
-        </div>
+      <MensajeCargando/>
     );
+
+  // Caso de error
+  if (error)
+    return (
+      <MensajeError title = {error}/>
+    );
+
+  // Caso si no hay mascotas
+  if (mascotas.length === 0)
+    return (
+    <section className="flex flex-col items-center px-4 py-12">
+      <div className="flex flex-col items-center p-12 rounded-3xl border b-2 border-azul-fondo max-w-2xl w-full">
+
+        {/* Título */}
+        <h2 className="text-2xl font-extrabold text-azul-fondo mb-2 font-serif text-center">
+            No hay nuevos amigos en adopción por ahora
+        </h2>
+        
+        {/* Descripción */}
+        <p className="text-lg text-azul-fondo text-center">
+            Parece que todas las mascotas han encontrado un hogar. ¡Vuelve pronto, actualizamos la lista constantemente!
+        </p>
+      </div>
+    </section>
+  );
+
+  // Hay mascotas, pero ninguna coincide con la búsqueda
+  if (mascotasFiltradas.length === 0) {
+    return (
+      <section className="flex flex-col items-center px-4 py-12">
+        <div className="flex flex-col items-center p-12 rounded-3xl border-2 border-dashed border-azul-fondo max-w-2xl w-full opacity-70">
+          <h2 className="text-2xl font-extrabold text-azul-fondo mb-2 font-serif text-center">
+              No encontramos esa especie
+          </h2>
+          <p className="text-lg text-azul-fondo text-center">
+              No tenemos mascotas registradas como "{terminoBusqueda}" en este momento.
+          </p>
+        </div>
+      </section>
+    );
+  }
+
+  const mascotasAMostrar = verTodos ? mascotasFiltradas : mascotasFiltradas.slice(0, 3);
+
+  return (
+    <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3 place-items-center py-6">
+      {mascotasAMostrar.map((m) => (
+        <TarjetaMascota
+          key={m.id}
+          id={m.id} 
+          nombre={m.nombre}
+          especie={m.especie_nombre}
+          genero={m.sexo}
+          ubicacion={m.ubicacion_abreviatura}
+          edad={m.edad_formateada}
+          descripcion={m.descripcion}
+          imagen={m.imagen}
+        />
+      ))}
+    </div>
+  );
 }

@@ -1,82 +1,94 @@
-/**
- * @fileoverview AuthContext: Provee el estado de autenticación de la aplicación
- * y funciones para iniciar/cerrar sesión a todos los componentes hijos.
- * @version 1.0.0
- * @author Equipo Slytherin
- */
+import { createContext, useContext, useState, useEffect } from 'react';
+import { authAPI } from '../services/api';
 
-import React, { createContext, useContext, useState, useEffect } from 'react';
+const AuthContext = createContext(null);
 
-// 1. Crear el contexto
-const AuthContext = createContext();
+export const useAuth = () => {
+    const context = useContext(AuthContext);
+    if (!context) {
+        throw new Error('useAuth debe ser usado dentro de un AuthProvider');
+    }
+    return context;
+};
 
-/**
- * Hook personalizado para facilitar el acceso al AuthContext.
- * @returns {object} El objeto de contexto que contiene { isLoggedIn, user, login, logout, setUser }.
- */
-export const useAuth = () => useContext(AuthContext);
-
-/**
- * Proveedor del contexto de autenticación.
- * * Gestiona el estado de login, los datos del usuario y la persistencia
- * de la sesión usando localStorage.
- *
- * @param {object} props Las propiedades del componente.
- * @param {React.ReactNode} props.children Los componentes hijos que tendrán acceso al contexto.
- * @returns {JSX.Element} El proveedor del contexto.
- */
 export const AuthProvider = ({ children }) => {
-    
-    // Inicializar estado del login: buscar en localStorage para persistencia
-    const [isLoggedIn, setIsLoggedIn] = useState(() => {
-        // Inicializa el estado leyendo 'isLoggedIn' de localStorage.
-        return localStorage.getItem('isLoggedIn') === 'true';
-    });
-    
-    // Simulación de los datos del usuario (datos por defecto si no hay sesión activa)
-    const [user, setUser] = useState({
-        username: 'UsuarioEjemplo',
-        email: 'usuario@amigo.com',
-        phone: '55 1234 5678',
-        profilePic: 'URL_A_TU_FOTO_DE_PERFIL_O_LOGO'
-    });
+    const [user, setUser] = useState(null);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
-    /**
-     * Efecto secundario que se ejecuta cada vez que 'isLoggedIn' cambia.
-     * Mantiene el estado de la sesión persistente en localStorage.
-     */
+    // Verificar autenticación al cargar la app
     useEffect(() => {
-        localStorage.setItem('isLoggedIn', isLoggedIn);
-    }, [isLoggedIn]);
+        checkAuthStatus();
+    }, []);
 
-    /**
-     * Función para simular inicio de sesión exitoso.
-     * @param {object} userData Los datos del usuario (username, email, etc.) obtenidos del backend.
-     */
-    const login = (userData) => {
-        setIsLoggedIn(true);
-        setUser(userData); // Guardar los datos del usuario
-        // NOTA: En producción, aquí también se guardaría el token de autenticación (JWT).
+    const checkAuthStatus = async () => {
+        try {
+            const data = await authAPI.checkAuth();
+            
+            if (data.isAuthenticated) {
+                setUser(data.user);
+                setIsAuthenticated(true);
+            } else {
+                setUser(null);
+                setIsAuthenticated(false);
+            }
+
+        } catch (error) {
+            console.error("Error al verificar autenticación:", error);
+            setUser(null);
+            setIsAuthenticated(false);
+
+        } finally {
+            setIsLoading(false);
+        }
     };
 
-    /**
-     * Función para simular cierre de sesión.
-     */
-    const logout = () => {
-        setIsLoggedIn(false);
-        setUser({}); // Limpiar los datos del usuario
-        // Limpiar la clave de persistencia en localStorage
-        localStorage.removeItem('isLoggedIn');
+    const login = async (username, password) => {
+        try {
+            const data = await authAPI.login(username, password);
+            setUser(data.user);
+            setIsAuthenticated(true);
+            return { success: true, user: data.user };
+
+        } catch (error) {
+            console.error("Error en login:", error);
+            return {
+                success: false,
+                error: error.message || "Error al iniciar sesión"
+            };
+        }
     };
 
-    // Objeto de valor del contexto que se proporciona a los componentes
-    const value = {
-        isLoggedIn, // Estado: ¿Está autenticado? (boolean)
-        user,       // Datos del usuario (object)
-        login,      // Función para iniciar sesión
-        logout,     // Función para cerrar sesión
-        setUser     // Función para que otros componentes actualicen los datos del perfil
+    const register = async (userData) => {
+        try {
+            const data = await authAPI.register(userData);
+            setUser(data.user);
+            setIsAuthenticated(true);
+            return { success: true, user: data.user };
+
+        } catch (error) {
+            console.error("Error en registro:", error);
+            return {
+                success: false,
+                error: error.message || "Error al registrar usuario"
+            };
+        }
     };
 
-    return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+    const logout = async () => {
+        try {
+            await authAPI.logout(); // <-- llama al backend
+        } catch (error) {
+            console.warn("El backend dio error en logout, pero igual cerramos sesión:", error);
+        }
+
+        setUser(null);
+        setIsAuthenticated(false);
+    };
+
+    return (
+        <AuthContext.Provider value={{ user, isAuthenticated, isLoading, login, register, logout }}>
+            {children}
+        </AuthContext.Provider>
+    );
 };

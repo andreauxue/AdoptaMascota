@@ -11,6 +11,7 @@ export default {
         'verde-grisaseo': '#89B0AE',
         'verde-menta': '#BEE3DB',
         'durazno': '#FFD6BA',
+        'blanco' : '#FAF9F9'
       },
     },
   },
