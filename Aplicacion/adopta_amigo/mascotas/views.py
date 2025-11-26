@@ -149,7 +149,6 @@ def registrar_mascota(request):
     esterilizado_bool = esterilizado == "Sí" if esterilizado else False
     
     # Obtener usuario (si está autenticado) o usar un usuario por defecto
-    # Para desarrollo, puedes usar el primer usuario o crear uno de prueba
     if request.user.is_authenticated:
         publicador = request.user
     else:
