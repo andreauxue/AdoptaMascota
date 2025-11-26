@@ -45,86 +45,96 @@ export default function Home() {
       {/* Contenedor de tarjetas */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 place-items-center">
 
-        <TarjetaMascota 
-          imagen={galleta} 
-          nombre="Galleta" 
-          tipo="Perro" 
-          info="Hembra • 6 años" 
+        <TarjetaMascota
+          id="galleta"
+          imagen={galleta}
+          nombre="Galleta"
+          tipo="Perro"
+          info="Hembra • 6 años"
         />
 
-        <TarjetaMascota 
-          imagen={mimi} 
-          nombre="Mimí" 
-          tipo="Gato" 
-          info="Hembra • 2 años" 
+        <TarjetaMascota
+          id="mimi"
+          imagen={mimi}
+          nombre="Mimí"
+          tipo="Gato"
+          info="Hembra • 2 años"
         />
 
-        <TarjetaMascota 
-          imagen={paco} 
-          nombre="Paco" 
-          tipo="Perro" 
-          info="Macho • 10 años" 
+        <TarjetaMascota
+          id="paco"
+          imagen={paco}
+          nombre="Paco"
+          tipo="Perro"
+          info="Macho • 10 años"
         />
 
-        <TarjetaMascota 
-          imagen={angel} 
-          nombre="Ángel" 
-          tipo="Perico" 
-          info="Macho • 6 años" 
+        <TarjetaMascota
+          id="angel"
+          imagen={angel}
+          nombre="Ángel"
+          tipo="Perico"
+          info="Macho • 6 años"
         />
 
-        <TarjetaMascota  
-          imagen={chispa} 
-          nombre="Chispa" 
-          tipo="Hámster" 
-          info="Macho • 1 año" 
+        <TarjetaMascota
+          id="chispa"
+          imagen={chispa}
+          nombre="Chispa"
+          tipo="Hámster"
+          info="Macho • 1 año"
         />
 
-        <TarjetaMascota 
-          imagen={oreo} 
-          nombre="Oreo" 
-          tipo="Perro" 
-          info="Macho • 2 años" 
+        <TarjetaMascota
+          id="oreo"
+          imagen={oreo}
+          nombre="Oreo"
+          tipo="Perro"
+          info="Macho • 2 años"
         />
 
-        <TarjetaMascota 
-          imagen={canela} 
-          nombre="Canela" 
-          tipo="Conejo" 
-          info="Hembra • 3 años" 
+        <TarjetaMascota
+          id="canela"
+          imagen={canela}
+          nombre="Canela"
+          tipo="Conejo"
+          info="Hembra • 3 años"
         />
 
-        <TarjetaMascota 
-          imagen={frank} 
-          nombre="Frank" 
-          tipo="Tortuga" 
-          info="Macho • 7 años" 
+        <TarjetaMascota
+          id="frank"
+          imagen={frank}
+          nombre="Frank"
+          tipo="Tortuga"
+          info="Macho • 7 años"
         />
 
-        <TarjetaMascota 
-          imagen={jaime} 
-          nombre="Jaime" 
-          tipo="Gato" 
-          info="Macho • 4 años" 
+        <TarjetaMascota
+          id="jaime"
+          imagen={jaime}
+          nombre="Jaime"
+          tipo="Gato"
+          info="Macho • 4 años"
         />
 
-        <TarjetaMascota 
-          imagen={peluche} 
-          nombre="Peluche" 
-          tipo="Perro" 
-          info="Macho • 1 año" 
+        <TarjetaMascota
+          id="peluche"
+          imagen={peluche}
+          nombre="Peluche"
+          tipo="Perro"
+          info="Macho • 1 año"
         />
 
         {cargando && <p>Cargando mascotas desde la API...</p>}
         {error && <p className="text-red-600">{error}</p>}
 
         {mascotasApi.map((m) => (
-          <TarjetaMascota 
+          <TarjetaMascota
             key={m.id}
-            imagen={m.imagen} 
-            nombre={m.nombre} 
-            tipo={m.especie_nombre} 
-            info={`${m.genero_nombre} • ${m.edad} años`} 
+            imagen={m.imagen}
+            nombre={m.nombre}
+            tipo={m.especie_nombre}
+            info={`${m.genero_nombre} • ${m.edad} años`}
           />
         ))}
 

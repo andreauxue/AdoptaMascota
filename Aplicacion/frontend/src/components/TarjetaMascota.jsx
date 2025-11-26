@@ -1,7 +1,7 @@
 import { Heart, Info } from "lucide-react";
 import { Link } from "react-router-dom";
 
-export default function TarjetaMascota({ nombre, tipo, info, imagen }) {
+export default function TarjetaMascota({ id, nombre, tipo, info, imagen }) {
   const [sexoTexto, edad] = info.split("•").map(t => t.trim());
   const sexoIcono = sexoTexto.includes("Hembra") ? "♀️" : "♂️";
 
@@ -54,7 +54,8 @@ export default function TarjetaMascota({ nombre, tipo, info, imagen }) {
         {/* Botón detalles */}
         <div className="flex justify-center pt-2">
           <Link
-            to={`/mascota/galleta`}
+            to={`/mascota/${id}`}
+            state={{ mascota: { nombre, tipo, info, imagen } }}
             className="
               inline-flex items-center gap-2 rounded-full 
               px-4 py-2 text-sm font-semibold 

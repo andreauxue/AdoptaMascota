@@ -15,22 +15,22 @@ export default function App() {
   return (
     <BrowserRouter>
       <div>
-        <Navbar/>
+        <Navbar />
 
         <main>
           <Routes>
-            <Route path="/" element={<Home/>}/>
-            <Route path="/galeria" element={<Galeria/>}/>
-            <Route path="/registrar-mascota" element={<PetRegister/>}/>
-            <Route path="/login" element={<Login/>}/>
-            <Route path="/register" element={<Register/>}/>
-            <Route path="/mascota/galleta" element={<DetallesMascota />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/galeria" element={<Galeria />} />
+            <Route path="/registrar-mascota" element={<PetRegister />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/mascota/:id" element={<DetallesMascota />} />
             <Route path="/formulario-adopcion" element={<FormularioAdopcion />} />
             <Route path="/formulario-recibido" element={<FormularioRecibido />} />
           </Routes>
         </main>
 
-        <Footer/>
+        <Footer />
       </div>
     </BrowserRouter>
   );
