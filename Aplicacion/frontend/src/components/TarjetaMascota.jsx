@@ -1,49 +1,74 @@
-export default function TarjetaMascota({ nombre, tipo, info, imagen }) {
+import { Heart, Info } from "lucide-react";
+import { Link } from "react-router-dom";
+
+export default function TarjetaMascota({ id, nombre, tipo, info, imagen }) {
+  const [sexoTexto, edad] = info.split("•").map(t => t.trim());
+  const sexoIcono = sexoTexto.includes("Hembra") ? "♀️" : "♂️";
+
   return (
-    <div className="group relative max-w-xs overflow-hidden rounded-2xl border border-black bg-white shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+    <div
+      className="
+      group relative max-w-xs overflow-hidden rounded-2xl 
+      bg-white shadow-md border border-black 
+      transition-all duration-300 hover:-translate-y-1 hover:shadow-xl
+      m-2
+    "
+    >
+      {/* Etiqueta tipo */}
+      <div className="absolute top-3 left-3 z-10 bg-amber-300 px-3 py-1 rounded-full text-black text-xs font-bold shadow">
+        {tipo}
+      </div>
 
-      <img
-        src={imagen}
-        alt={nombre}
-        className="h-48 w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
-      />
+      {/* Corazón */}
+      <button className="absolute top-3 right-3 z-10 rounded-full bg-white p-2 shadow-md hover:bg-pink-100 transition">
+        <Heart className="w-5 h-5 text-pink-500" />
+      </button>
 
-      <div className="space-y-1.5 p-4">
+      {/* Imagen */}
+      <div className="relative">
+        <img
+          src={imagen}
+          alt={nombre}
+          className="h-60 w-full object-cover transition-transform duration-300 group-hover:scale-105"
+        />
+      </div>
 
+      <div className="p-4 space-y-2">
         {/* Nombre */}
-        <h2 className="text-xl font-semibold tracking-tight" style={{ color: "#916431ff" }}>
+        <h2 className="text-xl font-semibold text-[#8A5A44] tracking-tight">
           {nombre}
         </h2>
 
-        {/* Tipo (Perro, Gato...) */}
-        <p className="text-xs text-gray-500">
-          {tipo}
-        </p>
+        <div className="flex flex-wrap gap-2">
+          {/* Edad */}
+          <span className="bg-pink-100 text-pink-700 px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1">
+            🎂 {edad}
+          </span>
 
-        {/* Edad o info */}
-        <p className="text-base text-black">
-          {info}
-        </p>
-
-        <div className="flex justify-center">
-          <button
-            className="
-              inline-flex items-center justify-center
-              rounded-full px-3 py-1.5 text-xs font-semibold 
-              text-black shadow-sm transition-all duration-200 
-              border border-black
-              active:scale-95 focus:outline-none focus-visible:ring-2
-            "
-            style={{
-              backgroundColor: "#F0E68C",
-            }}
-            onMouseEnter={(e) => (e.target.style.backgroundColor = "#dfd15bff")}
-            onMouseLeave={(e) => (e.target.style.backgroundColor = "#F0E68C")}
-          >
-            Más Detalles
-          </button>
+          {/* Género */}
+          <span className="bg-pink-100 text-pink-700 px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1">
+            {sexoIcono} {sexoTexto}
+          </span>
         </div>
 
+        {/* Botón detalles */}
+        <div className="flex justify-center pt-2">
+          <Link
+            to={`/mascota/${id}`}
+            state={{ mascota: { nombre, tipo, info, imagen } }}
+            className="
+              inline-flex items-center gap-2 rounded-full 
+              px-4 py-2 text-sm font-semibold 
+              text-white transition-all duration-300
+              bg-[#ff85a2] hover:bg-[#ff6c8f]
+              shadow-md active:scale-95
+            "
+          >
+            <Info className="w-4 h-4" />
+            Más Detalles
+          </Link>
+
+        </div>
       </div>
     </div>
   );

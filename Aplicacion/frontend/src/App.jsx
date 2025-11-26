@@ -7,25 +7,30 @@ import Galeria from "./pages/Galeria";
 import PetRegister from "./pages/PetRegister";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Protected from "./components/Protected";
+import DetallesMascota from "./pages/DetallesMascota";
+import FormularioAdopcion from "./pages/FormularioAdopcion";
+import FormularioRecibido from "./pages/FormularioRecibido";
 
 export default function App() {
   return (
     <BrowserRouter>
       <div>
-        <Navbar/>
+        <Navbar />
 
         <main>
           <Routes>
-            <Route path="/" element={<Home/>}/>
-            <Route path="/galeria" element={<Galeria/>}/>
-            <Route path="/registrar-mascota" element={<PetRegister/>}/>
-            <Route path="/login" element={<Login/>}/>
-            <Route path="/register" element={<Register/>}/>
+            <Route path="/" element={<Home />} />
+            <Route path="/galeria" element={<Galeria />} />
+            <Route path="/registrar-mascota" element={<PetRegister />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/mascota/:id" element={<DetallesMascota />} />
+            <Route path="/formulario-adopcion" element={<FormularioAdopcion />} />
+            <Route path="/formulario-recibido" element={<FormularioRecibido />} />
           </Routes>
         </main>
 
-        <Footer/>
+        <Footer />
       </div>
     </BrowserRouter>
   );
