@@ -50,13 +50,13 @@ export default function Navbar() {
           { to: "/login", label: "Cerrar Sesión", isLink: false }
         ].map((item, index) => (
           <li key={index}>
-            {item.isLink === false ? (
-              <a
-                href={item.to}
-                className="text-white transition-colors duration-300 hover:text-[#FFB6C1]"
+            {item.action ? (
+              <span
+                onClick={item.action} 
+                className="text-white transition-colors duration-300 hover:text-[#FFB6C1] cursor-pointer"
               >
                 {item.label}
-              </a>
+              </span>
             ) : (
               <Link
                 to={item.to}
