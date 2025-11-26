@@ -1,8 +1,10 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import logoRecibido from "../assets/FormularioRecibido.png";
 
 export default function FormularioRecibido() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const mascotaNombre = location.state?.mascotaNombre || "la mascota";
 
   const handleAceptar = () => {
     // El botón "Aceptar" redirige a la Galería de mascotas
@@ -26,14 +28,14 @@ export default function FormularioRecibido() {
           </h1>
 
           <p className="mt-5 max-w-xl text-gray-800 text-lg leading-relaxed">
-            Hemos recibido tu solicitud para adoptar a <span className="font-semibold text-pink-700">Galleta</span>.  
+            Hemos recibido tu solicitud para adoptar a <span className="font-semibold text-pink-700">{mascotaNombre}</span>.
             ¡Gracias por darte el tiempo de llenar el formulario y mostrar interés en darle un hogar lleno de amor!
           </p>
 
           <p className="mt-6 max-w-xl text-gray-600 text-base leading-relaxed">
-            Nuestro equipo revisará tus respuestas en un plazo aproximado de <span className="font-semibold">3 a 7 días hábiles</span>.  
+            Nuestro equipo revisará tus respuestas en un plazo aproximado de <span className="font-semibold">3 a 7 días hábiles</span>.
             Te notificaremos por correo electrónico si tu solicitud fue aprobada o si necesitamos más información.
-          </p>  
+          </p>
         </div>
 
         {/* Botón Aceptar */}

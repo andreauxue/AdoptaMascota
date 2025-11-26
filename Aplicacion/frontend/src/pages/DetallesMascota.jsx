@@ -54,7 +54,7 @@ export default function DetallesMascota() {
   }, [id, location.state]);
 
   const irAFormulario = () => {
-    navigate("/formulario-adopcion");
+    navigate("/formulario-adopcion", { state: { mascotaNombre: mascota.nombre } });
   };
 
   if (loading) return <div className="min-h-screen flex items-center justify-center">Cargando...</div>;
