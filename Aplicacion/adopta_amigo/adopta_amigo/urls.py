@@ -20,7 +20,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from rest_framework.routers import DefaultRouter
-from mascotas.views import MascotaViewSet, register_user, login_user
+from mascotas.views import MascotaViewSet, register_user, login_user, registrar_mascota
 
 router = DefaultRouter()
 router.register(r"mascotas", MascotaViewSet)
@@ -34,6 +34,7 @@ urlpatterns = [
 
     # API de mascotas
     path("api/", include(router.urls)),
+    path('api/registrar-mascota/', registrar_mascota, name='registrar-mascota'),
 ]
 
 if settings.DEBUG:
