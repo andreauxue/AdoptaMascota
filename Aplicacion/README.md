@@ -1,15 +1,45 @@
-# Guía para ejecutar el proyecto completo (Backend + Frontend)
+# Guía para Ejecutar el Proyecto Completo
 
-## 1. Configuración del entorno virtual
+## Backend (Django) + Frontend (React)
 
-Crea y activa un entorno virtual de Python:
+---
+
+## 0. Requisito Previo: Limpieza de Cookies del Navegador
+
+Para asegurar que el sistema de autenticación funcione correctamente, es indispensable limpiar las cookies del navegador cuando:
+
+* Se clona el proyecto en una nueva máquina.
+* Se modifica la configuración de CORS o CSRF en Django.
+* Se cambian puertos o dominios (por ejemplo, de `localhost` a `127.0.0.1`).
+* El login deja de generar la cookie de sesión (`sessionid`).
+* Se realizan ajustes en el frontend que interactúan con el backend.
+
+**Instrucciones para limpiar cookies:**
+
+1. Abrir las herramientas de desarrollador del navegador.
+2. Ir a la sección **Application** (o Storage).
+3. Seleccionar **Cookies**.
+4. Eliminar todas las cookies asociadas a:
+
+   * `http://127.0.0.1:8000`
+   * `http://127.0.0.1:5173`
+
+Una vez eliminadas, realizar nuevamente el proceso de inicio de sesión.
+
+---
+
+## 1. Configuración del Entorno Virtual
+
+Crear y activar un entorno virtual de Python.
+
+**Windows:**
 
 ```bash
 python -m venv venv
 venv\Scripts\activate
 ```
 
-En Linux o macOS:
+**Linux / macOS:**
 
 ```bash
 python3 -m venv venv
@@ -18,9 +48,9 @@ source venv/bin/activate
 
 ---
 
-## 2. Instalación de dependencias del backend
+## 2. Instalación de Dependencias del Backend
 
-Instala los requerimientos necesarios:
+Instalar los paquetes necesarios:
 
 ```bash
 pip install -r requirements.txt
@@ -28,22 +58,22 @@ pip install -r requirements.txt
 
 ---
 
-## 3. Preparación del proyecto Django
+## 3. Preparación del Proyecto Django
 
-Accede a la carpeta principal del proyecto:
+Ingresar a la carpeta principal del backend:
 
 ```bash
 cd adopta_amigo
 ```
 
-Elimina la base de datos y migraciones anteriores (solo si es necesario iniciar limpio):
+Si se desea iniciar completamente desde cero, eliminar base de datos y migraciones previas:
 
 ```bash
 rm db.sqlite3
 find . -path "*/migrations/*.py" -not -name "__init__.py" -delete
 ```
 
-Crea las migraciones y aplica los cambios:
+Crear migraciones y aplicarlas:
 
 ```bash
 python manage.py makemigrations
@@ -52,7 +82,7 @@ python manage.py migrate
 
 ---
 
-## 4. Creación de usuario administrador
+## 4. Creación de Usuario Administrador
 
 ```bash
 python manage.py createsuperuser
@@ -60,7 +90,7 @@ python manage.py createsuperuser
 
 ---
 
-## 5. Ejecución del servidor backend
+## 5. Ejecución del Servidor Backend
 
 ```bash
 python manage.py runserver
@@ -68,39 +98,32 @@ python manage.py runserver
 
 El backend estará disponible en:
 
-```
-http://127.0.0.1:8000/
-```
-
-Panel de administración:
-
-```
-http://127.0.0.1:8000/admin/
-```
+* Aplicación: `http://127.0.0.1:8000/`
+* Panel de administración: `http://127.0.0.1:8000/admin/`
 
 ---
 
-## 6. Configuración y ejecución del frontend
+## 6. Configuración y Ejecución del Frontend
 
-Accede al directorio del frontend (React):
+Ingresar al directorio del frontend:
 
 ```bash
 cd frontend
 ```
 
-Instala las dependencias del proyecto React:
+Instalar dependencias:
 
 ```bash
 npm install
 ```
 
-Ejecuta el servidor de desarrollo:
+Ejecutar el servidor de desarrollo:
 
 ```bash
 npm run dev
 ```
 
-El frontend se ejecutará por defecto en:
+El frontend estará disponible en:
 
 ```
 http://127.0.0.1:5173/
@@ -108,4 +131,15 @@ http://127.0.0.1:5173/
 
 ---
 
-Asegúrate de que las rutas API (`/api/...`) en el frontend coincidan con la URL del backend (`http://127.0.0.1:8000`).
+## 7. Verificación de Conexión entre Frontend y Backend
+
+Asegurarse de que todas las URL de consumo de API en el frontend tengan como base:
+
+```
+http://127.0.0.1:8000/api/
+```
+
+Esto garantiza que React se comunique correctamente con Django.
+
+---
+
