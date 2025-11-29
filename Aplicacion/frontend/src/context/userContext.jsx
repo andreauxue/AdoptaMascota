@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 
-export const UserContext = createContext();
+export const userContext = createContext();
 
 export function UserProvider({ children }) {
 
@@ -30,8 +30,8 @@ export function UserProvider({ children }) {
     };
 
     return (
-        <UserContext.Provider value={{ isAuthenticated, rol, loginUser, logoutUser }}>
+        <userContext.Provider value={{ isAuthenticated, rol, loginUser, logoutUser }}>
             {children}
-        </UserContext.Provider>
+        </userContext.Provider>
     );
 }

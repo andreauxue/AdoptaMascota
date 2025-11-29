@@ -2,7 +2,7 @@
 import FormularioAuth from "../components/FormularioAuth";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
-import { UserContext } from "../context/UserContext";
+import { userContext } from "../context/userContext";
 
 export default function Login() {
   // Hook de React Router para navegar entre páginas
@@ -10,7 +10,7 @@ export default function Login() {
   
   // Obtenemos la función loginUser del contexto de usuario
   // El contexto permite compartir estado entre componentes sin pasar props manualmente
-  const { loginUser } = useContext(UserContext);
+  const { loginUser } = useContext(userContext);
 
   // Función que maneja el proceso de inicio de sesión
   const handleLogin = async (data) => {

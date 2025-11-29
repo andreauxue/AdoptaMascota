@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { UserContext } from "../context/UserContext";
+import { userContext } from "../context/userContext";
 import { useNavigate } from "react-router-dom";
 
 import {
@@ -15,7 +15,7 @@ import {
 } from "react-icons/fa";
 
 export default function Navbar() {
-  const { isAuthenticated, rol, logoutUser } = useContext(UserContext);
+  const { isAuthenticated, rol, logoutUser } = useContext(userContext);
   const navigate = useNavigate();
 
   const getCookie = (name) => {

@@ -1,12 +1,12 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../context/UserContext";
+import { userContext } from "../context/userContext";
 import Boton from "../components/Boton";
 import { FaHeart, FaPaw, FaSearch, FaDog, FaPlusCircle, FaCog } from "react-icons/fa";
 
 export default function Home() {
   const navigate = useNavigate();
-  const { isAuthenticated, rol } = useContext(UserContext);
+  const { isAuthenticated, rol } = useContext(userContext);
 
   // 🔥 BOTONES DINÁMICOS
   const renderBotonesPorRol = () => {
