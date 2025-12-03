@@ -67,3 +67,28 @@ Está construido con:
 8. Para poder ir al panel de adminitración vamos a:
    - http://127.0.0.1:8000/admin
 
+#### Datos precargados importantes
+En db.sqlite3 ya se incluyen nuestros valores iniciales que el frontend necesita:
+
+Energías:
+  - Muy Activo
+  - Moderado
+  - Tranquilo
+
+Especies:
+  - Tortuga
+  - Perro
+  - Hámster
+  - Gato
+  - Erizo
+  - Conejo
+  - Perico
+
+Géneros:
+  - Macho
+  - Hembra
+
+Tamaños:
+  - Chico
+  - Mediano
+  - Grande
