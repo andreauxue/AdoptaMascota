@@ -72,9 +72,7 @@ Esta sección detallamos las principales correcciones y mejoras realizadas en el
 
 ### Backend
 
-1. Activamos el entorno virtual:
-   
-  source venv/bin/activate
+1. Activamos el entorno virtual: source venv/bin/activate
 
 3. Instalar dependencias del backend
    Dentro de la carpeta Aplicacion/ hacemos los siguientes comando en terminal
@@ -120,21 +118,24 @@ Géneros:
   - Hembra
 
 
-💻 Frontend (React + Vite)
+### Frontend
 
 Desde:
 
 AdoptaMascota/Aplicacion/frontend
 
-1️⃣ Instalar dependencias necesarias
-npm install react-icons
-npm install react-router-dom
-npm install lucide-react
+1. Instalar dependencias necesarias
+  - npm install react-icons
+  - npm install react-router-dom
+  - npm install lucide-react
 
-2️⃣ Ejecutar frontend
-npm run dev
+2. Ejecutamos en frontend/ en terminal el comando: npm run dev
 
-
-Abrir:
-👉 http://localhost:5173/
+3. Para poder ver nuestro sistema vamos a:
+   - http://localhost:5173/
+  
+4. Nosotros creamos y usamos este usuario:
+   - username:hufflepuff
+   - email: hufflepuff@gmail.com
+   - password: huffle123
 
