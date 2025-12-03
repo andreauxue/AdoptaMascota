@@ -93,7 +93,7 @@ export default function Home() {
             Búsqueda Compatible
           </h3>
           <p className="text-gray-700 text-sm">
-            Sistema de búsqueda filtrada que ayuda a encontrar mascotas compatibles con tu estilo de vida.
+            Facilita la búsqueda que ayuda a encontrar mascotas compatibles con tu estilo de vida.
           </p>
         </div>
 
