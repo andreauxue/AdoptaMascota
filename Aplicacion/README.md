@@ -25,8 +25,6 @@
 
 Crea y activa un entorno virtual de Python:
 
-### **✨ Objetivo del Proyecto**
-
 En Linux o macOS:
 
 ```bash
