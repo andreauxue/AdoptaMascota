@@ -8,6 +8,7 @@ import { FaTimes, FaUserPlus, FaSignInAlt, FaPaw } from 'react-icons/fa';
 export default function ListaMascotas() {
   const [mascotas, setMascotas] = useState([]);
   const [showModal, setShowModal] = useState(false); // Estado para la ventana emergente
+  const [showAdoptModal, setShowAdoptModal] = useState(false); // Estado ventana emergente adopcion registrado
   const location = useLocation();
   const navigate = useNavigate();
   const { user } = useAuth(); // Obtenemos el usuario para verificar sesión
@@ -38,10 +39,12 @@ export default function ListaMascotas() {
     }
   };
 
-  // Para cuando se da clic en Adoptar mascota sin iniciar sesión
+  // Para cuando se da clic en Adoptar mascota
   const handleAdoptarClick = () => {
     if (!user) {
       setShowModal(true);
+    } else {
+      setShowAdoptModal(true);
     }
   };
 
@@ -141,6 +144,41 @@ export default function ListaMascotas() {
               </div>
             </div>
             
+          </div>
+        </div>
+      )}
+
+      {/* Modal de "Adopción no disponible aún" */}
+      {showAdoptModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-opacity duration-300">
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden transform transition-all scale-100 animate-in fade-in zoom-in duration-200 border-4 border-[#127369]">
+            <div className="relative bg-[#127369] p-4 flex justify-end">
+              <button 
+                onClick={() => setShowAdoptModal(false)}
+                className="text-white hover:text-red-200 transition-colors duration-200 p-1 rounded-full hover:bg-white/20"
+              >
+                <FaTimes size={24} />
+              </button>
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <FaPaw className="text-white/20 text-6xl" />
+              </div>
+            </div>
+            <div className="p-8 text-center">
+              <h2 className="text-2xl font-bold text-[#243B55] mb-4 font-aclonica">
+                ¡Adopción no disponible aún!
+              </h2>
+              <p className="text-gray-600 mb-8 font-belleza text-lg leading-relaxed">
+                Por ahora no es posible adoptar una mascota, pero estate atento a futuras actualizaciones. ¡Gracias por tu interés!
+              </p>
+              <div className="flex flex-col gap-4">
+                <button
+                  onClick={() => setShowAdoptModal(false)} 
+                  className={modalButtonStyle}
+                >
+                  Ver Mascotas
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       )}
