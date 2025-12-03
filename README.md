@@ -89,7 +89,33 @@ Géneros:
   - Macho
   - Hembra
 
-Tamaños:
-  - Chico
-  - Mediano
-  - Grande
+
+💻 Frontend (React + Vite)
+
+Desde:
+
+AdoptaMascota/Aplicacion/frontend
+
+1️⃣ Instalar dependencias necesarias
+npm install react-icons
+npm install react-router-dom
+npm install lucide-react
+
+2️⃣ Ejecutar frontend
+npm run dev
+
+
+Abrir:
+👉 http://localhost:5173/
+
+## ✅ Mejoras y Correcciones Implementadas
+
+Esta sección detalla los problemas clave resueltos en el desarrollo:
+
+* **1. Redirección Inicial Corregida:** Ahora redirige correctamente a la pantalla de **Login** al inicio, en lugar de cargar directamente la página de Inicio sin autenticación.
+* **2. Flujo de Registro Mejorado:** Tras el registro de usuario, se retorna al **Login** para validar la sesión correctamente, en lugar de enviar directamente a la galería.
+* **3. Navbar Dinámica:** La barra de navegación ahora oculta opciones privadas en los estados de "Login" / "Crear cuenta" y las muestra según el rol una vez que el usuario ha iniciado sesión.
+* **4. Cerrar Sesión Estable:** Funcionalidad de cierre de sesión completamente corregida y operativa.
+* **5. Pantalla de Inicio Personalizada:** La pestaña Home da la bienvenida al usuario utilizando su nombre de usuario.
+* **6. Footer Funcional:** Los íconos en el footer simulan dirigir a los logins de las redes sociales.
+* **7. Datos de Detalle de Mascota:** Se corrigió un error que mostraba campos como "N/A" en la pantalla de detalles de la mascota.
