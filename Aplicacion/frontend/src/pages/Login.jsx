@@ -21,7 +21,7 @@ export default function Login() {
         password: data.password,
       });
 
-      nav("/galeria", {
+      nav("/home", {
         replace: true,
         state: { welcome: `¡Hola, ${me?.name || "amigo"}!` },
       });
@@ -53,7 +53,7 @@ export default function Login() {
 
         {/* parte izquierda de la tarjeta */}
         <section className="flex flex-col justify-center text-center md:text-left">
-          
+
           <h1 className="text-5xl font-extrabold text-[#38657E] drop-shadow-sm tracking-tight">
             MatchPaw
           </h1>

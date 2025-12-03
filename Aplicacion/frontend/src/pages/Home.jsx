@@ -1,7 +1,10 @@
 import { PawPrint, HeartHandshake, Search } from "lucide-react";
 import logo from "../assets/logoRosa.png";
+import { getSession } from "../services/auth";
 
 export default function Home() {
+  const user = getSession();
+
   return (
     <div className="min-h-screen bg-[#FFE6EC] p-8 flex flex-col items-center font-poppins">
 
@@ -14,12 +17,12 @@ export default function Home() {
         />
 
         <h1 className="text-4xl font-bold text-[#000000] text-center">
-          ¡Bienvenido a <span className="text-[#38657E]">MatchPaw</span>!
+          ¡Bienvenid@ {user?.name ? user.name : ""} a <span className="text-[#38657E]">MatchPaw</span>!
         </h1>
 
         <p className="mt-4 max-w-2xl text-black text-lg">
-          La plataforma para conectar hogares amorosos con refugios y 
-          particulares que dan en adopción animales que buscan una familia. 
+          La plataforma para conectar hogares amorosos con refugios y
+          particulares que dan en adopción animales que buscan una familia.
         </p>
       </div>
 
@@ -43,12 +46,12 @@ export default function Home() {
         "
       >
         <p className="leading-relaxed text-center text-md">
-          Nuestro objetivo principal es facilitar y humanizar el proceso de adopción, 
-          asegurando la colocación responsable de animales mediante perfiles detallados y 
-          formularios de solicitud. 
+          Nuestro objetivo principal es facilitar y humanizar el proceso de adopción,
+          asegurando la colocación responsable de animales mediante perfiles detallados y
+          formularios de solicitud.
         </p>
-        <p className="leading-relaxed text-center text-md mt-3">  
-          Buscamos ser una solución digital en la promoción 
+        <p className="leading-relaxed text-center text-md mt-3">
+          Buscamos ser una solución digital en la promoción
           de la adopción responsable.
         </p>
       </div>

@@ -1,9 +1,17 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
+import { getSession, logout } from "../services/auth";
 
 export default function Navbar() {
   const location = useLocation();
-  const isLoginPage = location.pathname === "/login";
+  const navigate = useNavigate();
+  const isLoginPage = location.pathname === "/login" || location.pathname === "/";
+  const user = getSession();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
 
   return (
     <nav
@@ -13,8 +21,8 @@ export default function Navbar() {
       {/* Logo + Nombre */}
       {isLoginPage ? (
         <div className="flex items-center gap-3 select-none opacity-70">
-          <img 
-            src={logo} 
+          <img
+            src={logo}
             alt="MatchPaw logo"
             className="w-10 h-10 object-contain"
           />
@@ -23,17 +31,17 @@ export default function Navbar() {
           </h1>
         </div>
       ) : (
-        // Si le damos clic al logo o nombre nos lleva al Home 
+        // Si le damos clic al logo o nombre nos lleva al Home (o Galería si está logueado)
         <Link
-          to="/"
+          to={user ? "/home" : "/"}
           className="flex items-center gap-3 group cursor-pointer"
         >
-          <img 
-            src={logo} 
+          <img
+            src={logo}
             alt="MatchPaw logo"
             className="w-10 h-10 object-contain transition-transform duration-300 group-hover:scale-110"
           />
-          <h1 
+          <h1
             className="text-2xl font-bold tracking-wide transition-transform duration-300 group-hover:scale-110"
           >
             MatchPaw
@@ -41,33 +49,35 @@ export default function Navbar() {
         </Link>
       )}
 
-      {/* Opciones del menú */}
-      <ul className="flex gap-8 text-sm font-medium">
-        {[
-          { to: "/", label: "Inicio" },
-          { to: "/galeria", label: "Ver Galería de Mascotas" },
-          { to: "/registrar-mascota", label: "Registrar Mascota" },
-          { to: "/login", label: "Cerrar Sesión", isLink: false }
-        ].map((item, index) => (
-          <li key={index}>
-            {item.isLink === false ? (
-              <a
-                href={item.to}
-                className="text-white transition-colors duration-300 hover:text-[#FFB6C1]"
-              >
-                {item.label}
-              </a>
-            ) : (
+      {/* Opciones del menú - Solo mostrar si hay usuario y no estamos en login */}
+      {!isLoginPage && user && (
+        <ul className="flex gap-8 text-sm font-medium">
+          {[
+            { to: "/home", label: "Inicio" },
+            { to: "/galeria", label: "Ver Galería de Mascotas" },
+            { to: "/registrar-mascota", label: "Registrar Mascota" },
+          ].map((item, index) => (
+            <li key={index}>
               <Link
                 to={item.to}
                 className="text-white transition-colors duration-300 hover:text-[#FFB6C1]"
               >
                 {item.label}
               </Link>
-            )}
+            </li>
+          ))}
+
+          {/* Botón de Cerrar Sesión */}
+          <li>
+            <button
+              onClick={handleLogout}
+              className="text-white transition-colors duration-300 hover:text-[#FFB6C1]"
+            >
+              Cerrar Sesión
+            </button>
           </li>
-        ))}
-      </ul>
+        </ul>
+      )}
     </nav>
   );
 }
