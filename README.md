@@ -70,7 +70,7 @@ Esta sección detallamos las principales correcciones y mejoras realizadas en el
 
 ## 🚀 **Instrucciones para ejecutar el proyecto**
 
-### Backend
+### **Backend**
 
 1. Activamos el entorno virtual: source venv/bin/activate
 
@@ -118,7 +118,7 @@ Géneros:
   - Hembra
 
 
-### Frontend
+### **Frontend**
 
 Desde:
 
