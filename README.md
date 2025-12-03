@@ -40,11 +40,11 @@ Está construido con:
 
 ## ✅ Mejoras y Correcciones Implementadas
 
-Esta sección detalla las principales optimizaciones realizadas en el proyecto para asegurar un flujo de usuario correcto y una mejor experiencia:
+Esta sección detallamos las principales correcciones y mejoras realizadas en el proyecto para asegurar un buen flujo y una mejor experiencia:
 
 1.  **Redirección de Inicio Corregida:**
-    * **Antes:** Al abrir la URL principal (`http://localhost:5173/`), la primera pantalla mostrada era **Inicio (Home)**, lo cual permitía el acceso a la galería de mascotas sin iniciar sesión, un comportamiento incorrecto.
-    * **Ahora:** Al cargar la IP, la aplicación redirige al usuario directamente a la pantalla de **Login**, forzando la autenticación.
+    * **Antes:** Al abrir la URL principal (`http://localhost:5173/`), la primera pantalla mostrada era **Inicio (Home)**, lo cual permitía el acceso a la galería de mascotas sin iniciar sesión, lo cual es un comportamiento incorrecto.
+    * **Ahora:** Al cargar la IP, la aplicación redirige al usuario directamente a la pantalla de **Login**, forzando su autenticación.
 
 2.  **Flujo de Registro de Usuario Optimizado:**
     * **Antes:** Tras completar el registro de un nuevo usuario, el sistema lo enviaba inmediatamente a la galería de mascotas.
@@ -55,16 +55,16 @@ Esta sección detalla las principales optimizaciones realizadas en el proyecto p
     * **Ahora:** Si la vista actual es **Login** o **Crear Cuenta**, las opciones de navegación privadas se ocultan. Una vez que la sesión ha sido iniciada, todas las opciones permitidas son visibles.
 
 4.  **Funcionalidad de Cerrar Sesión Establecida:**
-    * **Corrección:** Debido a conflictos en *merges* en una entrega anterior, la función de Cerrar Sesión había sido omitida. Ahora esta funcionalidad ha sido **validada, corregida y está completamente operativa.**
+    * **Corrección:** Debido a conflictos en *merges* en una entrega anterior, la función de Cerrar Sesión había sido omitida a pesar de que si la implementamos. Ahora esta funcionalidad ha sido validada y corregida.
 
 5.  **Mejora en la Pantalla de Bienvenida (Home):**
-    * **Mejora:** En la pestaña de **Inicio (Home)**, se implementó un mensaje personalizado que da la bienvenida al usuario utilizando su *username*.
+    * **Mejora:** En la pestaña de **Inicio (Home)**, se agregó un mensaje personalizado que da la bienvenida al usuario utilizando su username.
 
 6.  **Mejora en la Interacción del Footer:**
-    * **Mejora:** Al hacer clic en los iconos de las redes sociales en el *footer*, se simula el comportamiento de una aplicación real, redirigiendo a los *logins* de cada plataforma. Esto se implementa como un ejemplo funcional dentro del alcance del proyecto.
+    * **Mejora:** Al hacer clic en los iconos de las redes sociales en el *footer*, se simula el comportamiento de una aplicación real, redirigiendo a los logins de cada plataforma. Esto se implementa como un ejemplo funcional, simulando que nos llevan a las redes sociales de MatchPaw.
 
 7.  **Carga Correcta de Datos de Detalle de Mascota:**
-    * **Corrección:** Se solventó un error en la vista de detalles de una mascota específica donde los datos se cargaban erróneamente, resultando en campos con el valor **N/A**. **Ahora, la carga de datos es correcta** y todos los detalles específicos de cada mascota se muestran apropiadamente.
+    * **Corrección:** Se solucionó un error en la vista de detalles de una mascota específica donde los datos se cargaban erróneamente, resultando en campos con el valor **N/A**. **Ahora, la carga de datos es correcta** y todos los detalles específicos de cada mascota se muestran apropiadamente.
 
 ---
 
