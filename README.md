@@ -37,6 +37,37 @@ Está construido con:
 - **React Router** para navegación  
 
 ---
+---
+
+## ✅ Mejoras y Correcciones Implementadas
+
+Esta sección detalla las principales optimizaciones realizadas en el proyecto para asegurar un flujo de usuario correcto y una mejor experiencia:
+
+1.  **Redirección de Inicio Corregida:**
+    * **Antes:** Al abrir la URL principal (`http://localhost:5173/`), la primera pantalla mostrada era **Inicio (Home)**, lo cual permitía el acceso a la galería de mascotas sin iniciar sesión, un comportamiento incorrecto.
+    * **Ahora:** Al cargar la IP, la aplicación redirige al usuario directamente a la pantalla de **Login**, forzando la autenticación.
+
+2.  **Flujo de Registro de Usuario Optimizado:**
+    * **Antes:** Tras completar el registro de un nuevo usuario, el sistema lo enviaba inmediatamente a la galería de mascotas.
+    * **Ahora:** Al registrar un nuevo usuario, el sistema lo devuelve al **Login** para que ingrese sus credenciales y sea validado correctamente.
+
+3.  **Visibilidad de Opciones en la Navbar Dinámica:**
+    * **Antes:** Las opciones privadas de la Navbar (ej. "Ver Galería de Mascotas") eran visibles incluso en las vistas de **Login** o **Crear Cuenta**, permitiendo un acceso no autorizado.
+    * **Ahora:** Si la vista actual es **Login** o **Crear Cuenta**, las opciones de navegación privadas se ocultan. Una vez que la sesión ha sido iniciada, todas las opciones permitidas son visibles.
+
+4.  **Funcionalidad de Cerrar Sesión Establecida:**
+    * **Corrección:** Debido a conflictos en *merges* en una entrega anterior, la función de Cerrar Sesión había sido omitida. Ahora esta funcionalidad ha sido **validada, corregida y está completamente operativa.**
+
+5.  **Mejora en la Pantalla de Bienvenida (Home):**
+    * **Mejora:** En la pestaña de **Inicio (Home)**, se implementó un mensaje personalizado que da la bienvenida al usuario utilizando su *username*.
+
+6.  **Mejora en la Interacción del Footer:**
+    * **Mejora:** Al hacer clic en los iconos de las redes sociales en el *footer*, se simula el comportamiento de una aplicación real, redirigiendo a los *logins* de cada plataforma. Esto se implementa como un ejemplo funcional dentro del alcance del proyecto.
+
+7.  **Carga Correcta de Datos de Detalle de Mascota:**
+    * **Corrección:** Se solventó un error en la vista de detalles de una mascota específica donde los datos se cargaban erróneamente, resultando en campos con el valor **N/A**. **Ahora, la carga de datos es correcta** y todos los detalles específicos de cada mascota se muestran apropiadamente.
+
+---
 
 ## 🚀 **Instrucciones para ejecutar el proyecto**
 
@@ -108,14 +139,3 @@ npm run dev
 Abrir:
 👉 http://localhost:5173/
 
-## ✅ Mejoras y Correcciones Implementadas
-
-Esta sección detalla los problemas clave resueltos en el desarrollo:
-
-* **1. Redirección Inicial Corregida:** Ahora redirige correctamente a la pantalla de **Login** al inicio, en lugar de cargar directamente la página de Inicio sin autenticación.
-* **2. Flujo de Registro Mejorado:** Tras el registro de usuario, se retorna al **Login** para validar la sesión correctamente, en lugar de enviar directamente a la galería.
-* **3. Navbar Dinámica:** La barra de navegación ahora oculta opciones privadas en los estados de "Login" / "Crear cuenta" y las muestra según el rol una vez que el usuario ha iniciado sesión.
-* **4. Cerrar Sesión Estable:** Funcionalidad de cierre de sesión completamente corregida y operativa.
-* **5. Pantalla de Inicio Personalizada:** La pestaña Home da la bienvenida al usuario utilizando su nombre de usuario.
-* **6. Footer Funcional:** Los íconos en el footer simulan dirigir a los logins de las redes sociales.
-* **7. Datos de Detalle de Mascota:** Se corrigió un error que mostraba campos como "N/A" en la pantalla de detalles de la mascota.
