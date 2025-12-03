@@ -43,9 +43,10 @@ Está construido con:
 ### Backend
 
 1. Activamos el entorno virtual:
+   
   source venv/bin/activate
 
-2. Instalar dependencias del backend
+3. Instalar dependencias del backend
    Dentro de la carpeta Aplicacion/ hacemos los siguientes comando en terminal
    - pip install -r requirements.txt
 
@@ -53,7 +54,7 @@ Está construido con:
    - pip install djangorestframework
    - pip install django-cors-headers
 
-3. Vamos a la carpeta del Backend: cd adopta_amigo
+4. Vamos a la carpeta del Backend: cd adopta_amigo
    
 5. Aplicamos migraciones:
    - python manage.py makemigrations
