@@ -31,7 +31,8 @@ MatchPaw permite:
 
 Está construido con:
 
-- **React + Vite** para el frontend  
+- **React + Vite** para el frontend
+- **Django + Django REST Framework** para el backend
 - **TailwindCSS** para estilos  
 - **React Router** para navegación  
 
@@ -39,62 +40,30 @@ Está construido con:
 
 ## 🚀 **Instrucciones para ejecutar el proyecto**
 
-Este proyecto contiene un backend en Django REST Framework y un frontend en React + Vite.
+### Backend
 
-Dentro de Aplicacion/:
+1. Activamos el entorno virtual:
+  source venv/bin/activate
 
-pip install -r requirements.txt
+2. Instalar dependencias del backend
+   Dentro de la carpeta Aplicacion/ hacemos los siguientes comando en terminal
+   - pip install -r requirements.txt
 
-Instalamos aparte esto:
-pip install djangorestframework
-pip install django-cors-headers
-npm install react-icons
-npm install react-router-dom
-npm install lucide-react
+   Adicionalmente instalamos:
+   - pip install djangorestframework
+   - pip install django-cors-headers
 
+3. Vamos a la carpeta del Backend: cd adopta_amigo
+   
+5. Aplicamos migraciones:
+   - python manage.py makemigrations
+   - python manage.py migrate
 
-Luego, entrar a la carpeta del backend: cd adopta_amigo
+6. Creamos un superusuario con el comando: python manage.py createsuperuser
 
-python manage.py makemigrations
-python manage.py migrate
+7. Iniciamos Servidor backend:
+   - python manage.py runserver
 
-
-## Importante: Agregar datos iniciales en Django Admin
-
-En http://127.0.0.1:8000/admin
-, agregar los siguientes valores necesarios:
-
-Energias:Muy Activo,Moderado, Tranquilo
-
-Especies:Tortuga,Perro,Hamster, Gato, Erizo, Conejo
-
-Géneros: Macho, Hembra
-
-Tamaños:Chico,Mediano,Grande
-
-Esto es necesario para que el frontend pueda mostrar los detalles correctamente.
-
-Luego dentro de la adopta_amigo hacemos:
-
-python manage.py runserver
-
-Se puede abrir:
-http://127.0.0.1:8000/
-
-:::::::::::::::::::::::::::::::::::: 
-En otra terminal, dentro de:
-AdoptaMascota/Aplicacion/frontend
-
-
-Ejecutar:
-
-npm install
-npm install react-icons
-npm install react-router-dom
-npm install lucide-react
-npm run dev
-
-
-Abrimos:
-http://localhost:5173/
+8. Para poder ir al panel de adminitración vamos a:
+   - http://127.0.0.1:8000/admin
 
