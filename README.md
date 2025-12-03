@@ -34,9 +34,8 @@ Está construido con:
 - **React + Vite** para el frontend
 - **Django + Django REST Framework** para el backend
 - **TailwindCSS** para estilos  
-- **React Router** para navegación  
-
----
+- **React Router** para navegación
+  
 ---
 
 ## ✅ Mejoras y Correcciones Implementadas
