@@ -49,15 +49,23 @@ export default function Navbar() {
         </Link>
       )}
 
-      {/* Opciones del menú - Solo mostrar si hay usuario y no estamos en login */}
-      {!isLoginPage && user && (
-        <ul className="flex gap-8 text-sm font-medium">
-          {[
-            { to: "/home", label: "Inicio" },
-            { to: "/galeria", label: "Ver Galería de Mascotas" },
-            { to: "/registrar-mascota", label: "Registrar Mascota" },
-          ].map((item, index) => (
-            <li key={index}>
+      {/* Opciones del menú */}
+      <ul className="flex gap-8 text-sm font-medium">
+        {[
+          { to: "/", label: "Inicio" },
+          { to: "/galeria", label: "Ver Galería de Mascotas" },
+          { to: "/registrar-mascota", label: "Registrar Mascota" },
+          { to: "/login", label: "Cerrar Sesión", isLink: false }
+        ].map((item, index) => (
+          <li key={index}>
+            {item.action ? (
+              <span
+                onClick={item.action} 
+                className="text-white transition-colors duration-300 hover:text-[#FFB6C1] cursor-pointer"
+              >
+                {item.label}
+              </span>
+            ) : (
               <Link
                 to={item.to}
                 className="text-white transition-colors duration-300 hover:text-[#FFB6C1]"
