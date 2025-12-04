@@ -31,7 +31,7 @@ export default function Navbar() {
           </h1>
         </div>
       ) : (
-        // Si le damos clic al logo o nombre nos lleva al Home (o Galería si está logueado)
+        // Si le damos clic al logo o nombre nos lleva al Home (si está logueado)
         <>
           <Link
           to={user ? "/home" : "/"}
@@ -55,8 +55,7 @@ export default function Navbar() {
         {[
           { to: "/", label: "Inicio" },
           { to: "/galeria", label: "Ver Galería de Mascotas" },
-          { to: "/registrar-mascota", label: "Registrar Mascota" },
-          { to: "/login", label: "Cerrar Sesión", isLink: false }
+          { to: "/registrar-mascota", label: "Registrar Mascota" }
         ].map((item, index) => (
           <li key={index}>
             {item.action ? (
