@@ -102,7 +102,7 @@
 },
 {
     "model": "mascotas.mascota",
-    "pk": 6,
+    "pk": 1,
     "fields": {
         "nombre": "Luna",
         "descripcion": "Es una gatita que le gusta jugar todo el dia",
@@ -118,7 +118,7 @@
 },
 {
     "model": "mascotas.mascota",
-    "pk": 7,
+    "pk": 2,
     "fields": {
         "nombre": "Max",
         "descripcion": "Es un perro que le encanta estar en un patio muy grande",
@@ -134,7 +134,7 @@
 },
 {
     "model": "mascotas.mascota",
-    "pk": 8,
+    "pk": 3,
     "fields": {
         "nombre": "Pelusa",
         "descripcion": "Es una gata que no le gusta mucho el agua",
@@ -150,7 +150,7 @@
 },
 {
     "model": "mascotas.mascota",
-    "pk": 9,
+    "pk": 4,
     "fields": {
         "nombre": "Coco",
         "descripcion": "Le gusta comer a todas horas, nunca deja de comer ni de jugar",
@@ -166,7 +166,7 @@
 },
 {
     "model": "mascotas.mascota",
-    "pk": 10,
+    "pk": 5,
     "fields": {
         "nombre": "Bella",
         "descripcion": "Le gustan estar siempre con su dueño, nunca lo deja de seguir",
@@ -182,7 +182,7 @@
 },
 {
     "model": "mascotas.mascota",
-    "pk": 11,
+    "pk": 6,
     "fields": {
         "nombre": "mochi",
         "descripcion": "Es muy pequeño, necesita mucho cuidado",
@@ -198,7 +198,7 @@
 },
 {
     "model": "mascotas.mascota",
-    "pk": 12,
+    "pk": 7,
     "fields": {
         "nombre": "Jack",
         "descripcion": "Se duerme todo el dia",
@@ -214,7 +214,7 @@
 },
 {
     "model": "mascotas.mascota",
-    "pk": 13,
+    "pk": 8,
     "fields": {
         "nombre": "Bolita",
         "descripcion": "Se esconde por todos lados",
@@ -230,7 +230,7 @@
 },
 {
     "model": "mascotas.mascota",
-    "pk": 14,
+    "pk": 9,
     "fields": {
         "nombre": "Quesito",
         "descripcion": "Le gusta mucho el queso",
@@ -246,7 +246,7 @@
 },
 {
     "model": "mascotas.mascota",
-    "pk": 15,
+    "pk": 10,
     "fields": {
         "nombre": "Oliver",
         "descripcion": "No le gusta que le toquen la panza",
@@ -262,7 +262,7 @@
 },
 {
     "model": "mascotas.mascota",
-    "pk": 16,
+    "pk": 11,
     "fields": {
         "nombre": "Rockie",
         "descripcion": "No le gusta moverse mucho",
@@ -278,7 +278,7 @@
 },
 {
     "model": "mascotas.mascota",
-    "pk": 17,
+    "pk": 12,
     "fields": {
         "nombre": "Pelusa",
         "descripcion": "Siempre esta en su rueda girando",
@@ -294,7 +294,7 @@
 },
 {
     "model": "mascotas.mascota",
-    "pk": 18,
+    "pk": 13,
     "fields": {
         "nombre": "Turbo",
         "descripcion": "Siempre esta corriendo, se debe de tener cuidado de que no se escape",
@@ -310,7 +310,7 @@
 },
 {
     "model": "mascotas.mascota",
-    "pk": 19,
+    "pk": 14,
     "fields": {
         "nombre": "Cleo",
         "descripcion": "Le gusta mucho comer",
