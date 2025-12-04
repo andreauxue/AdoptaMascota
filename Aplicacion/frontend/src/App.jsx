@@ -7,6 +7,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import RegistrarMascota from "./pages/RegistrarMascota";
 import NotFound from "./pages/NotFound.jsx";
+import Perfil from "./pages/Perfil.jsx"; // Importamos la nueva página
 import { AuthProvider } from "./context/AuthContext";
 
 export default function App() {
@@ -21,6 +22,7 @@ export default function App() {
               <Route path="/mascotas" element={<ListaMascotas/>}/>
               <Route path="/register" element={<Register/>}/>
               <Route path="/login" element={<Login/>}/>
+              <Route path="/perfil" element={<Perfil/>}/>
               <Route path="/registrar-mascota" element={<RegistrarMascota/>}/>
               <Route path="*" element={<NotFound/>}/>
             </Routes>

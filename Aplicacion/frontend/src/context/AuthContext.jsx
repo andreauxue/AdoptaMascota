@@ -86,6 +86,24 @@ export const AuthProvider = ({ children }) => {
             setIsLoading(false);
         }
     };
+    // Función para actualizar el perfil del usuario
+    const updateUser = async (updatedData) => {
+        setIsLoading(true);
+        try {
+            const data = await api.put("/api/update-profile/", updatedData);
+            if (data.success) {
+                setUser(data.user);
+                localStorage.setItem('user', JSON.stringify(data.user));
+                return { success: true };
+            } else {
+                throw new Error(data.error || 'Error al actualizar perfil');
+            }
+        } catch (error) {
+            throw error;
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
     const value = {
         user,
@@ -94,6 +112,7 @@ export const AuthProvider = ({ children }) => {
         register,
         login,
         logout,
+        updateUser,
     };
 
     return (

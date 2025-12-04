@@ -147,3 +147,41 @@ def listar_mascotas(request):
     mascotas = Mascota.objects.all()
     serializer = MascotaSerializer(mascotas, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+# Vista para actualizar el perfil del usuario
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def update_profile(request):
+    user = request.user
+    data = request.data
+    
+    new_username = data.get('username')
+    new_email = data.get('email')
+    new_password = data.get('password')
+
+    # Validar si el username ya existe en otro usuario
+    if new_username and new_username != user.username:
+        if User.objects.filter(username=new_username).exists():
+            return Response({'error': 'El nombre de usuario ya está en uso'}, status=status.HTTP_400_BAD_REQUEST)
+        user.username = new_username
+
+    if new_email:
+        user.email = new_email
+
+    if new_password:
+        user.set_password(new_password)
+
+    user.save()
+    
+    # Mantener la sesión activa si se cambió la contraseña
+    if new_password:
+        login(request, user)
+
+    return Response({
+        'success': True,
+        'user': {
+            'username': user.username,
+            'email': user.email
+        }
+    }, status=status.HTTP_200_OK)
