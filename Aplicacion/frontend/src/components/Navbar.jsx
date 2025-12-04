@@ -32,7 +32,8 @@ export default function Navbar() {
         </div>
       ) : (
         // Si le damos clic al logo o nombre nos lleva al Home (o Galería si está logueado)
-        <Link
+        <>
+          <Link
           to={user ? "/home" : "/"}
           className="flex items-center gap-3 group cursor-pointer"
         >
@@ -47,7 +48,7 @@ export default function Navbar() {
             MatchPaw
           </h1>
         </Link>
-      )}
+
 
       {/* Opciones del menú */}
       <ul className="flex gap-8 text-sm font-medium">
@@ -72,6 +73,7 @@ export default function Navbar() {
               >
                 {item.label}
               </Link>
+            )}
             </li>
           ))}
 
@@ -85,6 +87,7 @@ export default function Navbar() {
             </button>
           </li>
         </ul>
+        </>
       )}
     </nav>
   );
