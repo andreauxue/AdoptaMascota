@@ -20,4 +20,3 @@ function TarjetaCanciones({ title, artist, album, cover, year, description }) {
 }
 
 export default TarjetaCanciones;
-
