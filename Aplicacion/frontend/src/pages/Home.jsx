@@ -27,7 +27,6 @@ export default function Home() {
       </div>
 
       {/* Objetivo */}
-      {/* Objetivo */}
       <div
         className="
           max-w-4xl 

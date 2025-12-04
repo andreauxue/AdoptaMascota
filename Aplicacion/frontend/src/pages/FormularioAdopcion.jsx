@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom"; // <-- Importa esto
+import { useNavigate, useLocation } from "react-router-dom"; 
 import logoRosa from "../assets/logoRosa.png";
 
 export default function FormularioAdopcion() {
-  const navigate = useNavigate(); // <-- Crea la función para redirigir
+  const navigate = useNavigate(); 
   const location = useLocation();
   const mascotaNombre = location.state?.mascotaNombre || "la mascota";
   const [formData, setFormData] = useState({
@@ -23,11 +23,8 @@ export default function FormularioAdopcion() {
     e.preventDefault();
 
     console.log("Formulario de Adopción:", formData);
+    navigate("/formulario-recibido", { state: { mascotaNombre } });
 
-    // Aquí reemplazamos el alert por navegar a la otra página
-    navigate("/formulario-recibido", { state: { mascotaNombre } }); // <-- Redirige a tu pantalla de gracias
-
-    // Opcional: si quieres limpiar el formulario
     setFormData({
       razon: "",
       vivienda: "",

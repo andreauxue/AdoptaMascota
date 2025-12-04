@@ -36,7 +36,7 @@ export default function Register() {
       await new Promise((r) => setTimeout(r, 350));
 
       await register(formData);
-      logout(); // Clear session to force manual login
+      logout();
 
       nav("/login", {
         replace: true,
