@@ -1,9 +1,17 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
+import { getSession, logout } from "../services/auth";
 
 export default function Navbar() {
   const location = useLocation();
-  const isLoginPage = location.pathname === "/login";
+  const navigate = useNavigate();
+  const isLoginPage = location.pathname === "/login" || location.pathname === "/";
+  const user = getSession();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
 
   return (
     <nav
@@ -13,8 +21,8 @@ export default function Navbar() {
       {/* Logo + Nombre */}
       {isLoginPage ? (
         <div className="flex items-center gap-3 select-none opacity-70">
-          <img 
-            src={logo} 
+          <img
+            src={logo}
             alt="MatchPaw logo"
             className="w-10 h-10 object-contain"
           />
@@ -23,40 +31,40 @@ export default function Navbar() {
           </h1>
         </div>
       ) : (
-        // Si le damos clic al logo o nombre nos lleva al Home 
-        <Link
-          to="/"
+        // Si le damos clic al logo o nombre nos lleva al Home (si está logueado)
+        <>
+          <Link
+          to={user ? "/home" : "/"}
           className="flex items-center gap-3 group cursor-pointer"
         >
-          <img 
-            src={logo} 
+          <img
+            src={logo}
             alt="MatchPaw logo"
             className="w-10 h-10 object-contain transition-transform duration-300 group-hover:scale-110"
           />
-          <h1 
+          <h1
             className="text-2xl font-bold tracking-wide transition-transform duration-300 group-hover:scale-110"
           >
             MatchPaw
           </h1>
         </Link>
-      )}
+
 
       {/* Opciones del menú */}
       <ul className="flex gap-8 text-sm font-medium">
         {[
           { to: "/", label: "Inicio" },
           { to: "/galeria", label: "Ver Galería de Mascotas" },
-          { to: "/registrar-mascota", label: "Registrar Mascota" },
-          { to: "/login", label: "Cerrar Sesión", isLink: false }
+          { to: "/registrar-mascota", label: "Registrar Mascota" }
         ].map((item, index) => (
           <li key={index}>
-            {item.isLink === false ? (
-              <a
-                href={item.to}
-                className="text-white transition-colors duration-300 hover:text-[#FFB6C1]"
+            {item.action ? (
+              <span
+                onClick={item.action} 
+                className="text-white transition-colors duration-300 hover:text-[#FFB6C1] cursor-pointer"
               >
                 {item.label}
-              </a>
+              </span>
             ) : (
               <Link
                 to={item.to}
@@ -65,9 +73,21 @@ export default function Navbar() {
                 {item.label}
               </Link>
             )}
+            </li>
+          ))}
+
+          {/* Botón de Cerrar Sesión */}
+          <li>
+            <button
+              onClick={handleLogout}
+              className="text-white transition-colors duration-300 hover:text-[#FFB6C1]"
+            >
+              Cerrar Sesión
+            </button>
           </li>
-        ))}
-      </ul>
+        </ul>
+        </>
+      )}
     </nav>
   );
 }

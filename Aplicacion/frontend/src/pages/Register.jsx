@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { register } from "../services/auth";
+import { register, logout } from "../services/auth";
 import logoRosa from "../assets/logoRosa.png";
 
 export default function Register() {
@@ -35,11 +35,12 @@ export default function Register() {
 
       await new Promise((r) => setTimeout(r, 350));
 
-      const user = await register(formData);
+      await register(formData);
+      logout();
 
-      nav("/galeria", {
+      nav("/login", {
         replace: true,
-        state: { welcome: `¡Hola, ${user?.name || "amigo"}!` },
+        state: { message: "Cuenta creada exitosamente. Por favor inicia sesión." },
       });
     } catch (e) {
       setErr(e.message || "Ocurrió un error al registrarte.");
@@ -66,7 +67,7 @@ export default function Register() {
 
         {/* Formulario */}
         <form onSubmit={handleRegister} className="space-y-6">
-          
+
           {/* Nombre */}
           <div>
             <label className="block font-semibold text-pink-700 mb-1">Nombre</label>

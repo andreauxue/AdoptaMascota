@@ -31,70 +31,111 @@ MatchPaw permite:
 
 Está construido con:
 
-- **React + Vite** para el frontend  
+- **React + Vite** para el frontend
+- **Django + Django REST Framework** para el backend
 - **TailwindCSS** para estilos  
-- **React Router** para navegación  
+- **React Router** para navegación
+  
+---
+
+## ✅ Mejoras y Correcciones Implementadas
+
+Esta sección detallamos las principales correcciones y mejoras realizadas en el proyecto para asegurar un buen flujo y una mejor experiencia:
+
+1.  **Redirección de Inicio Corregida:**
+    * **Antes:** Al abrir la URL principal (`http://localhost:5173/`), la primera pantalla mostrada era **Inicio (Home)**, lo cual permitía el acceso a la galería de mascotas sin iniciar sesión, lo cual es un comportamiento incorrecto.
+    * **Ahora:** Al cargar la IP, la aplicación redirige al usuario directamente a la pantalla de **Login**, forzando su autenticación.
+
+2.  **Flujo de Registro de Usuario Optimizado:**
+    * **Antes:** Tras completar el registro de un nuevo usuario, el sistema lo enviaba inmediatamente a la galería de mascotas.
+    * **Ahora:** Al registrar un nuevo usuario, el sistema lo devuelve al **Login** para que ingrese sus credenciales y sea validado correctamente.
+
+3.  **Visibilidad de Opciones en la Navbar Dinámica:**
+    * **Antes:** Las opciones privadas de la Navbar (ej. "Ver Galería de Mascotas") eran visibles incluso en las vistas de **Login** o **Crear Cuenta**, permitiendo un acceso no autorizado.
+    * **Ahora:** Si la vista actual es **Login** o **Crear Cuenta**, las opciones de navegación privadas se ocultan. Una vez que la sesión ha sido iniciada, todas las opciones permitidas son visibles.
+
+4.  **Funcionalidad de Cerrar Sesión Establecida:**
+    * **Corrección:** Debido a conflictos en *merges* en una entrega anterior, la función de Cerrar Sesión había sido omitida a pesar de que si la implementamos. Ahora esta funcionalidad ha sido validada y corregida.
+
+5.  **Mejora en la Pantalla de Bienvenida (Home):**
+    * **Mejora:** En la pestaña de **Inicio (Home)**, se agregó un mensaje personalizado que da la bienvenida al usuario utilizando su username.
+
+6.  **Mejora en la Interacción del Footer:**
+    * **Mejora:** Al hacer clic en los iconos de las redes sociales en el *footer*, se simula el comportamiento de una aplicación real, redirigiendo a los logins de cada plataforma. Esto se implementa como un ejemplo funcional, simulando que nos llevan a las redes sociales de MatchPaw.
+
+7.  **Carga Correcta de Datos de Detalle de Mascota:**
+    * **Corrección:** Se solucionó un error en la vista de detalles de una mascota específica donde los datos se cargaban erróneamente, resultando en campos con el valor **N/A**. **Ahora, la carga de datos es correcta** y todos los detalles específicos de cada mascota se muestran apropiadamente.
 
 ---
 
 ## 🚀 **Instrucciones para ejecutar el proyecto**
 
-Este proyecto contiene un backend en Django REST Framework y un frontend en React + Vite.
+### **Backend**
 
-Dentro de Aplicacion/:
+1. Activamos el entorno virtual: source venv/bin/activate
 
-pip install -r requirements.txt
+3. Instalar dependencias del backend
+   Dentro de la carpeta Aplicacion/ hacemos los siguientes comando en terminal
+   - pip install -r requirements.txt
 
-Instalamos aparte esto:
-pip install djangorestframework
-pip install django-cors-headers
-npm install react-icons
-npm install react-router-dom
-npm install lucide-react
+   Adicionalmente instalamos:
+   - pip install djangorestframework
+   - pip install django-cors-headers
+
+4. Vamos a la carpeta del Backend: cd adopta_amigo
+   
+5. Aplicamos migraciones:
+   - python manage.py makemigrations
+   - python manage.py migrate
+
+6. Creamos un superusuario con el comando: python manage.py createsuperuser
+
+7. Iniciamos Servidor backend:
+   - python manage.py runserver
+
+8. Para poder ir al panel de adminitración vamos a:
+   - http://127.0.0.1:8000/admin
+
+#### Datos precargados importantes
+En db.sqlite3 ya se incluyen nuestros valores iniciales que el frontend necesita:
+
+Energías:
+  - Muy Activo
+  - Moderado
+  - Tranquilo
+
+Especies:
+  - Tortuga
+  - Perro
+  - Hámster
+  - Gato
+  - Erizo
+  - Conejo
+  - Perico
+
+Géneros:
+  - Macho
+  - Hembra
 
 
-Luego, entrar a la carpeta del backend: cd adopta_amigo
+### **Frontend**
 
-python manage.py makemigrations
-python manage.py migrate
+Desde:
 
-
-## Importante: Agregar datos iniciales en Django Admin
-
-En http://127.0.0.1:8000/admin
-, agregar los siguientes valores necesarios:
-
-Energias:Muy Activo,Moderado, Tranquilo
-
-Especies:Tortuga,Perro,Hamster, Gato, Erizo, Conejo
-
-Géneros: Macho, Hembra
-
-Tamaños:Chico,Mediano,Grande
-
-Esto es necesario para que el frontend pueda mostrar los detalles correctamente.
-
-Luego dentro de la adopta_amigo hacemos:
-
-python manage.py runserver
-
-Se puede abrir:
-http://127.0.0.1:8000/
-
-:::::::::::::::::::::::::::::::::::: 
-En otra terminal, dentro de:
 AdoptaMascota/Aplicacion/frontend
 
+1. Instalar dependencias necesarias
+  - npm install react-icons
+  - npm install react-router-dom
+  - npm install lucide-react
 
-Ejecutar:
+2. Ejecutamos en frontend/ en terminal el comando: npm run dev
 
-npm install
-npm install react-icons
-npm install react-router-dom
-npm install lucide-react
-npm run dev
-
-
-Abrimos:
-http://localhost:5173/
+3. Para poder ver nuestro sistema vamos a:
+   - http://localhost:5173/
+  
+4. Nosotros creamos y usamos este usuario:
+   - username:hufflepuff
+   - email: hufflepuff@gmail.com
+   - password: huffle123
 

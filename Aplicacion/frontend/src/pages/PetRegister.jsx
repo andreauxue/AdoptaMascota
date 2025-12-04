@@ -38,7 +38,6 @@ export default function PetRegister() {
       });
     }
 
-    // Limpiar mensajes al editar
     if (error) setError("");
     if (success) setSuccess("");
   };
@@ -56,7 +55,7 @@ export default function PetRegister() {
       return;
     }
 
-    // Crear FormData para enviar al backend
+    // para enviar al backend
     const data = new FormData();
     data.append("nombre", formData.nombre);
     data.append("edad", formData.edad);
@@ -69,7 +68,7 @@ export default function PetRegister() {
     data.append("descripcion", formData.descripcion);
     data.append("foto", formData.foto, formData.foto.name);
 
-    // Debug: Ver qué se está enviando
+    // para ver en la consola 
     console.log("=== Datos que se enviarán ===");
     for (let [key, value] of data.entries()) {
       console.log(`${key}:`, value);
@@ -90,7 +89,6 @@ export default function PetRegister() {
         throw new Error(result.error || "Error al registrar la mascota");
       }
 
-      // Éxito
       setSuccess("¡Mascota registrada exitosamente!");
 
       // Limpiar formulario
@@ -107,10 +105,7 @@ export default function PetRegister() {
         foto: null,
       });
 
-      // Resetear el input file manualmente
       e.target.reset();
-
-      // Auto-ocultar mensaje de éxito después de 5 segundos
       setTimeout(() => {
         setSuccess("");
       }, 5000);
@@ -118,7 +113,6 @@ export default function PetRegister() {
       setError(err.message || "Error al conectar con el servidor");
       console.error("Error:", err);
 
-      // Auto-ocultar mensaje de error después de 5 segundos
       setTimeout(() => {
         setError("");
       }, 5000);
@@ -198,12 +192,13 @@ export default function PetRegister() {
               disabled={loading}
             >
               <option value="">Selecciona una especie</option>
+              <option value="Perro">Perro</option>
+              <option value="Gato">Gato</option>
               <option value="Conejo">Conejo</option>
               <option value="Erizo">Erizo</option>
-              <option value="Gato">Gato</option>
               <option value="Hamster">Hamster</option>
-              <option value="Perro">Perro</option>
               <option value="Tortuga">Tortuga</option>
+              <option value="Perico">Perico</option>
             </select>
           </div>
 
@@ -314,9 +309,9 @@ export default function PetRegister() {
               disabled={loading}
             >
               <option value="">Selecciona una opción</option>
-              <option value="Tranquilo">Tranquilo 💤</option>
-              <option value="Moderado">Moderado 🙂</option>
-              <option value="Muy Activo">Muy Activo ⚡</option>
+              <option value="Tranquilo">Tranquilo</option>
+              <option value="Moderado">Moderado</option>
+              <option value="Muy Activo">Muy Activo</option>
             </select>
           </div>
 

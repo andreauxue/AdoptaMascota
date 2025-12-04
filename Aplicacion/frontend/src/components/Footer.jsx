@@ -6,13 +6,13 @@ export default function Footer() {
     <footer className="w-full bg-[#38657E] text-white px-8 py-8 text-center">
 
       {/* Derechos reservados */}
-      <p className="font-semibold text-base mb-4">  {/* <- antes era text-lg */}
+      <p className="font-semibold text-base mb-4">
         © 2025 MatchPaw
       </p>
 
       {/* Contactos */}
       <div className="mb-6">
-        <h3 className="font-bold text-lg"> {/* <- antes era text-xl */}
+        <h3 className="font-bold text-lg">
           Contactos
         </h3>
         <p className="text-sm">5578937301</p>
@@ -21,10 +21,31 @@ export default function Footer() {
       </div>
 
       {/* Redes sociales */}
-      <div className="flex justify-center gap-6 text-2xl"> {/* <- antes era text-3xl */}
-        <FaFacebook className="hover:text-[#FF93A2] transition cursor-pointer" />
-        <FaInstagram className="hover:text-[#FF93A2] transition cursor-pointer" />
-        <FaTwitter className="hover:text-[#FF93A2] transition cursor-pointer" />
+      <div className="flex justify-center gap-6 text-2xl">
+        <a
+          href="https://www.facebook.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Facebook"
+        >
+          <FaFacebook className="hover:text-[#FF93A2] transition cursor-pointer" />
+        </a>
+        <a
+          href="https://www.instagram.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Instagram"
+        >
+          <FaInstagram className="hover:text-[#FF93A2] transition cursor-pointer" />
+        </a>
+        <a
+          href="https://www.x.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="X (Twitter)"
+        >
+          <FaTwitter className="hover:text-[#FF93A2] transition cursor-pointer" />
+        </a>
       </div>
     </footer>
   );

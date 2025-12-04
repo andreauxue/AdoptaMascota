@@ -12,46 +12,39 @@ export default function DetallesMascota() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    if (location.state?.mascota) {
-      setMascota(location.state.mascota);
-      setLoading(false);
-      return;
-    }
+    console.log("Cargando mascota con ID:", id);
 
-    const isNumeric = /^\d+$/.test(id);
-
-    if (isNumeric) {
-      fetch(`/api/mascotas/${id}/`)
-        .then(res => {
-          if (!res.ok) throw new Error("No se pudo cargar la mascota");
-          return res.json();
-        })
-        .then(data => {
-          setMascota({
-            nombre: data.nombre,
-            imagen: data.imagen, // URL completa o relativa
-            tipo: data.especie_nombre,
-            info: `${data.genero_nombre} • ${data.edad} años`,
-            descripcion: data.descripcion,
-            detalles: {
-              especie: data.especie_nombre,
-              genero: data.genero_nombre,
-              edad: `${data.edad} años`,
-              tamanio: data.tamanio_nombre,
-              vacunado: data.vacunado ? "Sí" : "No",
-              esterilizado: data.esterilizado ? "Sí" : "No",
-              energia: data.energia_nombre,
-              personalidad: "Desconocida" // No está en el modelo actual
-            }
-          });
-        })
-        .catch(err => setError(err.message))
-        .finally(() => setLoading(false));
-    } else {
-      setError("Mascota no encontrada o recarga no soportada para estáticos.");
-      setLoading(false);
-    }
-  }, [id, location.state]);
+    fetch(`http://localhost:8000/api/mascotas/${id}/`)
+      .then(res => {
+        console.log("Response status:", res.status);
+        if (!res.ok) throw new Error("No se pudo cargar la mascota");
+        return res.json();
+      })
+      .then(data => {
+        console.log("Datos recibidos:", data);
+        setMascota({
+          nombre: data.nombre,
+          imagen: data.imagen,
+          tipo: data.especie_nombre || "Desconocido",
+          info: `${data.genero_nombre || "Desconocido"} • ${data.edad} años`,
+          descripcion: data.descripcion,
+          detalles: {
+            especie: data.especie_nombre || "N/A",
+            genero: data.genero_nombre || "N/A",
+            edad: `${data.edad} años`,
+            tamanio: data.tamanio_nombre || "N/A",
+            vacunado: data.vacunado ? "Sí" : "No",
+            esterilizado: data.esterilizado ? "Sí" : "No",
+            energia: data.energia_nombre || "N/A",
+          }
+        });
+      })
+      .catch(err => {
+        console.error("Error cargando mascota:", err);
+        setError(err.message);
+      })
+      .finally(() => setLoading(false));
+  }, [id]);
 
   const irAFormulario = () => {
     navigate("/formulario-adopcion", { state: { mascotaNombre: mascota.nombre } });
@@ -113,10 +106,9 @@ export default function DetallesMascota() {
               <p><span className="font-bold text-pink-700">Género:</span> {mascota.detalles?.genero || sexo}</p>
               <p><span className="font-bold text-pink-700">Edad:</span> {mascota.detalles?.edad || edad}</p>
               <p><span className="font-bold text-pink-700">Tamaño:</span> {mascota.detalles?.tamanio || "N/A"}</p>
-              <p><span className="font-bold text-pink-700">Vacunada:</span> {mascota.detalles?.vacunado || "N/A"}</p>
-              <p><span className="font-bold text-pink-700">Esterilizada:</span> {mascota.detalles?.esterilizado || "N/A"}</p>
+              <p><span className="font-bold text-pink-700">Vacunado:</span> {mascota.detalles?.vacunado || "N/A"}</p>
+              <p><span className="font-bold text-pink-700">Esterilizado:</span> {mascota.detalles?.esterilizado || "N/A"}</p>
               <p><span className="font-bold text-pink-700">Energía:</span> {mascota.detalles?.energia || "N/A"}</p>
-              <p><span className="font-bold text-pink-700">Personalidad:</span> {mascota.detalles?.personalidad || "Cariñosa"}</p>
             </div>
 
             {/* Botón Adoptar */}
