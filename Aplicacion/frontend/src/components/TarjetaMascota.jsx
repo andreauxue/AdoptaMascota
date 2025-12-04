@@ -19,11 +19,6 @@ export default function TarjetaMascota({ id, nombre, tipo, info, imagen }) {
         {tipo}
       </div>
 
-      {/* Corazón */}
-      <button className="absolute top-3 right-3 z-10 rounded-full bg-white p-2 shadow-md hover:bg-pink-100 transition">
-        <Heart className="w-5 h-5 text-pink-500" />
-      </button>
-
       {/* Imagen */}
       <div className="relative">
         <img
@@ -55,7 +50,6 @@ export default function TarjetaMascota({ id, nombre, tipo, info, imagen }) {
         <div className="flex justify-center pt-2">
           <Link
             to={`/mascota/${id}`}
-            state={{ mascota: { nombre, tipo, info, imagen } }}
             className="
               inline-flex items-center gap-2 rounded-full 
               px-4 py-2 text-sm font-semibold 

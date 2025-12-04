@@ -198,12 +198,13 @@ export default function PetRegister() {
               disabled={loading}
             >
               <option value="">Selecciona una especie</option>
+              <option value="Perro">Perro</option>
+              <option value="Gato">Gato</option>
               <option value="Conejo">Conejo</option>
               <option value="Erizo">Erizo</option>
-              <option value="Gato">Gato</option>
               <option value="Hamster">Hamster</option>
-              <option value="Perro">Perro</option>
               <option value="Tortuga">Tortuga</option>
+              <option value="Perico">Perico</option>
             </select>
           </div>
 
@@ -314,9 +315,9 @@ export default function PetRegister() {
               disabled={loading}
             >
               <option value="">Selecciona una opción</option>
-              <option value="Tranquilo">Tranquilo 💤</option>
-              <option value="Moderado">Moderado 🙂</option>
-              <option value="Muy Activo">Muy Activo ⚡</option>
+              <option value="Tranquilo">Tranquilo</option>
+              <option value="Moderado">Moderado</option>
+              <option value="Muy Activo">Muy Activo</option>
             </select>
           </div>
 
