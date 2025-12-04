@@ -37,8 +37,14 @@ urlpatterns = [
     # Ruta de Logout
     path('api/logout/', mascotas_views.logout_view, name='logout'), 
     
+    # Ruta para verificar sesión
     path('api/check-session/', mascotas_views.check_session, name='check_session'),
+    
+    # Ruta para registrar mascota
     path('api/registrar-mascota/', mascotas_views.registrar_mascota, name='registrar_mascota'),
+    
+    # Ruta para actualizar perfil
+    path('api/update-profile/', mascotas_views.update_profile, name='update_profile'),
 ]
 
 if settings.DEBUG:
