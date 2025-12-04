@@ -2,19 +2,16 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import Home from "./pages/Home";
 import Register from "./pages/Register";
-import Adoptar from "./pages/Adoptar";
-import PublicarMascota from "./pages/PublicarMascota"; // <-- Importación corregida y esencial
-import Perfil from "./pages/Perfil"; 
+import PublicarMascota from "./pages/PublicarMascota"; 
 import DetalleMascota from "./pages/DetalleMascota"; 
-// Importación de Componentes de Layout y Seguridad
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import ListaMascotas from "./components/ListaMascotas";
-import Register from "./pages/Register";
 import MuroMascotas from "./pages/MuroMascotas";
 import Anuncio from "./pages/Anuncio";
-import DetalleMascota from "./pages/DetalleMascota";
 import EditProfile from "./pages/EditProfile";
+import MisMascotas from "./pages/MisMascotas";
+import AdminDashboard from "./pages/AdminDashboard";
 import { BusquedaProvider } from './context/BusquedaContext';
 
 function AppContent() {
@@ -43,6 +40,8 @@ function AppContent() {
                 <Route path="/publicar" element={<Anuncio />} />
                 <Route path="/mascota/:id" element={<DetalleMascota />} />
                 <Route path="/perfil" element={<EditProfile />} />
+                <Route path="/mis-mascotas" element={<MisMascotas />} />
+                <Route path="/admin-dashboard" element={<AdminDashboard />} />
               </Routes>
             </main>
             <Footer/>

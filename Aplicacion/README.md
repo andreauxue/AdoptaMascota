@@ -25,8 +25,6 @@
 
 Crea y activa un entorno virtual de Python:
 
-### **✨ Objetivo del Proyecto**
-
 En Linux o macOS:
 
 ```bash
@@ -43,6 +41,13 @@ pip install -r requirements.txt
 Crea las migraciones y aplica los cambios:
 
 #### **1. Configuración del Entorno Virtual**
+Aplica los cambios en la base de datos:
+
+> **Nota:** Si acabas de descargar cambios del repositorio (`git pull`), ejecuta este comando para evitar errores.
+
+```bash
+python manage.py migrate
+```
 
 Cargar Mascotas Iniciales (Base de Datos Precargada)
 

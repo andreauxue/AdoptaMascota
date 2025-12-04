@@ -2,14 +2,22 @@ from django.db import models
 from django.contrib.auth.models import User 
 
 class Especie(models.Model):
-    nombre = models.CharField(max_length=50) 
+    """
+    Modelo que representa las especies de animales disponibles en el sistema.
+    Ejemplos: Perro, Gato, Hamster, etc.
+    """
+    nombre = models.CharField(max_length=50, verbose_name="Nombre de la Especie") 
     
     def __str__(self):
         return self.nombre
     
 class Ubicacion(models.Model):
-    estado = models.CharField(max_length=30)
-    abreviatura = models.CharField(max_length=10)
+    """
+    Modelo para gestionar las ubicaciones geográficas (Estados).
+    Incluye el nombre completo y su abreviatura estándar.
+    """
+    estado = models.CharField(max_length=30, verbose_name="Nombre del Estado")
+    abreviatura = models.CharField(max_length=10, verbose_name="Abreviatura")
 
     class Meta:
         verbose_name = "Ubicación"
@@ -19,24 +27,24 @@ class Ubicacion(models.Model):
         return self.estado
     
 class Mascota(models.Model):
-    nombre = models.CharField(max_length=100) 
-    descripcion = models.TextField()
+    """
+    Modelo principal que representa a una mascota disponible para adopción.
+    Almacena información detallada, multimedia y relaciones con su publicador.
+    """
+    nombre = models.CharField(max_length=100, verbose_name="Nombre de la Mascota") 
+    descripcion = models.TextField(verbose_name="Descripción Detallada")
 
-    # Para poder mostrar los meses de las mascotas
-    # almacenamos la edad total en meses
-    edad_meses = models.PositiveSmallIntegerField(default=0)
+    # Almacenamos la edad total en meses para facilitar cálculos y filtrado
+    edad_meses = models.PositiveSmallIntegerField(default=0, verbose_name="Edad en Meses")
 
     @property
     def edad_formateada(self):
-        """Calcula y devuelve la edad en formato 'X años, Y meses'."""
-        
-        # Obtenemos los años dividiendo por 12
+        """
+        Propiedad calculada que devuelve una representación legible de la edad.
+        Ejemplo: '2 años, 3 meses' o '5 meses'.
+        """
         años = self.edad_meses // 12 
-        
-        # Obtenemos los meses restantes
         meses = self.edad_meses % 12
-
-        # Para guardar las cadenas de años y meses respectivamente
         partes_edad = []
 
         if años > 0:
@@ -46,29 +54,42 @@ class Mascota(models.Model):
 
         return ", ".join(partes_edad) if partes_edad else "0 meses"
 
-    vacunado = models.BooleanField(default=False)
-    fecha_reporte = models.DateField(auto_now_add=True)
-    imagen = models.ImageField(upload_to='mascotas/')
+    vacunado = models.BooleanField(default=False, verbose_name="¿Está Vacunado?")
+    fecha_reporte = models.DateField(auto_now_add=True, verbose_name="Fecha de Publicación")
+    imagen = models.ImageField(upload_to='mascotas/', verbose_name="Fotografía")
     
-    especie = models.ForeignKey(Especie, on_delete=models.CASCADE)
-    publicador = models.ForeignKey(User, on_delete=models.CASCADE)
+    # Relaciones
+    especie = models.ForeignKey(Especie, on_delete=models.CASCADE, verbose_name="Especie")
+    publicador = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Publicado por")
 
     sexo = models.CharField(
         max_length=10,
         choices=[('macho', 'Macho'), ('hembra', 'Hembra')],
-        default='macho',          
+        default='macho',
+        verbose_name="Género"
     )
-    # Relacion con el nuevo atributo de ubicacion, evitamos eliminar ubicaciones en uso
-    ubicacion = models.ForeignKey(Ubicacion, on_delete=models.PROTECT)
+    
+    # Relación con Ubicación (PROTECT evita borrar estados si hay mascotas ahí)
+    ubicacion = models.ForeignKey(Ubicacion, on_delete=models.PROTECT, verbose_name="Ubicación")
     
     def __str__(self):
         return self.nombre
     
 class PerfilUsuario(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    bio = models.TextField(blank=True)
-    avatar = models.ImageField(upload_to='perfiles/', null=True, blank=True)
+    """
+    Extensión del modelo User de Django para almacenar información adicional del perfil.
+    Gestiona roles específicos (Admin, Publicador, Adoptante) y datos biográficos.
+    """
+    ROLES = [
+        ('admin', 'Administrador'),
+        ('publicador', 'Publicador'),
+        ('adoptante', 'Adoptante'),
+    ]
+    
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='perfilusuario')
+    bio = models.TextField(blank=True, verbose_name="Biografía")
+    avatar = models.ImageField(upload_to='perfiles/', null=True, blank=True, verbose_name="Avatar")
+    rol = models.CharField(max_length=20, choices=ROLES, default='adoptante', verbose_name="Rol del Usuario")
         
     def __str__(self):
         return self.user.username
-    

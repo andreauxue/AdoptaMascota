@@ -19,6 +19,9 @@ import Boton from "../components/Boton";
 export default function TarjetaMascota({ id, nombre, especie, edad, ubicacion, imagen, genero }) {
     
     const navigate = useNavigate();
+    // Revisar si esta mascota ya fue adoptada 
+    const adoptedList = JSON.parse(localStorage.getItem("adoptedPets") || "[]");
+    const isAdopted = adoptedList.includes(id);
 
     // Define el ícono y color basado en el género
     const generoIcono = genero === 'macho' 

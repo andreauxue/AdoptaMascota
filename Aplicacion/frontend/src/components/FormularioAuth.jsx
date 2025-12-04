@@ -1,24 +1,39 @@
 /**
- * @fileoverview Componente FormularioAuth
+ * @fileoverview Componente FormularioAuth.
+ * Formulario unificado para el inicio de sesión y registro de usuarios.
+ * Permite cambiar entre modos y seleccionar roles durante el registro.
  * @version 1.0.2
  * @author Equipo Slytherin
  */
 
 import { useState } from "react";
-import { FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
+import { FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash, FaUsers } from 'react-icons/fa';
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext"; 
 
+/**
+ * Componente funcional FormularioAuth.
+ * 
+ * Renderiza un formulario que se adapta según el `tipo` (login o register).
+ * Gestiona el estado de los campos, la validación básica y la comunicación con el AuthContext.
+ * 
+ * @param {Object} props - Propiedades del componente.
+ * @param {string} props.tipo - Modo del formulario: 'login' o 'register'.
+ * @param {Function} props.onToggleType - Función para alternar entre modos Login/Registro.
+ * @returns {JSX.Element} Formulario de autenticación.
+ */
 export default function FormularioAuth({ tipo, onToggleType }) { 
     
     const navigate = useNavigate();
     const { login, register } = useAuth();
     
+    // Estado inicial del formulario
     const [formData, setFormData] = useState({ 
         username: "", 
         password: "", 
         password_confirm: "",
-        email: ""
+        email: "",
+        rol: "adoptante" // Valor por defecto para nuevos registros
     });
     
     const [showPassword, setShowPassword] = useState(false);
@@ -27,16 +42,24 @@ export default function FormularioAuth({ tipo, onToggleType }) {
     const [isError, setIsError] = useState(false);
 
     /**
-     * Manejador de cambio para actualizar el estado del formulario.
-     * @param {Event} e Evento de cambio del input.
+     * Actualiza el estado del formulario al cambiar un input.
+     * @param {Event} e - Evento de cambio del input.
      */
     const handleChange = (e) => 
         setFormData({ ...formData, [e.target.name]: e.target.value });
 
+    /**
+     * Alterna la visibilidad de la contraseña.
+     */
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
     
+    /**
+     * Maneja el envío del formulario.
+     * Realiza el login o registro según corresponda.
+     * @param {Event} e - Evento de envío del formulario.
+     */
     const handleSubmit = async (e) => {
         e.preventDefault();
         setMessage(null);
@@ -50,7 +73,7 @@ export default function FormularioAuth({ tipo, onToggleType }) {
             if (result.success) {
                 navigate("/muro");
             } else {
-                // Si falla el login, avisar
+                // Si falla el login, mostrar error
                 setIsError(true);
                 setMessage("Usuario o contraseña incorrectos.");
             }
@@ -61,7 +84,8 @@ export default function FormularioAuth({ tipo, onToggleType }) {
                 username: formData.username,
                 email: formData.email,
                 password: formData.password,
-                password_confirm: formData.password_confirm
+                password_confirm: formData.password_confirm,
+                rol: formData.rol
             });
 
             if (result.success) {
@@ -79,7 +103,7 @@ export default function FormularioAuth({ tipo, onToggleType }) {
             onSubmit={handleSubmit} 
             className="bg-blanco rounded-2xl shadow-xl p-8 w-full max-w-md border border-verde-menta"
         >
-            {/* Header dinámico */}
+            {/* Encabezado dinámico del formulario */}
             <div className="text-center mb-8">
                 <div className="w-16 h-16 bg-durazno rounded-full flex items-center justify-center mx-auto mb-4">
                     <FaUser className="text-2xl text-azul-fondo" />
@@ -95,7 +119,7 @@ export default function FormularioAuth({ tipo, onToggleType }) {
                 </p>
             </div>
             
-            {/* Mensaje de notificación */}
+            {/* Mensaje de notificación (éxito o error) */}
             {message && (
                 <div className={`p-3 rounded-lg text-sm mb-4 border ${
                     isError 
@@ -106,7 +130,7 @@ export default function FormularioAuth({ tipo, onToggleType }) {
                 </div>
             )}
 
-            {/* Campos del formulario */}
+            {/* Contenedor de campos */}
             <div className="space-y-4">
                 {/* Campo Usuario */}
                 <div className="relative">
@@ -123,22 +147,42 @@ export default function FormularioAuth({ tipo, onToggleType }) {
                     />
                 </div>
 
-                {/* Campo Email (solo registro) */}
+                {/* Campos exclusivos para registro */}
                 {tipo === "register" && ( 
-                    <div className="relative">
-                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <FaEnvelope className="text-verde-grisaseo" />
+                    <>
+                        {/* Campo Email */}
+                        <div className="relative">
+                            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <FaEnvelope className="text-verde-grisaseo" />
+                            </div>
+                            <input 
+                                name="email"
+                                type="email"
+                                placeholder="Correo electrónico"
+                                value={formData.email}
+                                onChange={handleChange}
+                                required
+                                className="w-full pl-10 pr-4 py-3 border border-verde-grisaseo rounded-xl focus:ring-2 focus:ring-durazno focus:border-durazno transition-all duration-200 text-azul-fondo bg-blanco"
+                            />
                         </div>
-                        <input 
-                            name="email"
-                            type="email"
-                            placeholder="Correo electrónico"
-                            value={formData.email}
-                            onChange={handleChange}
-                            required
-                            className="w-full pl-10 pr-4 py-3 border border-verde-grisaseo rounded-xl focus:ring-2 focus:ring-durazno focus:border-durazno transition-all duration-200 text-azul-fondo bg-blanco"
-                        />
-                    </div>
+
+                        {/* Selector de Rol */}
+                        <div className="relative">
+                            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <FaUsers className="text-verde-grisaseo" />
+                            </div>
+                            <select
+                                name="rol"
+                                value={formData.rol}
+                                onChange={handleChange}
+                                className="w-full pl-10 pr-4 py-3 border border-verde-grisaseo rounded-xl focus:ring-2 focus:ring-durazno focus:border-durazno transition-all duration-200 text-azul-fondo bg-blanco appearance-none"
+                            >
+                                <option value="adoptante">Quiero Adoptar</option>
+                                <option value="publicador">Quiero Publicar Mascotas</option>
+                                <option value="admin">Administrador</option>
+                            </select>
+                        </div>
+                    </>
                 )}
 
                 {/* Campo Contraseña */}

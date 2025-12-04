@@ -21,7 +21,7 @@ import { useBusqueda } from "../context/BusquedaContext";
  */
 export default function Navbar() {
     const navigate = useNavigate();
-    const { isAuthenticated, logout } = useAuth();
+    const { user, isAuthenticated, logout } = useAuth();
     const { setTerminoBusqueda } = useBusqueda();
 
     const [showLogoutModal, setShowLogoutModal] = useState(false);
@@ -122,19 +122,41 @@ export default function Navbar() {
                 {/* ---- SI ESTÁ LOGUEADO ---- */}
                 {isAuthenticated && (
                     <>
-                        <li className="group">
-                            <button onClick={() => navigate("/publicar")} className="relative inline-block px-4 py-2 font-serif text-white">
-                                Publicar Mascota
-                                <UnderlineEffect />
-                            </button>
-                        </li>
-
+                        {/* Vistas comunes */}
                         <li className="group">
                             <button onClick={() => navigate("/muro")} className="relative inline-block px-4 py-2 font-serif text-white">
                                 Adoptar
                                 <UnderlineEffect />
                             </button>
                         </li>
+
+                        {/* Vista Publicador */}
+                        {user?.rol === 'publicador' && (
+                            <>
+                                <li className="group">
+                                    <button onClick={() => navigate("/publicar")} className="relative inline-block px-4 py-2 font-serif text-white">
+                                        Publicar Mascota
+                                        <UnderlineEffect />
+                                    </button>
+                                </li>
+                                <li className="group">
+                                    <button onClick={() => navigate("/mis-mascotas")} className="relative inline-block px-4 py-2 font-serif text-white">
+                                        Mis Mascotas
+                                        <UnderlineEffect />
+                                    </button>
+                                </li>
+                            </>
+                        )}
+
+                        {/* Vista Admin */}
+                        {user?.rol === 'admin' && (
+                            <li className="group">
+                                <button onClick={() => navigate("/admin-dashboard")} className="relative inline-block px-4 py-2 font-serif text-white">
+                                    Panel Admin
+                                    <UnderlineEffect />
+                                </button>
+                            </li>
+                        )}
 
                         <li className="group">
                             <button onClick={() => navigate("/perfil")} className="relative inline-block px-4 py-2 font-serif text-white">

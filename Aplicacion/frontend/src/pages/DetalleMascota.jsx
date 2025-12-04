@@ -15,7 +15,6 @@ import MensajeInformativo from '../components/MensajeInformativo';
 import Boton from '../components/Boton';
 import FeedbackModal from "../components/FeedbackModal";
 import { useNavigate } from 'react-router-dom'; 
-// import luna from "../assets/img/gato1.jpg";
 import { useAuth } from "../context/AuthContext";
 
 export default function DetalleMascota() {
@@ -27,6 +26,9 @@ export default function DetalleMascota() {
     const [showAdoptModal, setShowAdoptModal] = useState(false);
     const navigate = useNavigate();
         const { isAuthenticated } = useAuth();
+        const adoptedList = JSON.parse(localStorage.getItem("adoptedPets") || "[]");
+        const isAdopted = adoptedList.includes(Number(id));
+
 
     useEffect(() => {
         fetch(`http://127.0.0.1:8000/api/mascotas/${id}`)
@@ -84,9 +86,13 @@ export default function DetalleMascota() {
             return;
         }
 
-        // Si sí está logueado, mostrar modal de éxito
+        // Guardar en localStorage como adoptada (evita duplicados)
+        const updated = [...new Set([...adoptedList, Number(id)])];
+        localStorage.setItem("adoptedPets", JSON.stringify(updated));
+
         setShowAdoptModal(true);
     };
+
 
     return (
     <>
@@ -105,12 +111,16 @@ export default function DetalleMascota() {
                         className="w-full h-80 object-cover rounded-xl shadow-lg mb-6"
                     />
                     
-                    <div className="flex justify-center">
-                        <Boton 
-                            texto="¡Quiero Adoptar!"
-                            customClasses="w-full text-base px-4 shadow-lg"
-                            onClick={handleAdoptarClick}
-                        />
+                     <div className="flex justify-center">
+                        {isAdopted ? (
+                            <p className="text-red-500 text-xl font-bold text-center">Ya ha sido adoptada</p>
+                        ) : (
+                            <Boton 
+                                texto="¡Quiero Adoptar!"
+                                customClasses="w-full text-base px-4 shadow-lg"
+                                onClick={handleAdoptarClick}
+                            />
+                        )}
                     </div>
                 </div>
 

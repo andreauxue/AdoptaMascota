@@ -16,6 +16,10 @@ export const AuthProvider = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
 
+    // Mascotas adoptadas por usuario
+    const [adoptedPets, setAdoptedPets] = useState([]);
+
+
     // Verificar autenticación al cargar la app
     useEffect(() => {
         checkAuthStatus();
@@ -84,10 +88,26 @@ export const AuthProvider = ({ children }) => {
 
         setUser(null);
         setIsAuthenticated(false);
+        setAdoptedPets([]);
     };
 
+    const adoptarMascota = (petId) => {
+        if (!user) return;
+
+        // evita duplicados
+        if (!adoptedPets.includes(petId)) {
+            setAdoptedPets([...adoptedPets, petId]);
+        }
+    };
+
+    // Roles del usuario 
+    const puedeAdoptar = user?.rol === "Quiero Adoptar";
+    const puedePublicar = user?.rol === "Quiero Publicar Mascotas";
+    const esAdmin = user?.rol === "Administrador";
+
+
     return (
-        <AuthContext.Provider value={{ user, isAuthenticated, isLoading, login, register, logout }}>
+        <AuthContext.Provider value={{ user, isAuthenticated, isLoading, puedeAdoptar, puedePublicar, esAdmin, adoptedPets, adoptarMascota, login, register, logout }}>
             {children}
         </AuthContext.Provider>
     );
